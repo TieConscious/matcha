@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
-import AppNavbar from './component/AppNavbar';
-import './App.css';
+import React, { Component, ImageBackground, Text } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
-import { Container } from 'reactstrap';
+import AppNavbar from "./components/AppNavbar";
+import AppFooter from "./components/AppFooter";
 
 class App extends Component {
   render() {
     return (
-     <AppNavbar />
+      <div className="App">
+        <div className="background">
+          <div>
+            <AppNavbar />
+          </div>
+        </div>
+        <AppFooter />
+      </div>
     );
   }
 }

@@ -1,4 +1,4 @@
 {
-	"mongoURI": "mongodb+srv://hi:hi@cluster0-x4fry.azure.mongodb.net/test?retryWrites=true&w=majority",
-	"jwtSecret": "sl_myJwtSecret"
+	"mongoURI": "mongodb+srv://hi:hi@cluster0-x4fry.azure.mongodb.net/matcha?retryWrites=true&w=majority",
+	"jwtSecret": "matcha_myJwtSecret"
 }
