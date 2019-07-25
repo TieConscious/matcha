@@ -2,6 +2,12 @@
 
 }
 
+.CenterArea {
+  margin-top: 50vh;
+  text-align: center;
+  justify-content: center;
+}
+
 .background {
   background-image: url("./img/bald.jpg");
   background-repeat: no-repeat;
