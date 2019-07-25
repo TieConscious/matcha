@@ -7,6 +7,7 @@ import "./App.css";
 import AppNavbar from "./components/AppNavbar";
 import AppFooter from "./components/AppFooter";
 import AppRegistration from "./components/AppRegistration";
+import AppLogin from "./components/AppLogin";
 // import AppDescription from "./components/AppDescription";
 
 class App extends Component {

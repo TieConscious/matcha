@@ -11,10 +11,15 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Container
+  Container,
+  Form,
+  Input,
+  Button,
+  Row
 } from "reactstrap";
 
 // import './AppNavbar.css';
+import AppLogin from "./AppLogin";
 import matcha from "../img/matcha.png";
 
 class AppNavbar extends Component {
@@ -39,7 +44,9 @@ class AppNavbar extends Component {
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
-                <NavItem>Login</NavItem>
+                <NavItem>
+                  <AppLogin />
+                </NavItem>
               </Nav>
             </Collapse>
           </Container>
