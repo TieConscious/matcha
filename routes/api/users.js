@@ -4,35 +4,27 @@ const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
 
-//Item Model
+//User Model
 const User = require("../../models/User.model");
-
-//@route	GET api/users
-//@desc		Get all users
-//@access	Public
-router.get("/", (req, res) => {
-  User.find()
-    .sort({ date: -1 })
-    .then(users => res.json(users));
-});
 
 //@route	POST api/users
 //@desc		Create a user
 //@access	Public
 router.post("/", (req, res) => {
-  const { username, firstname, lastname, age, email, password } = req.body;
+  const { firstname, lastname, email, password } = req.body;
 
   //Simple validation
-  if (!username || !firstname || !lastname || !age || !email || !password) {
+  if (!firstname || !lastname || !email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
 
   // Check for existing user
   User.findOne({ email }).then(user => {
-    if (user) return res.status(400).json({ msg: "User already exists" });
+    if (user) return res.status(400).json({ msg: "Email already registered" });
 
     const newUser = new User({
-      username,
+      firstname,
+      lastname,
       email,
       password
     });
@@ -53,7 +45,8 @@ router.post("/", (req, res) => {
                 token,
                 user: {
                   id: user.id,
-                  username: user.name,
+                  firstname: user.firstname,
+                  lastname: user.lastname,
                   email: user.email
                 }
               });

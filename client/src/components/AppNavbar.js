@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   Collapse,
   Navbar,
@@ -6,17 +6,10 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Container,
-  Form,
-  Input,
-  Button,
-  Row
+  Container
 } from "reactstrap";
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // import './AppNavbar.css';
 import AppLogin from "./AppLogin";
@@ -27,6 +20,10 @@ class AppNavbar extends Component {
     isOpen: false
   };
 
+  static propTypes = {
+    auth: PropTypes.object.isRequired
+  };
+
   toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
@@ -34,19 +31,40 @@ class AppNavbar extends Component {
   };
 
   render() {
+    const { isAuthenticated, user } = this.props.auth;
+
+    const authLinks = (
+      <Fragment>
+        <NavItem>
+          <span className="navbar-text mr-3">
+            <strong>{user ? `Welcome ${user.lastname}` : ""}</strong>
+          </span>
+        </NavItem>
+        {/* <NavItem>
+          <Logout />
+        </NavItem> */}
+      </Fragment>
+    );
+
+    const guestLinks = (
+      <Fragment>
+        <NavItem>
+          <AppLogin />
+        </NavItem>
+      </Fragment>
+    );
+
     return (
       <div>
         <Navbar color="light" expand="sm" className="mb-5">
           <Container>
-            <NavbarBrand href="/">
+            <NavbarBrand hr-ef="/">
               <img src={matcha} color="white" width="30" height="30" />
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
-                <NavItem>
-                  <AppLogin />
-                </NavItem>
+                {isAuthenticated ? authLinks : guestLinks}
               </Nav>
             </Collapse>
           </Container>
@@ -56,4 +74,11 @@ class AppNavbar extends Component {
   }
 }
 
-export default AppNavbar;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(AppNavbar);

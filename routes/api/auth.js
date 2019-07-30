@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
+const auth = require("../../middleware/auth");
 
 //Item Model
 const User = require("../../models/User.model");
@@ -11,20 +12,20 @@ const User = require("../../models/User.model");
 //@desc		Authenticate user
 //@access	Public
 router.post("/", (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   //Simple validation
-  if (!username || !password) {
+  if (!email || !password) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
 
   //Check for existing user
-  User.findOne({ username }).then(user => {
-    if (!user) return res.status(400).json({ msg: "User does not exist" });
+  User.findOne({ email }).then(user => {
+    if (!user) return res.status(400).json({ msg: "Email does not exist" });
 
     // Validate password
     bcrypt.compare(password, user.password).then(isMatch => {
-      if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+      if (!isMatch) return res.status(400).json({ msg: "Invalid password" });
 
       jwt.sign(
         { id: user.id },
@@ -36,8 +37,7 @@ router.post("/", (req, res) => {
             token,
             user: {
               id: user.id,
-              name: user.username,
-              email: user.email
+              email: user.email,
             }
           });
         }
