@@ -25,8 +25,8 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <div className="background">
+        <div className="background">
+          <div>
             <AppNavbar />
             <Router>
               <div>

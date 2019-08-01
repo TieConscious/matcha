@@ -22,22 +22,13 @@ class AppLogin extends Component {
     const { error } = this.props;
     if (error !== prevProps.error) {
       // Check for register error
-      if (error.id === "REGISTER_FAIL") {
+      if (error.id === "LOGIN_FAIL") {
         this.setState({ msg: error.msg.msg });
       } else {
-        this.setState({ msg: null });
-      }
-    }
-  }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      });
+        this.setState({ msg: null });
+        // this.props.push("/dashboard");
+      }
     }
   }
 

@@ -11,7 +11,7 @@ class Dashboard extends Component {
 		return (
 			<div>
 
-				Hello thar!
+				Hello thar! moo gay
 			</div>
 		)
 	}
