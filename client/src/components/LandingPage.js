@@ -7,7 +7,7 @@ import AppRegistration from "./AppRegistration";
 class LandingPage extends Component {
   render() {
     return (
-      <div>
+      <div classname="background">
         <h1>Meet your bald soulmate...</h1>
         <Container className="CenterArea">
           <Row>

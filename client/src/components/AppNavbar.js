@@ -59,7 +59,7 @@ class AppNavbar extends Component {
       <div>
         <Navbar color="light" expand="sm" className="mb-5">
           <Container>
-            <NavbarBrand hr-ef="/">
+            <NavbarBrand href="/">
               <img src={matcha} color="white" width="30" height="30" />
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} color="black"/>
