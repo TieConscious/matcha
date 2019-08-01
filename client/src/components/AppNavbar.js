@@ -62,7 +62,7 @@ class AppNavbar extends Component {
             <NavbarBrand hr-ef="/">
               <img src={matcha} color="white" width="30" height="30" />
             </NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
+            <NavbarToggler onClick={this.toggle} color="black"/>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 {isAuthenticated ? authLinks : guestLinks}

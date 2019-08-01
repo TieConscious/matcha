@@ -2,6 +2,10 @@
 
 }
 
+.navbar-toggler-icon {
+  color: black;
+}
+
 .CenterArea {
   margin-top: 50vh;
   text-align: center;
