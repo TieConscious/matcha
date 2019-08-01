@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 
 // import './AppNavbar.css';
 import AppLogin from "./AppLogin";
+import AppLogout from "./AppLogout";
 import matcha from "../img/matcha.png";
 
 class AppNavbar extends Component {
@@ -37,12 +38,12 @@ class AppNavbar extends Component {
       <Fragment>
         <NavItem>
           <span className="navbar-text mr-3">
-            <strong>{user ? `Welcome ${user.lastname}` : ""}</strong>
+            <strong>{user ? `Welcome ${user.firstname}` : ""}</strong>
           </span>
         </NavItem>
-        {/* <NavItem>
-          <Logout />
-        </NavItem> */}
+        <NavItem>
+          <AppLogout />
+        </NavItem>
       </Fragment>
     );
 
