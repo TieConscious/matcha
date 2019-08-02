@@ -24,10 +24,10 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    // age: {
-    //     type: Number,
-    //     required: true
-    // },
+    age: {
+        type: Number,
+        //required: true
+    },
     email: {
         type: String,
         required: true,
@@ -38,30 +38,30 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         match: /^(?=.*\d).{4,8}/
-    }
-
-    // images: [{type: Schema.Types.ObjectId, ref: 'Post', default: '[]'}],
+    },
+    images: [{type: Schema.Types.ObjectId, ref: 'Post', default: '[]'}],
     // isValidated: {
     //     type: Boolean,
     //     default: false
     // },
-    // receiveEmails: {
-    //     type: Boolean,
-    //     default: true
-    // },
-    // gender: {
-    //     type: String,
-    //     enum: ["male", "female", "other"]
-    // },
-    // sexualPreference: {
-    //     type: String,
-    //     enum: ["male", "female", "other"]
-    // },
-    // bio: {
-    //     type: String,
-    //     minlength: 50,
-    //     maxlength: 420
-    // },
+    receiveEmails: {
+        type: Boolean,
+        default: true
+    },
+    gender: {
+        type: String,
+        enum: ["male", "female", "other"]
+    },
+    sexualPreference: {
+        type: String,
+        enum: ["male", "female", "other"]
+    },
+    bio: {
+        type: String,
+        //minlength: 10,
+        maxlength: 420,
+        default: "Im lonely"
+    },
     // baldTags: {
 
     // }

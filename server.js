@@ -21,6 +21,7 @@ mongoose
 //Use Routes
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/posts', require('./routes/api/posts'));
 
 //Deploying to Heroku
 const port = process.env.PORT || 5000;

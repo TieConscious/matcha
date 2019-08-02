@@ -10,7 +10,9 @@ const User = require("../../models/User.model");
 //@route	POST api/users
 //@desc		Create a user
 //@access	Public
-router.post("/", (req, res) => {
+
+//register
+router.post("/register", (req, res) => {
   const { firstname, lastname, email, password } = req.body;
 
   //Simple validation
@@ -55,6 +57,61 @@ router.post("/", (req, res) => {
         });
       });
     });
+  });
+});
+
+router.get("/", (req, res) => {
+  User.find(function(err, users) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.json(users);
+    }
+  });
+});
+
+router.route('/:id').get(function(req, res) {
+  let id = req.params.id;
+  User.findById(id, function(err, user) {
+      if(err)
+          res.send(err)
+      else
+          res.json(user);
+  });
+});
+
+router.route('/delete/:id').delete(function(req, res) {
+  User.findById(req.params.id).remove(function(err, user) {
+      if (err)
+          res.send(err);
+      else
+          res.send("successfully deleted");
+  });
+});
+
+router.route('/update/:id').post(function(req, res) {
+  User.findById(req.params.id, function (err, user) {
+      if(!user)
+          res.status(404).send('User not found');
+      else {
+          let psswd = bcrypt.hashSync(req.body.password, 10, function(err, hash) {
+              if (err)
+                  "false"
+          });
+          console.log(psswd);
+          user.username = req.body.username;
+          user.password = psswd;
+          user.email = req.body.email;
+          user.receiveEmails = req.body.receiveEmails;
+
+          user.save().then(user => {
+              res.status(200).send("worked");
+          })
+          .catch(err => {
+              res.status(400).send("update not possible due to " + err);
+          });
+      }
   });
 });
 
