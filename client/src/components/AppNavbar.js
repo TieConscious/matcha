@@ -33,9 +33,7 @@ class AppNavbar extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { isAuthenticated, user } = this.props.auth;
-    console.log(user);
     const authLinks = (
       <Fragment>
         <NavItem>
@@ -60,9 +58,9 @@ class AppNavbar extends Component {
     return (
       <div>
         <Navbar color="light" light expand="sm" className="mb-5">
-          <Container> 
+          <Container>
               <NavbarBrand>
-                <Link to="/"><img src={matcha} color="white" width="30" height="30" /></Link>
+                <Link to="/"><img src={matcha} alt="mug" color="white" width="30" height="30" /></Link>
               </NavbarBrand>
             <NavbarToggler onClick={this.toggle} color="black"/>
             <Collapse isOpen={this.state.isOpen} navbar>

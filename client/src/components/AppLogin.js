@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
-import { withRouter, Redirect } from "react-router-dom"; 
+import { withRouter, Redirect } from "react-router-dom";
 
 class AppLogin extends Component {
   state = {
@@ -51,7 +51,6 @@ class AppLogin extends Component {
   };
 
   render() {
-    console.log(this.state.token);
     return (
       <div className="Registration">
         <Form onSubmit={this.onSubmit}>

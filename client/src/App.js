@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -12,9 +11,9 @@ import "./App.css";
 import AppNavbar from "./components/AppNavbar";
 import AppFooter from "./components/AppFooter";
 
-import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/Dashboard";
 import LandingPage from "./components/LandingPage";
+import Settings from "./components/Settings";
 // import AppDescription from "./components/AppDescription";
 
 class App extends Component {
@@ -32,14 +31,12 @@ class App extends Component {
               <div>
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/settings" component={Settings} />
               </div>
             </Router>
           </div>
           <AppFooter />
         </div>
-        {/* <Switch>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          </Switch> */}
       </Provider>
     );
   }

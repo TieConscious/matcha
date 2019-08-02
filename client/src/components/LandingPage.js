@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Container, Row, Col } from "reactstrap";
 import { connect } from 'react-redux';
 
@@ -22,14 +21,12 @@ class LandingPage extends Component {
   }
 
   render() {
-    console.log(this.props.isAuthenticated);
     return (
-      <div classname="background">
+      <div>
         <h1>Meet your bald soulmate...</h1>
         <Container className="CenterArea">
           <Row>
             <Col>{/* <AppDescription /> */}</Col>
-            {/* <Link to="/dashboard">Dashboard</Link> */}
             <Col>
               <AppRegistration />
             </Col>
