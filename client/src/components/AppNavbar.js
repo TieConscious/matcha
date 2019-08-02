@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 // import './AppNavbar.css';
 import AppLogin from "./AppLogin";
 import AppLogout from "./AppLogout";
+import { Link } from 'react-router-dom';
 import matcha from "../img/matcha.png";
 
 class AppNavbar extends Component {
@@ -32,8 +33,9 @@ class AppNavbar extends Component {
   };
 
   render() {
+    console.log(this.props);
     const { isAuthenticated, user } = this.props.auth;
-
+    console.log(user);
     const authLinks = (
       <Fragment>
         <NavItem>
@@ -57,12 +59,12 @@ class AppNavbar extends Component {
 
     return (
       <div>
-        <Navbar color="light" expand="sm" className="mb-5">
-          <Container>
-            <NavbarBrand href="/">
-              <img src={matcha} color="white" width="30" height="30" />
-            </NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
+        <Navbar color="light" light expand="sm" className="mb-5">
+          <Container> 
+              <NavbarBrand>
+                <Link to="/"><img src={matcha} color="white" width="30" height="30" /></Link>
+              </NavbarBrand>
+            <NavbarToggler onClick={this.toggle} color="black"/>
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 {isAuthenticated ? authLinks : guestLinks}

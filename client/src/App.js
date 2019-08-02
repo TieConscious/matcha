@@ -27,8 +27,8 @@ class App extends Component {
       <Provider store={store}>
         <div className="background">
           <div>
-            <AppNavbar />
             <Router>
+              <AppNavbar />
               <div>
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />

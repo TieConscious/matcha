@@ -4,11 +4,13 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
+import { withRouter, Redirect } from "react-router-dom"; 
 
 class AppLogin extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
+    token: null
   };
 
   static propTypes = {
@@ -21,7 +23,7 @@ class AppLogin extends Component {
   componentDidUpdate(prevProps) {
     const { error } = this.props;
     if (error !== prevProps.error) {
-      // Check for register error
+      // Check for login error
       if (error.id === "LOGIN_FAIL") {
         this.setState({ msg: error.msg.msg });
       } else {
@@ -49,12 +51,14 @@ class AppLogin extends Component {
   };
 
   render() {
+    console.log(this.state.token);
     return (
       <div className="Registration">
         <Form onSubmit={this.onSubmit}>
           <Row>
             <Col>
               <Input
+                style={{ marginTop: "0.5rem"}}
                 type="email"
                 name="email"
                 // id="email"
@@ -64,6 +68,7 @@ class AppLogin extends Component {
             </Col>
             <Col>
               <Input
+                style={{ marginTop: "0.5rem"}}
                 type="password"
                 name="password"
                 // id="password"
@@ -72,7 +77,7 @@ class AppLogin extends Component {
               />
             </Col>
             <Col>
-              <Button color="primary">Login</Button>
+              <Button style={{ marginTop: "0.5rem"}} color="primary">Login</Button>
             </Col>
           </Row>
         </Form>
@@ -86,7 +91,7 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { login, clearErrors }
-)(AppLogin);
+)(AppLogin));

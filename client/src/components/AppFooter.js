@@ -5,7 +5,7 @@ import "./css/AppFooter.css";
 class AppFooter extends Component {
   render() {
     return (
-      <footer className="footer text-center">
+      <footer className="footer">
         <div className="container">
           <p className="footer-text">BaldPersonAlgorithm</p>
         </div>
