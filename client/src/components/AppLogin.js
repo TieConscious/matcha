@@ -27,7 +27,6 @@ class AppLogin extends Component {
       } else {
 
         this.setState({ msg: null });
-        // this.props.push("/dashboard");
       }
     }
   }
