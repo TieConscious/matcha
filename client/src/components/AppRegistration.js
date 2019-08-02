@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 import { register } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
 
-import "./css/AppRegistration.css";
-
 class AppRegistration extends Component {
   state = {
     firstname: "",
@@ -55,7 +53,7 @@ class AppRegistration extends Component {
 
   render() {
     return (
-      <div className="Registration">
+      <div className="registration">
         <Card>
           <CardBody>
             <h3>Register:</h3>
@@ -66,7 +64,7 @@ class AppRegistration extends Component {
               <Row>
                 <Col>
                   <Input
-                    style={{ marginTop: "0.5rem" }}
+                    style={{ marginTop: "0.5rem"}}
                     type="text"
                     name="firstname"
                     id="firstname"
@@ -74,6 +72,8 @@ class AppRegistration extends Component {
                     onChange={this.onChange}
                   />
                 </Col>
+              </Row>
+              <Row>
                 <Col>
                   <Input
                     style={{ marginTop: "0.5rem" }}
@@ -110,9 +110,11 @@ class AppRegistration extends Component {
                 </Col>
               </Row>
               <Row>
-                <Button style={{ marginTop: "0.5rem" }} color="primary">
-                  Register
-                </Button>
+                <Col>
+                  <Button style={{ marginTop: "1.5rem" }} color="primary">
+                    Register
+                  </Button>
+                </Col>
               </Row>
             </Form>
           </CardBody>

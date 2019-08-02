@@ -7,7 +7,7 @@
 }
 
 .CenterArea {
-  margin-top: 50vh;
+  margin-top: 20vh;
   text-align: center;
   justify-content: center;
 }
@@ -41,7 +41,9 @@
   color: #61dafb;
 }
 
-
+.registration {
+  
+}
 
 @keyframes App-logo-spin {
   from {
@@ -50,4 +52,14 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  color: black;
+  text-align: right;
 }
