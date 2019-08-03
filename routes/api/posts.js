@@ -43,4 +43,15 @@ postsRoutes.route('/delete/:id').delete(function(req, res) {
     });
 });
 
+//find all images of a user
+postsRoutes.route('/search/:userId').get(function(req, res) {
+    let userId = req.params.userId;
+    Post.find({userId:  userId}, function(err, post) {
+        if (err)
+            res.send(err);
+        else
+            res.json(post);
+    });
+});
+
 module.exports = postsRoutes;

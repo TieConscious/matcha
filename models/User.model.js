@@ -39,11 +39,11 @@ const UserSchema = new Schema({
         required: true,
         match: /^(?=.*\d).{4,8}/
     },
-    images: [{type: Schema.Types.ObjectId, ref: 'Post', default: '[]'}],
-    // isValidated: {
-    //     type: Boolean,
-    //     default: false
-    // },
+    images: [{type: Schema.ObjectId, ref: 'Post', default: '[]'}],
+    isValidated: {
+        type: Boolean,
+        default: false
+    },
     receiveEmails: {
         type: Boolean,
         default: true
@@ -62,9 +62,7 @@ const UserSchema = new Schema({
         maxlength: 420,
         default: "Im lonely"
     },
-    // baldTags: {
-
-    // }
+     baldTags: [{ type: String, default: '[]'}]
 });
 
-module.exports = User = mongoose.model('user', UserSchema)
+module.exports = mongoose.model('User', UserSchema)
