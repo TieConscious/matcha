@@ -24,7 +24,6 @@ class Dashboard extends Component {
 	render () {
 		return (
 			<div>
-				<Link to="/settings">Settings</Link>
 				Hello thar! moo gay
 			</div>
 		)

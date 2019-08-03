@@ -8,54 +8,56 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles(theme => ({
-	root: {
-	  flexGrow: 1,
-	},
-	paper: {
-	  height: 140,
-	  width: 100,
-	},
-	control: {
-	  padding: theme.spacing(2),
-	},
-  }));
+  root: {
+    flexGrow: 1
+  },
+  paper: {
+    padding: theme.spacing(10, 5000000)
+  },
+  button: {
+    margin: theme.spacing(1)
+  }
+}));
 
 function Settings() {
-	const classes = useStyles();
-    return (
+  const classes = useStyles();
+  return (
+    <div>
+      Hello thar! moo gay
       <div>
-        <Link to="/dashboard">Dashboard</Link>
-        Hello thar! moo gay
-        <Grid container>
+        <Paper className="classes.paper">
           <form noValidate autoComplete="off">
-            <Grid item>
-              <TextField
-                id="outlined-name"
-                label="Name"
-                className={classes.textField}
-                // value={values.name}
-                // onChange={handleChange("name")}
-                margin="normal"
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="outlined-uncontrolled"
-                label="Uncontrolled"
-                defaultValue="foo"
-                // className={classes.textField}
-                margin="normal"
-                variant="outlined"
-              />
-            </Grid>
-            <Button variant="contained">Submit</Button>
+            <TextField
+              id="outlined-name"
+              label="Name"
+              className={classes.textField}
+              // value={values.name}
+              // onChange={handleChange("name")}
+              margin="normal"
+              variant="outlined"
+            />
+
+            <TextField
+              id="outlined-uncontrolled"
+              label="Uncontrolled"
+              defaultValue="foo"
+              // className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+            <div>
+              <Button variant="contained" className={classes.button}>
+                Submit
+              </Button>
+            </div>
           </form>
-        </Grid>
+        </Paper>
       </div>
-    );
+    </div>
+  );
 }
 
 const mapStateToProps = state => ({
