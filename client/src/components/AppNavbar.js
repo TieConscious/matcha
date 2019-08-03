@@ -6,15 +6,16 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
+  NavLink,
   Container
 } from "reactstrap";
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 // import './AppNavbar.css';
 import AppLogin from "./AppLogin";
 import AppLogout from "./AppLogout";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import matcha from "../img/matcha.png";
 
 class AppNavbar extends Component {
@@ -42,6 +43,10 @@ class AppNavbar extends Component {
           </span>
         </NavItem>
         <NavItem>
+          <Link to="/dashboard">Dashboard</Link>
+        </NavItem>
+        <Link to="/settings">Settings</Link>
+        <NavItem>
           <AppLogout />
         </NavItem>
       </Fragment>
@@ -59,10 +64,18 @@ class AppNavbar extends Component {
       <div>
         <Navbar color="light" light expand="sm" className="mb-5">
           <Container>
-              <NavbarBrand>
-                <Link to="/"><img src={matcha} alt="mug" color="white" width="30" height="30" /></Link>
-              </NavbarBrand>
-            <NavbarToggler onClick={this.toggle} color="black"/>
+            <NavbarBrand>
+              <Link to="/">
+                <img
+                  src={matcha}
+                  alt="mug"
+                  color="white"
+                  width="30"
+                  height="30"
+                />
+              </Link>
+            </NavbarBrand>
+            <NavbarToggler onClick={this.toggle} color="black" />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 {isAuthenticated ? authLinks : guestLinks}

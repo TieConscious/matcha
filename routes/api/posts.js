@@ -26,7 +26,7 @@ postsRoutes.route('/:id').get(function(req, res) {
 postsRoutes.route('/add').post(function(req, res) {
     let post = new Post(req.body);
     post.save().then(user => {
-        res.status(200).json({'post': 'post added succesfully'});
+        res.status(200).json({'post': 'post added succesfully with poop'});
     })
     .catch(err => {
         res.status(400).send('adding new post failed: ' + err);
