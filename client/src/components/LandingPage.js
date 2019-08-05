@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
+import Typography from "@material-ui/core/Typography";
 import AppRegistration from "./AppRegistration";
 
 class LandingPage extends Component {
-
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.isAuthenticated) {
@@ -23,7 +23,9 @@ class LandingPage extends Component {
   render() {
     return (
       <div>
-        <h1>Meet your bald soulmate...</h1>
+        <Typography variant="h5" component="h3">
+          Meet your bald soulmate...
+        </Typography>
         <Container className="CenterArea">
           <Row>
             <Col>{/* <AppDescription /> */}</Col>
@@ -43,4 +45,7 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, null)(LandingPage);
+export default connect(
+  mapStateToProps,
+  null
+)(LandingPage);

@@ -6,9 +6,10 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Container
 } from "reactstrap";
+// import AppBar from '@material-ui/core/AppBar';
+// import Toolbar from '@material-ui/core/Toolbar';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -64,7 +65,6 @@ class AppNavbar extends Component {
       <div>
         <Navbar color="light" light expand="sm" className="mb-5">
           <Container>
-            <NavbarBrand>
               <Link to="/">
                 <img
                   src={matcha}
@@ -74,7 +74,6 @@ class AppNavbar extends Component {
                   height="30"
                 />
               </Link>
-            </NavbarBrand>
             <NavbarToggler onClick={this.toggle} color="black" />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>

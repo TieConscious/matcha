@@ -4,12 +4,44 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
+import { createMuiTheme } from "@material-ui/core/styles";
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#ffcc80"
+    },
+    secondary: {
+      main: "#fff9c4"
+    }
+  },
+  fabPadding: {
+    padding: "100px"
+  },
+  typography: {
+    fontFamily: [
+      "Roboto",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      "Segoe UI",
+      "Arial",
+      "sans-serif"
+    ].join(","),
+    useNextVariants: true
+  },
+  paper: {
+	  width: "40vh",
+	  margin: "auto"
+	},
+});
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ThemeProvider>,
   document.getElementById("root")
 );
 
