@@ -15,6 +15,7 @@ import AppFooter from "./components/AppFooter";
 import Dashboard from "./components/Dashboard";
 import LandingPage from "./components/LandingPage";
 import Settings from "./components/Settings";
+import SelectingPage from "./components/SelectingPage";
 // import AppDescription from "./components/AppDescription";
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/settings" component={Settings} />
+                <Route exact path="/select" component={SelectingPage} />
               </div>
             </Router>
           </div>

@@ -2,6 +2,95 @@
 
 }
 
+.select {
+  margin: auto;
+  margin-top: 40px;
+  height: 100%;
+  min-height: 700px;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: 10% 1fr 1fr 10%;
+  grid-template-rows: 10% 1fr 1fr 1fr 10%;
+  grid-template-areas:
+    "main center center main-last"
+    "main2-1 main2-2 main2-3 main2-4" 
+    "main3-1 main3-2 main3-3 main2-4"
+    "main4-1 main4-2 main4-3 main2-4"
+    "footer footer2 footer2 footer4";
+}
+
+[contentEditable=true]:empty:not(:focus):before{
+  content:attr(data-placeholder) }
+
+.select-title {
+  grid-area: center;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.select-pictures1 {
+  justify-self: center;
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  grid-area: main2-2;
+}
+
+.select-pictures2 {
+  justify-self: center;
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  grid-area: main2-3;
+}
+
+.select-pictures3 {
+  justify-self: center;
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  grid-area: main3-2;
+}
+
+.select-pictures4 {
+  justify-self: center;
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  grid-area: main3-3;
+}
+
+.select-pictures5 {
+  justify-self: center;
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  grid-area: main4-2;
+}
+
+.select-pictures6 {
+  justify-self: center;
+  margin-top: 20px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  grid-area: main4-3;
+}
+
+.SelectingPage-button-2 {
+  justify-self: center;
+  grid-area: footer2;
+  height: 40px;
+  width: 80px;
+  border-radius: 12px;
+  background-color: green;
+}
+
 .navbar-toggler-icon {
   color: black;
 }
@@ -12,7 +101,7 @@
   justify-content: center;
 }
 
-.background {
+.landing {
   background-image: url("./img/bald.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -58,6 +147,7 @@
   position: fixed;
   left: 0;
   bottom: 0;
+  height: 20px;
   width: 100%;
   background-color: white;
   color: black;

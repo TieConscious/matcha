@@ -9,3 +9,10 @@ Chatting
     -bald people array
     -images
 
+SELECTING
+-make small images components of their own
+-put the images in database with correct info
+-mkae api call to retrieve info randomly
+-fill component with retrieved info correctly
+-make callback or redux action to update state of selected images
+-function for button clikced to send right info
