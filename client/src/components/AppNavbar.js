@@ -63,7 +63,7 @@ class AppNavbar extends Component {
 
     return (
       <div>
-        <Navbar color="light" light expand="sm" className="mb-5">
+        <Navbar color="light" light expand="sm">
           <Container>
               <Link to="/">
                 <img

@@ -22,10 +22,12 @@ class LandingPage extends Component {
 
   render() {
     return (
-      <div>
-        <Typography variant="h5" component="h3">
-          Meet your bald soulmate...
-        </Typography>
+      <div className="landing">
+        <div className="landing-title">
+          <Typography variant="h5" component="h3">
+            Meet your bald soulmate...
+          </Typography>
+        </div>
         <Container className="CenterArea">
           <Row>
             <Col>{/* <AppDescription /> */}</Col>

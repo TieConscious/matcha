@@ -10,10 +10,10 @@ import ThemeProvider from '@material-ui/styles/ThemeProvider';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#ffcc80"
+      main: "#0E3804"
     },
     secondary: {
-      main: "#fff9c4"
+      main: "#A4DDB0"
     }
   },
   fabPadding: {
