@@ -15,14 +15,20 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 const styles = {
   paper: {
+    flex: '1',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: "40vh",
-    margin: "auto"
+    margin: "auto",
+    paddingTop: "5vh"
   },
   button: {
     margin: "10px"
   },
   textField: {
-    margin: "1vh"
+    margin: "1vh",
+    alignSelf: "center"
   }
 };
 
@@ -40,7 +46,6 @@ class Settings extends Component {
       this.props.history.push("/");
     }
   }
-
 
   render() {
     const { classes } = this.props;

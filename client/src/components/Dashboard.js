@@ -15,18 +15,20 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Grid from '@material-ui/core/Grid';
 
 const styles = {
-  root: {
-    flexGrow: 1,
-  },
   paper: {
+    flex: '1',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: "40vh",
-    margin: "auto"
+    margin: "auto",
+    paddingTop: "5vh"
   },
   button: {
     margin: "10px"
   },
   textField: {
-    margin: "1vh"
+    margin: "auto"
   }
 };
 
