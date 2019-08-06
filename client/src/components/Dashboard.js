@@ -25,7 +25,11 @@ const styles = {
   },
   textField: {
     margin: "auto"
-  }
+  },
+  profile: {
+    height: '100px',
+    borderRadius: '50%'
+  },
 };
 
 class Dashboard extends Component {
@@ -64,7 +68,7 @@ class Dashboard extends Component {
         <Paper style={{ backgroundColor: "#FBFBFB" }}>
           <Grid container className={classes.root}>
             <Grid item xs={4}>
-              <img src={profile} alt={'profile pic'} />
+              <img className={classes.profile} src={profile} alt={'profile pic'} />
             </Grid>
             <Grid item xs={8}>
               <Paper>asdf</Paper>
