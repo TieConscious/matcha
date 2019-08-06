@@ -1,25 +1,21 @@
-import React, { Component } from "react";
-// import PropTypes from 'prop-types';
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import TextField from "@material-ui/core/TextField";
-import Select from "@material-ui/core/Select";
-import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Grid from '@material-ui/core/Grid';
+import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
+import profile from '../img/me.jpg';
 
 const styles = {
   paper: {
-    flex: '1',
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: "1",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
     width: "40vh",
     margin: "auto",
     paddingTop: "5vh"
@@ -47,20 +43,44 @@ class Dashboard extends Component {
     }
   }
 
+  static propTypes = {
+    auth: PropTypes.object.isRequired
+  };
+
   render() {
     const { classes } = this.props;
+    const { isAuthenticated, user } = this.props.auth;
+
+    const dashboardDisplay = (
+      <Fragment>
+        <span className="navbar-text mr-3">
+          <strong>{user ? `${user.firstname} ${user.lastname}` : ""}</strong>
+        </span>
+      </Fragment>
+    );
 
     return (
       <Box className={classes.paper}>
-        <Paper>
-          <Typography variant="h5" color="primary" component="h3">
-            --first and last name--
-          </Typography>
+        <Paper style={{ backgroundColor: "#FBFBFB" }}>
           <Grid container className={classes.root}>
-            <Grid item xs={6}>asdf</Grid>
-            <Grid item xs={6}>asdf</Grid>
-            <Grid item xs={6}>asdf</Grid>
-            <Grid item xs={6}>asdf</Grid>
+            <Grid item xs={4}>
+              <img src={profile} alt={'profile pic'} />
+            </Grid>
+            <Grid item xs={8}>
+              <Paper>asdf</Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper>asdf</Paper>
+            </Grid>
+            <Grid item xs={8}>
+              <Paper>asdf</Paper>
+            </Grid>
+            <Grid item xs={4}>
+              <Paper>asdf</Paper>
+            </Grid>
+            <Grid item xs={8}>
+              <Paper>asdf</Paper>
+            </Grid>
           </Grid>
           <form noValidate autoComplete="off" />
         </Paper>
@@ -70,6 +90,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   isAuthenticated: state.auth.isAuthenticated,
   error: state.error
 });

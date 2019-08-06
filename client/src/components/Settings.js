@@ -29,7 +29,11 @@ const styles = {
   textField: {
     margin: "1vh",
     alignSelf: "center"
-  }
+  },
+  formControl: {
+    margin: "1vh",
+    minWidth: 120,
+  },
 };
 
 class Settings extends Component {
@@ -52,8 +56,8 @@ class Settings extends Component {
 
     return (
       <Box className={classes.paper}>
-        <Paper>
-          <Typography variant="h5" color="primary" component="h3">
+        <Paper style={{backgroundColor: "#FBFBFB"}}>
+          <Typography variant="h5" component="h3">
             Settings
           </Typography>
           <form noValidate autoComplete="off">
@@ -99,8 +103,8 @@ class Settings extends Component {
               variant="outlined"
             />
             <br />
-            <FormControl variant="outlined" className={classes.textField}>
-              <InputLabel htmlFor="age-simple">gender</InputLabel>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel htmlFor="outlined-age-simple">gender</InputLabel>
               <Select>
                 <MenuItem value={"male"}>male</MenuItem>
                 <MenuItem value={"female"}>female</MenuItem>
@@ -108,7 +112,7 @@ class Settings extends Component {
               </Select>
             </FormControl>
             <br />
-            <FormControl variant="outlined" className={classes.textField}>
+            <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel htmlFor="age-simple">preference</InputLabel>
               <Select>
                 <MenuItem value={"male"}>men</MenuItem>
