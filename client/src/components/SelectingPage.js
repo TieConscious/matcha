@@ -36,7 +36,6 @@ class SelectingPage extends Component {
 
   handleSelect = (id) => {
     let imgId = "img" + id;
-    console.log(this.state[imgId]);
     if (this.state[imgId]) {
       this.setState({
         [imgId]: false,
@@ -47,9 +46,6 @@ class SelectingPage extends Component {
         [imgId]: true,
         });
     }
-      
-    
-    console.log(this.state[imgId]);
   }
 
   render() {
