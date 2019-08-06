@@ -53,7 +53,7 @@ class AppRegistration extends Component {
 
   render() {
     return (
-      <div className="registration">
+      <div>
         <Card>
           <CardBody>
             <h3>Register:</h3>

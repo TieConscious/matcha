@@ -12,19 +12,25 @@ import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
+import Grid from '@material-ui/core/Grid';
 
 const styles = {
-	paper: {
-	  width: "40vh",
-	  margin: "auto"
-	},
-	button: {
-	  margin: "10px"
-	},
-	textField: {
-	  margin: "1vh"
-	}
-  };
+  paper: {
+    flex: '1',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: "40vh",
+    margin: "auto",
+    paddingTop: "5vh"
+  },
+  button: {
+    margin: "10px"
+  },
+  textField: {
+    margin: "auto"
+  }
+};
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -42,14 +48,20 @@ class Dashboard extends Component {
   }
 
   render() {
-	const { classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <Box className={classes.paper}>
         <Paper>
           <Typography variant="h5" color="primary" component="h3">
-            Dashboard
+            --first and last name--
           </Typography>
+          <Grid container className={classes.root}>
+            <Grid item xs={6}>asdf</Grid>
+            <Grid item xs={6}>asdf</Grid>
+            <Grid item xs={6}>asdf</Grid>
+            <Grid item xs={6}>asdf</Grid>
+          </Grid>
           <form noValidate autoComplete="off" />
         </Paper>
       </Box>
