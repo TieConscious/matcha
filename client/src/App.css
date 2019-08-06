@@ -28,6 +28,11 @@
   margin-bottom: 15px;
 }
 
+.selected {
+  filter: grayscale(100%) sepia(100%) hue-rotate(95deg);
+  border: 2px solid green;
+}
+
 .select-pictures1 {
   justify-self: center;
   margin-top: 20px;
@@ -36,6 +41,8 @@
   border-radius: 50%;
   grid-area: main2-2;
 }
+
+
 
 .select-pictures2 {
   justify-self: center;

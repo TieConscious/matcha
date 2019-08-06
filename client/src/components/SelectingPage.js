@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import rock from './resources/rock.jpg';
 import Button from '@material-ui/core/Button';
 import { withStyles } from "@material-ui/core/styles";
+import SelectImage from './SelectImage.js';
 
 const styles = {
 	paper: {
@@ -21,6 +22,36 @@ const styles = {
   };
 
 class SelectingPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      img1: false,
+      img2: false,
+      img3: false,
+      img4: false,
+      img5: false,
+      img6: false
+    }
+  }
+
+  handleSelect = (id) => {
+    let imgId = "img" + id;
+    console.log(this.state[imgId]);
+    if (this.state[imgId]) {
+      this.setState({
+        [imgId]: false,
+        });
+    }
+    else {
+      this.setState({
+        [imgId]: true,
+        });
+    }
+      
+    
+    console.log(this.state[imgId]);
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -34,12 +65,12 @@ class SelectingPage extends Component {
           Your match will be determine by this so choose wisely. Pleaaaaase.
           </Typography>
         </div>
-        <img className="select-pictures1" src={rock}></img>
-        <img className="select-pictures2" src={rock}></img>
-        <img className="select-pictures3" src={rock}></img>
-        <img className="select-pictures4" src={rock}></img>
-        <img className="select-pictures5" src={rock}></img>
-        <img className="select-pictures6" src={rock}></img>
+        <SelectImage id="1" classForImage="select-pictures1" classSelected="select-pictures1 selected" handleSelect={this.handleSelect}/>
+        <SelectImage id="2" classForImage="select-pictures2" classSelected="select-pictures2 selected" handleSelect={this.handleSelect}/>
+        <SelectImage id="3" classForImage="select-pictures3" classSelected="select-pictures3 selected" handleSelect={this.handleSelect}/>
+        <SelectImage id="4" classForImage="select-pictures4" classSelected="select-pictures4 selected" handleSelect={this.handleSelect}/>
+        <SelectImage id="5" classForImage="select-pictures5" classSelected="select-pictures5 selected" handleSelect={this.handleSelect}/>
+        <SelectImage id="6" classForImage="select-pictures6" classSelected="select-pictures6 selected" handleSelect={this.handleSelect}/>
         <Button color="primary" size="medium" className={classes.button}>
           Done
         </Button>
