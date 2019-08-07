@@ -6,7 +6,9 @@ import rock from './resources/rock.jpg';
 import Button from '@material-ui/core/Button';
 import { withStyles } from "@material-ui/core/styles";
 import SelectImage from './SelectImage.js';
+import axios from 'axios';
 var json = require('./resources/imagesInfo.json');
+
 
 
 const styles = {
@@ -29,12 +31,34 @@ class SelectingPage extends Component {
     this.state = {
       imgStatus: [false, false, false, false, false, false],
       imgSrc: ['./resources/gray.jpg', './resources/gray.jpg', './resources/gray.jpg', './resources/gray.jpg', './resources/gray.jpg', './resources/gray.jpg'],
-      imgName: [null, null, null, null, null, null]
+      imgName: [null, null, null, null, null, null],
+      error: false
     }
   }
 
   componentDidMount() {
     this.fillUp();
+  }
+
+  handleDone = () => {
+    let selectedNumber = this.state.imgStatus.filter(v => v).length;
+    let arrayToPush = [];
+    if (selectedNumber < 4) {
+      alert("select 4");
+    }
+    else {
+      this.state.imgStatus.forEach(element => {
+        if (element != false) {
+          arrayToPush.push(element);
+        }
+      });
+      console.log("DONE: " + arrayToPush);
+    }
+    this.handleDoneAPI(arrayToPush, this.props.user.id)
+  }
+
+  handleDoneAPI = (tags, userId) => {
+    
   }
 
   fillUp = () => {
@@ -72,47 +96,50 @@ class SelectingPage extends Component {
 
   }
 
-  handleSelect = (id) => {
-    let newId = id-1;
-    if (this.state.imgStatus[newId]) {
-      let newImgStatus = this.state.imgStatus.slice();
-      newImgStatus[newId] = false;
-      this.setState({
-        imgStatus: newImgStatus
-        }, function() {
-          console.log(this.state.imgStatus);
-        });
-    }
-    else {
-      let newImgStatus = this.state.imgStatus.slice();
-      newImgStatus[newId] = true;
-      this.setState({
-        imgStatus: newImgStatus
-        }, function() {
-          console.log(this.state.imgStatus);
-        });
-    }
+  handleSelect = (id, name) => {
+      let newId = id-1;
+      if (this.state.imgStatus[newId]) {
+        let newImgStatus = this.state.imgStatus.slice();
+        newImgStatus[newId] = false;
+        this.setState({
+          imgStatus: newImgStatus
+          }, function() {
+            console.log(this.state.imgStatus);
+          });
+      }
+      else {
+        let newImgStatus = this.state.imgStatus.slice();
+        newImgStatus[newId] = name;
+        this.setState({
+          imgStatus: newImgStatus
+          }, function() {
+            console.log(this.state.imgStatus);
+          });
+      }
   }
 
   render() {
+    console.log(this.props.user);
     const { classes } = this.props;
     return (
       <div className="select">
         <div className="select-title">
-          <Typography variant="subtitle1" color="primary" align="center" component="h5">
+          {this.state.error ?  <Typography className="subtitle-alert" align="center" component="h5">
+     SELECT ONLY 4 of your favorite bald celebrities
+          </Typography> : <Typography variant="subtitle1" color="primary" align="center" component="h5">
           Select 5 of your favorite bald celebrities
-          </Typography>
+          </Typography> }
           <Typography variant="subtitle2" align="center" color="secondary">
           Your match will be determine by this so choose wisely. Pleaaaaase.
           </Typography>
         </div>
-        <SelectImage id="1" src={this.state.imgSrc[0]} classForImage="select-pictures1" classSelected="select-pictures1 selected" handleSelect={this.handleSelect}/>
-        <SelectImage id="2" src={this.state.imgSrc[1]} classForImage="select-pictures2" classSelected="select-pictures2 selected" handleSelect={this.handleSelect}/>
-        <SelectImage id="3" src={this.state.imgSrc[2]} classForImage="select-pictures3" classSelected="select-pictures3 selected" handleSelect={this.handleSelect}/>
-        <SelectImage id="4" src={this.state.imgSrc[3]} classForImage="select-pictures4" classSelected="select-pictures4 selected" handleSelect={this.handleSelect}/>
-        <SelectImage id="5" src={this.state.imgSrc[4]} classForImage="select-pictures5" classSelected="select-pictures5 selected" handleSelect={this.handleSelect}/>
-        <SelectImage id="6" src={this.state.imgSrc[5]} classForImage="select-pictures6" classSelected="select-pictures6 selected" handleSelect={this.handleSelect}/>
-        <Button color="primary" size="medium" className={classes.button}>
+        <SelectImage id="1" imgName={this.state.imgName[0]} imgStatus={this.state.imgStatus} src={this.state.imgSrc[0]} classForImage="select-pictures1" classSelected="select-pictures1 selected" handleSelect={this.handleSelect}/>
+        <SelectImage id="2" imgName={this.state.imgName[1]} imgStatus={this.state.imgStatus} src={this.state.imgSrc[1]} classForImage="select-pictures2" classSelected="select-pictures2 selected" handleSelect={this.handleSelect}/>
+        <SelectImage id="3" imgName={this.state.imgName[2]} imgStatus={this.state.imgStatus} src={this.state.imgSrc[2]} classForImage="select-pictures3" classSelected="select-pictures3 selected" handleSelect={this.handleSelect}/>
+        <SelectImage id="4" imgName={this.state.imgName[3]} imgStatus={this.state.imgStatus} src={this.state.imgSrc[3]} classForImage="select-pictures4" classSelected="select-pictures4 selected" handleSelect={this.handleSelect}/>
+        <SelectImage id="5" imgName={this.state.imgName[4]} imgStatus={this.state.imgStatus} src={this.state.imgSrc[4]} classForImage="select-pictures5" classSelected="select-pictures5 selected" handleSelect={this.handleSelect}/>
+        <SelectImage id="6" imgName={this.state.imgName[5]} imgStatus={this.state.imgStatus} src={this.state.imgSrc[5]} classForImage="select-pictures6" classSelected="select-pictures6 selected" handleSelect={this.handleSelect}/>
+        <Button onClick={this.handleDone} color="primary" size="medium" className={classes.button}>
           Done
         </Button>
       </div>
@@ -122,6 +149,7 @@ class SelectingPage extends Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  user: state.auth.user,
   error: state.error
 });
 
