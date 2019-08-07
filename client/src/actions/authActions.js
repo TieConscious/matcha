@@ -43,10 +43,8 @@ export const register = ({ firstname, lastname, email, password }) => dispatch =
       "Content-Type": "application/json"
     }
   };
-
   // Request body
   const body = JSON.stringify({ firstname, lastname, email, password });
-
   axios
     .post("/api/users/register", body, config)
     .then(res =>
@@ -66,15 +64,25 @@ export const register = ({ firstname, lastname, email, password }) => dispatch =
 };
 
 // Update user with bald tags
-export const updateBaldTags = (tags, userId) => dispatch => {
-  
+export const updateBaldTags = ( tags, userId ) => dispatch => {
+  console.log(tags + " " + userId);
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  };
+  // Request body
+  const body = JSON.stringify({ tags, userId});
   axios
-    .post("/api/users/select/done", tags, userId)
-    .then(res =>
-      dispatch({
-        type: UPDATETAGS_SUCCESS,
-        payload: res.data
-      })
+    .post("api/users/select/done", body, config)
+    .then(res => {
+        console.log(res)
+        dispatch({
+          type: UPDATETAGS_SUCCESS,
+          payload: res.data
+        })
+      }
     )
     .catch(err => {
       // dispatch(
@@ -83,6 +91,7 @@ export const updateBaldTags = (tags, userId) => dispatch => {
       dispatch({
         type: UPDATETAGS_FAIL
       });
+      console.log(err)
     });
 };
 

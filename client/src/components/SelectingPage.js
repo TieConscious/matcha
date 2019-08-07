@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from "@material-ui/core/styles";
 import SelectImage from './SelectImage.js';
 import axios from 'axios';
+import { updateBaldTags } from "../actions/authActions";
+import { clearErrors } from "../actions/errorActions";
 var json = require('./resources/imagesInfo.json');
 
 
@@ -54,11 +56,8 @@ class SelectingPage extends Component {
       });
       console.log("DONE: " + arrayToPush);
     }
-    this.handleDoneAPI(arrayToPush, this.props.user.id)
-  }
-
-  handleDoneAPI = (tags, userId) => {
-    
+    console.log(this.props.user._id);
+    this.props.updateBaldTags(arrayToPush, this.props.user._id)
   }
 
   fillUp = () => {
@@ -155,5 +154,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  { updateBaldTags }
 )(withStyles(styles)(SelectingPage));

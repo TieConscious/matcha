@@ -115,12 +115,12 @@ router.route('/update/:id').post(function(req, res) {
   });
 });
 
-router.route('/select/done').post(function(req, res) {
-  User.findById(req.params.id, function (err, user) {
+router.route('/select/done/').post(function(req, res) {
+  User.findById(req.body.userId, function (err, user) {
     if(!user)
       res.status(404).send('User not found');
     else {
-      user.baldTags = req.params.tags;
+      user.baldTags = req.body.tags;
       user.save().then(user => {
           res.status(200).send("worked");
       })
