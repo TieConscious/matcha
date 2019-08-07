@@ -9,7 +9,9 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  UPDATETAGS_SUCCESS,
+  UPDATETAGS_FAIL
 } from "./types";
 
 // Check token & load user
@@ -59,6 +61,27 @@ export const register = ({ firstname, lastname, email, password }) => dispatch =
       // );
       dispatch({
         type: REGISTER_FAIL
+      });
+    });
+};
+
+// Update user with bald tags
+export const updateBaldTags = (tags, userId) => dispatch => {
+  
+  axios
+    .post("/api/users/select/done", tags, userId)
+    .then(res =>
+      dispatch({
+        type: UPDATETAGS_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      // dispatch(
+      //   returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
+      // );
+      dispatch({
+        type: UPDATETAGS_FAIL
       });
     });
 };

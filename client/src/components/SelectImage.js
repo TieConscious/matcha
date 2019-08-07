@@ -18,10 +18,26 @@ class SelectImage extends Component {
     }
 
     handleClick = () => {
-        this.setState(state => ({
-            isSelected: !state.isSelected,
-            }));
-        this.props.handleSelect(this.props.id);
+        let selectedNumber = this.props.imgStatus.filter(v => v).length;
+        if (selectedNumber >= 4) {
+            if (this.state.isSelected) {
+                this.setState(state => ({
+                    isSelected: !state.isSelected,
+                    }));
+                this.props.handleSelect(this.props.id);
+            }
+            else {
+                console.log("too much");
+            }
+            
+        }
+        else {
+            this.setState(state => ({
+                isSelected: !state.isSelected,
+                }));
+            this.props.handleSelect(this.props.id, this.props.imgName);
+        }
+        
     }
 
     render() {

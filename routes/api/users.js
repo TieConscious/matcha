@@ -115,4 +115,20 @@ router.route('/update/:id').post(function(req, res) {
   });
 });
 
+router.route('/select/done').post(function(req, res) {
+  User.findById(req.params.id, function (err, user) {
+    if(!user)
+      res.status(404).send('User not found');
+    else {
+      user.baldTags = req.params.tags;
+      user.save().then(user => {
+          res.status(200).send("worked");
+      })
+      .catch(err => {
+          res.status(400).send("update not possible due to " + err);
+      });
+    };
+  });
+});
+
 module.exports = router;
