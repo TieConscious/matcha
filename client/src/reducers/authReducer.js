@@ -7,7 +7,8 @@ import {
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  UPDATETAGS_SUCCESS
+  UPDATETAGS_SUCCESS,
+  UPDATETAGS_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -53,6 +54,7 @@ export default function(state = initialState, action) {
         isLoading: false
       };
     case UPDATETAGS_SUCCESS:
+    case UPDATETAGS_FAIL:
     default:
       return state;
   }
