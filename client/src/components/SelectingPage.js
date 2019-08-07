@@ -59,24 +59,37 @@ class SelectingPage extends Component {
     var src4 = json[numbersArray[3]].url;
     var src5 = json[numbersArray[4]].url;
     var src6 = json[numbersArray[5]].url;
+    var newName = this.state.imgName.slice();
+    newName = [json[numbersArray[0]].name, json[numbersArray[1]].name, json[numbersArray[2]].name, json[numbersArray[3]].name, json[numbersArray[4]].name, json[numbersArray[5]].name]
     var newSrc = this.state.imgSrc.slice();
     newSrc = [src1, src2, src3, src4, src5, src6];
     this.setState({ imgSrc: newSrc}, function() {
       console.log(this.state.imgSrc);
     });
+    this.setState({ imgName: newName}, function() {
+      console.log(this.state.imgName);
+    });
 
   }
 
   handleSelect = (id) => {
-    let imgId = "img" + id;
-    if (this.state[imgId]) {
+    let newId = id-1;
+    if (this.state.imgStatus[newId]) {
+      let newImgStatus = this.state.imgStatus.slice();
+      newImgStatus[newId] = false;
       this.setState({
-        [imgId]: false,
+        imgStatus: newImgStatus
+        }, function() {
+          console.log(this.state.imgStatus);
         });
     }
     else {
+      let newImgStatus = this.state.imgStatus.slice();
+      newImgStatus[newId] = true;
       this.setState({
-        [imgId]: true,
+        imgStatus: newImgStatus
+        }, function() {
+          console.log(this.state.imgStatus);
         });
     }
   }
