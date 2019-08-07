@@ -3,6 +3,7 @@ import rock from './resources/rock.jpg';
 import { connect } from "react-redux";
 
 
+
 class SelectImage extends Component {
 
     constructor(props) {
@@ -11,6 +12,11 @@ class SelectImage extends Component {
             isSelected: false
         };
     }
+
+    componentDidMount() {
+        console.log(this.props.src);
+    }
+
     handleClick = () => {
         this.setState(state => ({
             isSelected: !state.isSelected,
@@ -19,9 +25,10 @@ class SelectImage extends Component {
     }
 
     render() {
+        //const src = require('./resources/moo.jpg');
     return (
         <>
-            {this.state.isSelected ? <img className={this.props.classSelected} src={rock} onClick={this.handleClick}></img> :  <img className={this.props.classForImage} src={rock} onClick={this.handleClick}></img>}
+            {this.state.isSelected ? <img className={this.props.classSelected} src={require("" + this.props.src)} onClick={this.handleClick}></img> :  <img className={this.props.classForImage} src={require("" + this.props.src)} onClick={this.handleClick}></img>}
         </>
     );
     }
