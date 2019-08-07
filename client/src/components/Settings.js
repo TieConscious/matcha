@@ -15,10 +15,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 const styles = {
   paper: {
-    flex: '1',
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: "1",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
     width: "40vh",
     margin: "auto",
     paddingTop: "5vh"
@@ -32,8 +32,8 @@ const styles = {
   },
   formControl: {
     margin: "1vh",
-    minWidth: 120,
-  },
+    minWidth: 120
+  }
 };
 
 class Settings extends Component {
@@ -56,7 +56,7 @@ class Settings extends Component {
 
     return (
       <Box className={classes.paper}>
-        <Paper style={{backgroundColor: "#FBFBFB"}}>
+        <Paper style={{ backgroundColor: "#FBFBFB" }}>
           <Typography variant="h5" component="h3">
             Settings
           </Typography>
@@ -121,7 +121,23 @@ class Settings extends Component {
               </Select>
             </FormControl>
             <br />
-
+            <input
+              accept="image/*"
+              style={{ display: "none" }}
+              id="raised-button-file"
+              multiple
+              type="file"
+            />
+            <label htmlFor="raised-button-file">
+              <Button
+                variant="contained"
+                component="span"
+                className={classes.button}
+              >
+                upload image
+              </Button>
+            </label>
+            <br />
             <Button variant="contained" className={classes.button}>
               Submit
             </Button>
