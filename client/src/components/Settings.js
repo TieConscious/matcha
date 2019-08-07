@@ -77,6 +77,15 @@ class Settings extends Component {
               variant="outlined"
             />
             <TextField
+              label="bio"
+              multiline
+              rowsMax="4"
+              // defaultValue="foo"
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+            {/* <TextField
               label="password"
               // defaultValue="foo"
               type="password"
@@ -91,7 +100,7 @@ class Settings extends Component {
               className={classes.textField}
               margin="normal"
               variant="outlined"
-            />
+            /> */}
 
             <TextField
               label="age"
