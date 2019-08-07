@@ -54,11 +54,21 @@ class Dashboard extends Component {
   render() {
     const { classes } = this.props;
     const { isAuthenticated, user } = this.props.auth;
-
+    console.log(user);
     const dashboardDisplay = (
       <Fragment>
         <span className="navbar-text mr-3">
-          <strong>{user ? `${user.firstname} ${user.lastname}` : ""}</strong>
+          <h3><strong>{user ? `${user.firstname} ${user.lastname}` : ""}</strong></h3>
+          <h5>{user ? `${user.age} ${user.gender}` : ""}</h5>
+          <h5>{user ? `${user.location}`: ""}</h5>
+        </span>
+      </Fragment>
+    );
+
+    const bioDisplay = (
+      <Fragment>
+        <span className="navbar-text mr-3">
+          <h6>{user ? `${user.bio}` : ""}</h6>
         </span>
       </Fragment>
     );
@@ -71,10 +81,10 @@ class Dashboard extends Component {
               <img className={classes.profile} src={profile} alt={'profile pic'} />
             </Grid>
             <Grid item xs={8}>
-              <Paper>asdf</Paper>
+              {dashboardDisplay}
             </Grid>
-            <Grid item xs={4}>
-              <Paper>asdf</Paper>
+            <Grid item xs={12}>
+              {bioDisplay}
             </Grid>
             <Grid item xs={8}>
               <Paper>asdf</Paper>

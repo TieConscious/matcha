@@ -34,6 +34,9 @@ const UserSchema = new Schema({
         match:
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     },
+    location: {
+        type: String
+    },
     password: {
         type: String,
         required: true,
@@ -62,7 +65,7 @@ const UserSchema = new Schema({
         maxlength: 420,
         default: "Im lonely"
     },
-     baldTags: [{ type: String, default: '[]'}]
+    baldTags: [{ type: String, default: '[]'}]
 });
 
 module.exports = mongoose.model('User', UserSchema)

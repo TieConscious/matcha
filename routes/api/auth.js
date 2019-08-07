@@ -35,11 +35,7 @@ router.post("/", (req, res) => {
           if (err) throw err;
           res.json({
             token,
-            user: {
-              id: user.id,
-              email: user.email,
-              firstname: user.firstname
-            }
+            user
           });
         }
       );
