@@ -131,4 +131,13 @@ router.route('/select/done/').post(function(req, res) {
   });
 });
 
+router.route('/explore/').post(function(req, res) {
+  User.find({sexualPreference: req.body.sexualPreference}, function(err, pmatches) {
+    if (err)
+      res.send(err);
+    else
+      res.json(pmatches);
+  });
+});
+
 module.exports = router;
