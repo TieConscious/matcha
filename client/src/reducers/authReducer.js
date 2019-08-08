@@ -8,7 +8,9 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   UPDATETAGS_SUCCESS,
-  UPDATETAGS_FAIL
+  UPDATETAGS_FAIL,
+  UPDATEUSER_SUCCESS,
+	UPDATEUSER_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -56,6 +58,9 @@ export default function(state = initialState, action) {
     case UPDATETAGS_SUCCESS:
     case UPDATETAGS_FAIL:
     default:
+      return state;
+    case UPDATEUSER_SUCCESS:
+    case UPDATEUSER_FAIL:
       return state;
   }
 }

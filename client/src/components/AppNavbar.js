@@ -46,6 +46,7 @@ class AppNavbar extends Component {
           <Link to="/dashboard">Dashboard</Link>
         </NavItem>
         <Link to="/settings">Settings</Link>
+        <Link to="/select">Select</Link>
         <NavItem>
           <AppLogout />
         </NavItem>
@@ -64,15 +65,15 @@ class AppNavbar extends Component {
       <div>
         <Navbar color="light" light expand="sm">
           <Container>
-              <Link to="/">
-                <img
-                  src={matcha}
-                  alt="mug"
-                  color="white"
-                  width="30"
-                  height="30"
-                />
-              </Link>
+            <Link to="/">
+              <img
+                src={matcha}
+                alt="mug"
+                color="white"
+                width="30"
+                height="30"
+              />
+            </Link>
             <NavbarToggler onClick={this.toggle} color="black" />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>

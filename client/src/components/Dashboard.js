@@ -54,7 +54,7 @@ class Dashboard extends Component {
   render() {
     const { classes } = this.props;
     const { isAuthenticated, user } = this.props.auth;
-    console.log(user);
+
     const dashboardDisplay = (
       <Fragment>
         <span className="navbar-text mr-3">
