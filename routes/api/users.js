@@ -137,6 +137,8 @@ router.route('/explore/').post(function(req, res) {
       res.send(err);
     else
       res.json(pmatches);
+  });
+});
 
 router.post('/update/settings', (req, res) => {
   const { firstname, lastname, bio, userId } = req.body;
