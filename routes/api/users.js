@@ -131,4 +131,23 @@ router.route('/select/done/').post(function(req, res) {
   });
 });
 
+router.route('/update/settings').post(function(req, res) {
+  User.findById(req.body.userId, function (err, user) {
+    if(!user)
+      res.status(404).send('User not found');
+    else {
+      user.firstname = req.body.firstname;
+      user.lastname = req.body.firstname;
+      user.bio = req.body.bio;
+      user.age = req.body.age;
+      user.save().then(user => {
+          res.status(200).send("worked");
+      })
+      .catch(err => {
+          res.status(400).send("update not possible due to " + err);
+      });
+    };
+  });
+});
+
 module.exports = router;
