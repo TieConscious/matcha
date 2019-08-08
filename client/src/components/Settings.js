@@ -40,10 +40,9 @@ const styles = {
 
 class Settings extends Component {
   state = {
-    firstname: "",
+    firstname: this.props.user.firstname,
     lastname: "",
-    bio: "",
-    age: ""
+    bio: ""
   };
 
   static propTypes = {
@@ -65,22 +64,22 @@ class Settings extends Component {
   }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.id]: e.target.value });
+    console.log(this.state);
   };
 
   onSubmit = e => {
     e.preventDefault();
-
-    const { firstname, lastname, bio, age } = this.state;
+    console.log(this.state);
+    const { firstname, lastname, bio } = this.state;
 
     const newSettings = {
       firstname,
       lastname,
-      bio,
-      age
+      bio
     };
 
-    this.props.updateSettings(newSettings, this.props.user._id);
+    this.props.updateSettings(firstname, lastname, bio, this.props.user._id);
   };
 
   render() {
@@ -95,6 +94,7 @@ class Settings extends Component {
           </Typography>
           <form noValidate autoComplete="off" onSubmit={this.onSubmit}>
             <TextField
+              id="firstname"
               label="first name"
               className={classes.textField}
               defaultValue={user ? `${user.firstname}` : ""}
@@ -103,6 +103,7 @@ class Settings extends Component {
               variant="outlined"
             />
             <TextField
+              id="lastname"
               label="last name"
               className={classes.textField}
               defaultValue={user ? `${user.lastname}` : ""}
@@ -111,6 +112,7 @@ class Settings extends Component {
               variant="outlined"
             />
             <TextField
+              id="bio"
               label="bio"
               multiline
               rowsMax="4"
@@ -120,7 +122,7 @@ class Settings extends Component {
               margin="normal"
               variant="outlined"
             />
-            <TextField
+            {/* <TextField
               label="age"
               type="number"
               className={classes.textField}
@@ -128,7 +130,7 @@ class Settings extends Component {
               onChange={this.onChange}
               margin="normal"
               variant="outlined"
-            />
+            /> */}
             {/* <br />
             <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel>gender</InputLabel>

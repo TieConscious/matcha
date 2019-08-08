@@ -93,7 +93,7 @@ router.route('/delete/:id').delete(function(req, res) {
 router.route('/update/:id').post(function(req, res) {
   User.findById(req.params.id, function (err, user) {
       if(!user)
-          res.status(404).send('User not found');
+          res.status(404).send('User not found!!!!');
       else {
           let psswd = bcrypt.hashSync(req.body.password, 10, function(err, hash) {
               if (err)
@@ -131,15 +131,23 @@ router.route('/select/done/').post(function(req, res) {
   });
 });
 
-router.route('/update/settings').post(function(req, res) {
-  User.findById(req.body.userId, function (err, user) {
+
+router.post('/update/settings', (req, res) => {
+  const { firstname, lastname, bio, userId } = req.body;
+
+  //Simple validation
+  if (!firstname || !lastname || !bio) {
+    return res.status(400).json({ msg: "Please enter all fields" });
+  }
+
+  User.findOne(userId, function (err, user) {
+    console.log(user);
     if(!user)
-      res.status(404).send('User not found');
+      res.status(404).send('not found: ' + user);
     else {
       user.firstname = req.body.firstname;
-      user.lastname = req.body.firstname;
+      user.lastname = req.body.lastname;
       user.bio = req.body.bio;
-      user.age = req.body.age;
       user.save().then(user => {
           res.status(200).send("worked");
       })

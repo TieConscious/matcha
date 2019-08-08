@@ -6,7 +6,7 @@ import {
 } from "./types";
 
 // Update user settings
-export const updateSettings = ({ firstname, lastname, bio, age }, userId) => dispatch => {
+export const updateSettings = ( firstname, lastname, bio , userId) => dispatch => {
   // Headers
   const config = {
     headers: {
@@ -14,7 +14,8 @@ export const updateSettings = ({ firstname, lastname, bio, age }, userId) => dis
     }
   };
   // Request body
-  const body = JSON.stringify({ firstname, lastname, bio, age }, userId);
+  const body = JSON.stringify({ firstname, lastname, bio, userId });
+  console.log(body);
   axios
     .post("api/users/update/settings", body, config)
     .then(res => {
@@ -29,7 +30,7 @@ export const updateSettings = ({ firstname, lastname, bio, age }, userId) => dis
       dispatch({
         type: UPDATEUSER_FAIL
       });
-      console.log(err)
+      console.log("ERROR: " + err)
     });
 };
 
