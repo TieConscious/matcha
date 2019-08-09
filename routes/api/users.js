@@ -131,15 +131,6 @@ router.route('/select/done/').post(function(req, res) {
   });
 });
 
-router.route('/explore/').post(function(req, res) {
-  User.find({sexualPreference: req.body.sexualPreference}, function(err, pmatches) {
-    if (err)
-      res.send(err);
-    else
-      res.json(pmatches);
-  });
-});
-
 router.post('/update/settings', (req, res) => {
   const { firstname, lastname, bio, userId } = req.body;
 
@@ -163,6 +154,15 @@ router.post('/update/settings', (req, res) => {
           res.status(400).send("update not possible due to " + err);
       });
     };
+  });
+});
+
+router.route('/explore/').post(function(req, res) {
+  User.find({sexualPreference: req.body.sexualPreference, gender: req.body.gender}, function(err, pmatches) {
+    if (err)
+      res.send(err);
+    else
+      res.json(pmatches);
   });
 });
 
