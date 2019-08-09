@@ -161,12 +161,24 @@ router.post('/settings', (req, res) => {
 });
 
 router.route('/explore/').post(function(req, res) {
-  User.find({sexualPreference: req.body.sexualPreference, gender: req.body.gender}, function(err, pmatches) {
-    if (err)
-      res.send(err);
-    else
-      res.json(pmatches);
-  });
+  if (req.body.sexualPreference == "undefined") {
+    //add location 
+    User.find({$or:[{sexualPreference: req.body.gender}, {sexualPreference: 'undefined'}], location: req.body.location}, function(err, pmatches) {
+      if (err)
+        res.send(err);
+      else
+        res.json(pmatches);
+    });
+  }
+  else {
+    User.find({location: req.body.location, sexualPreference: req.body.gender, gender: req.body.sexualPreference}, function(err, pmatches) {
+      if (err)
+        res.send(err);
+      else
+        res.json(pmatches);
+    });
+  }
+  
 });
 
 module.exports = router;
