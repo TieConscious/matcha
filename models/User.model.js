@@ -53,11 +53,12 @@ const UserSchema = new Schema({
     },
     gender: {
         type: String,
-        enum: ["male", "female", "other"]
+        enum: ["male", "female", "undefined"]
     },
     sexualPreference: {
         type: String,
-        enum: ["male", "female", "other"]
+        enum: ["male", "female", "undefined"],
+        default: "undefined"
     },
     bio: {
         type: String,

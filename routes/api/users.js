@@ -131,6 +131,14 @@ router.route('/select/done/').post(function(req, res) {
   });
 });
 
+router.route('/explore/').post(function(req, res) {
+  User.find({sexualPreference: req.body.sexualPreference}, function(err, pmatches) {
+    if (err)
+      res.send(err);
+    else
+      res.json(pmatches);
+  });
+});
 
 router.post('/settings', (req, res) => {
   const { firstname, lastname, bio, age, gender, sexualPreference, userId } = req.body;

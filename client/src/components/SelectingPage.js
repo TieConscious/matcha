@@ -39,7 +39,17 @@ class SelectingPage extends Component {
   }
 
   componentDidMount() {
+    if (!this.props.isAuthenticated) {
+      this.props.history.push("/");
+    }
     this.fillUp();
+  }
+
+  componentDidUpdate() {
+    // If not logged in and user navigates to Dashboard page, should redirect them to landing page
+    if (!this.props.isAuthenticated) {
+      this.props.history.push("/");
+    }
   }
 
   handleDone = () => {
