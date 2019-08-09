@@ -10,10 +10,10 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
-// import MenuItem from "@material-ui/core/MenuItem";
-// import FormControl from "@material-ui/core/FormControl";
-// import InputLabel from "@material-ui/core/InputLabel";
-// import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
 
 const styles = {
   paper: {
@@ -39,14 +39,18 @@ const styles = {
 };
 
 class Settings extends Component {
-  state = {
-    firstname: this.props.user.firstname,
-    lastname: "",
-    bio: ""
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
   };
 
-  static propTypes = {
-    auth: PropTypes.object.isRequired
+  state = {
+    firstname: this.props.user.firstname,
+    lastname: this.props.user.lastname,
+    bio: this.props.user.bio,
+    age: this.props.user.age,
+    gender: this.props.user.gender,
+    sexualPreference: this.props.user.sexualPreference
   };
 
   componentDidMount() {
@@ -65,21 +69,14 @@ class Settings extends Component {
 
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
-    console.log(this.state);
   };
 
   onSubmit = e => {
     e.preventDefault();
     console.log(this.state);
-    const { firstname, lastname, bio } = this.state;
+    const { firstname, lastname, bio, age, gender, sexualPreference } = this.state;
 
-    const newSettings = {
-      firstname,
-      lastname,
-      bio
-    };
-
-    this.props.updateSettings(firstname, lastname, bio, this.props.user._id);
+    this.props.updateSettings(firstname, lastname, bio, age, gender, sexualPreference, this.props.user._id);
   };
 
   render() {
@@ -122,7 +119,8 @@ class Settings extends Component {
               margin="normal"
               variant="outlined"
             />
-            {/* <TextField
+            <TextField
+              id="age"
               label="age"
               type="number"
               className={classes.textField}
@@ -130,11 +128,11 @@ class Settings extends Component {
               onChange={this.onChange}
               margin="normal"
               variant="outlined"
-            /> */}
-            {/* <br />
+            />
+            <br />
             <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel>gender</InputLabel>
-              <Select variant="outlined" onChange={this.onChange} defaultValue={user ? `${user.gender}` : ""}>
+              <Select id="gender" variant="outlined" onChange={this.onChange} defaultValue={user ? `${user.gender}` : ""}>
                 <MenuItem value={"male"}>male</MenuItem>
                 <MenuItem value={"female"}>female</MenuItem>
                 <MenuItem value={"other"}>other</MenuItem>
@@ -144,6 +142,7 @@ class Settings extends Component {
             <FormControl variant="outlined" className={classes.formControl} autoComplete="off">
               <InputLabel htmlFor="sexualPreference">preference</InputLabel>
               <Select
+                id="sexualPreference"
                 variant="outlined"
                 onChange={this.onChange}
                 defaultValue={user ? `${user.sexualPreference}` : ""}
@@ -154,7 +153,7 @@ class Settings extends Component {
                 <MenuItem value={"other"}>everyone</MenuItem>
               </Select>
             </FormControl>
-            <br /> */}
+            <br />
             {/* <input
               accept="image/*"
               style={{ display: "none" }}
