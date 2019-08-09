@@ -53,7 +53,7 @@ class Dashboard extends Component {
 
   render() {
     const { classes } = this.props;
-    const { isAuthenticated, user } = this.props.auth;
+    const { user } = this.props.auth;
 
     const dashboardDisplay = (
       <Fragment>
@@ -106,7 +106,8 @@ class Dashboard extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   isAuthenticated: state.auth.isAuthenticated,
-  error: state.error
+  error: state.error,
+  user: state.auth.user
 });
 
 export default connect(

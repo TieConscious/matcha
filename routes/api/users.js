@@ -132,22 +132,25 @@ router.route('/select/done/').post(function(req, res) {
 });
 
 
-router.post('/update/settings', (req, res) => {
-  const { firstname, lastname, bio, userId } = req.body;
+router.post('/settings', (req, res) => {
+  const { firstname, lastname, bio, age, gender, sexualPreference, userId } = req.body;
 
   //Simple validation
-  if (!firstname || !lastname || !bio) {
+  if (!firstname || !lastname || !bio || !age || !gender || !sexualPreference) {
     return res.status(400).json({ msg: "Please enter all fields" });
   }
-
-  User.findOne(userId, function (err, user) {
+  console.log(userId);
+  User.findById(userId, function (err, user) {
     console.log(user);
     if(!user)
       res.status(404).send('not found: ' + user);
     else {
-      user.firstname = req.body.firstname;
-      user.lastname = req.body.lastname;
-      user.bio = req.body.bio;
+      user.firstname = firstname;
+      user.lastname = lastname;
+      user.bio = bio;
+      user.age = age;
+      user.gender = gender;
+      user.sexualPreference = sexualPreference;
       user.save().then(user => {
           res.status(200).send("worked");
       })
