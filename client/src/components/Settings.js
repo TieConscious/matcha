@@ -71,7 +71,12 @@ class Settings extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
+  onChangeSelect = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   onSubmit = e => {
+    //Grabs all info from settings with default values already set
     e.preventDefault();
     console.log(this.state);
     const { firstname, lastname, bio, age, gender, sexualPreference } = this.state;
@@ -130,29 +135,37 @@ class Settings extends Component {
               variant="outlined"
             />
             <br />
-            <FormControl variant="outlined" className={classes.formControl}>
-              <InputLabel>gender</InputLabel>
-              <Select id="gender" variant="outlined" onChange={this.onChange} defaultValue={user ? `${user.gender}` : ""}>
+            <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="gender">gender</InputLabel>
+              <Select
+                value={this.state.gender}
+                onChange={this.onChangeSelect}
+                inputProps={{
+                  name: 'gender',
+                  id: 'gender'
+                }}
+              >
                 <MenuItem value={"male"}>male</MenuItem>
                 <MenuItem value={"female"}>female</MenuItem>
                 <MenuItem value={"other"}>other</MenuItem>
               </Select>
             </FormControl>
             <br />
-            <FormControl variant="outlined" className={classes.formControl} autoComplete="off">
-              <InputLabel htmlFor="sexualPreference">preference</InputLabel>
+            {/* <FormControl className={classes.formControl}>
+              <InputLabel htmlFor="sexualPreference">sexualPreference</InputLabel>
               <Select
-                id="sexualPreference"
-                variant="outlined"
-                onChange={this.onChange}
-                defaultValue={user ? `${user.sexualPreference}` : ""}
-
+                value={this.state.sexualPreference}
+                onChange={this.onChangeSelect}
+                inputProps={{
+                  name: 'sexualPreference',
+                  id: 'sexualPreference'
+                }}
               >
-                <MenuItem value={"male"}>men</MenuItem>
-                <MenuItem value={"female"}>women</MenuItem>
+                <MenuItem value={"male"}>male</MenuItem>
+                <MenuItem value={"female"}>female</MenuItem>
                 <MenuItem value={"other"}>everyone</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
             <br />
             {/* <input
               accept="image/*"
