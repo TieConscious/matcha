@@ -136,7 +136,7 @@ router.post('/settings', (req, res) => {
 
   //Simple validation
   if (!firstname || !lastname || !bio || !age || !gender || !sexualPreference) {
-    return res.status(400).json({ msg: "Please enter all fields" });
+    return res.status(400).send("update not possible due to " + err);
   }
   console.log(userId);
   User.findById(userId, function (err, user) {
