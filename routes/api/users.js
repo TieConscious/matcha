@@ -131,15 +131,6 @@ router.route('/select/done/').post(function(req, res) {
   });
 });
 
-router.route('/explore/').post(function(req, res) {
-  User.find({sexualPreference: req.body.sexualPreference}, function(err, pmatches) {
-    if (err)
-      res.send(err);
-    else
-      res.json(pmatches);
-  });
-});
-
 router.post('/settings', (req, res) => {
   const { firstname, lastname, bio, age, gender, sexualPreference, userId } = req.body;
 
@@ -167,6 +158,27 @@ router.post('/settings', (req, res) => {
       });
     };
   });
+});
+
+router.route('/explore/').post(function(req, res) {
+  if (req.body.sexualPreference == "everyone") {
+    //add location 
+    User.find({$or:[{sexualPreference: req.body.gender}, {sexualPreference: 'everyone'}], location: req.body.location}, function(err, pmatches) {
+      if (err)
+        res.send(err);
+      else
+        res.json(pmatches);
+    });
+  }
+  else {
+    User.find({location: req.body.location, sexualPreference: req.body.gender, gender: req.body.sexualPreference}, function(err, pmatches) {
+      if (err)
+        res.send(err);
+      else
+        res.json(pmatches);
+    });
+  }
+  
 });
 
 module.exports = router;

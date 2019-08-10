@@ -47,6 +47,7 @@ class AppNavbar extends Component {
         </NavItem>
         <Link to="/settings">Settings</Link>
         <Link to="/select">Select</Link>
+        <Link to="/explore">Explore</Link>
         <NavItem>
           <AppLogout />
         </NavItem>
