@@ -59,36 +59,27 @@ class Explore extends Component {
         if (this.props.user != null) {
             this.props.getMatches(this.props.user.sexualPreference, this.props.user.gender, this.props.user.location);
         }
-        this.updateMatches();
     }
-
-    updateMatches = () => {
-        console.log("UPDATINGGGGG");
-        let newPmatches = this.props.pmatches;
-        console.log("newPMATCHES: " + newPmatches);
-        // this.setState({pmatches: newPmatches}, function() {
-        //     console.log("matches: " + this.state.pmatches);
-        // })
-    }
-    componentDidUpdate() {
-        // console.log(this.props.pmatches);
-        // let newPmatches = this.props.pmatches;
-        // this.setState({pmatches: newPmatches}, function() {
-        //     console.log("matches: " + this.state.pmatches);
-        // })
-    }
-
+    
     static propTypes = {
         auth: PropTypes.object.isRequired
     };
 
     render() {
-        console.log(this.props.pmatches);
+        console.log("matches in global state: " + this.props.pmatches);
+        console.log("USER: " + this.props.user);
+        // if (this.props.user != null) {
+        //     this.updateMatches();
+        // };
         const { classes } = this.props;
         return (
             <div className="wrapper">
                 <div className="explore">
-                    {
+                    {   this.props.pmatches ? 
+                        this.props.pmatches.map(pmatch => {
+                            return <CardExplore info={pmatch} />
+                        })
+                        :
                         this.state.pmatches.map(pmatch => {
                             return <CardExplore info={pmatch} />
                         })

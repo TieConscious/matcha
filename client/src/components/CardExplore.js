@@ -20,7 +20,7 @@ const styles = {
 
 class CardExplore extends React.Component {
     render() {
-        console.log("INFOOOOOO: " + this.props.info.images);
+        // console.log("INFOOOOOO: " + this.props.info.images);
         const { classes } = this.props;
         return (
             <Card className={classes.card}>
