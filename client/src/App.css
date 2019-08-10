@@ -6,6 +6,14 @@
   color: red
 }
 
+.wrapper {
+  text-align: center;
+}
+
+.explore {
+  display: inline-block;
+}
+
 .select {
   margin: auto;
   margin-top: 40px;
@@ -25,6 +33,19 @@
 
 [contentEditable=true]:empty:not(:focus):before{
   content:attr(data-placeholder) }
+
+.cardImage {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 50%;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 5px;
+}
+
+.cardButtons {
+  margin-left: 35px;
+}
 
 .select-title {
   grid-area: center;

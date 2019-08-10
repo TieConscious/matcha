@@ -11,7 +11,9 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   UPDATETAGS_SUCCESS,
-  UPDATETAGS_FAIL
+  UPDATETAGS_FAIL,
+  EXPLORE_SUCCESS,
+  EXPLORE_FAIL
 } from "./types";
 
 // Check token & load user
@@ -150,4 +152,35 @@ export const tokenConfig = getState => {
   }
 
   return config;
+};
+
+export const getMatches = ( sexualPreference, gender, location ) => dispatch => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  };
+  // Request body
+  const body = JSON.stringify({ sexualPreference, gender, location});
+  console.log(body);
+  axios
+    .post("api/users/explore", body, config)
+    .then(res => {
+        console.log(res.data)
+        dispatch({
+          type: EXPLORE_SUCCESS,
+          payload: res.data
+        })
+      }
+    )
+    .catch(err => {
+      // dispatch(
+      //   returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
+      // );
+      dispatch({
+        type: EXPLORE_FAIL
+      });
+      console.log(err)
+    });
 };

@@ -10,14 +10,17 @@ import {
   UPDATETAGS_SUCCESS,
   UPDATETAGS_FAIL,
   UPDATEUSER_SUCCESS,
-	UPDATEUSER_FAIL
+  UPDATEUSER_FAIL,
+  EXPLORE_SUCCESS,
+  EXPLORE_FAIL
 } from "../actions/types";
 
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
   isLoading: false,
-  user: null
+  user: null,
+  pmatches: null
 };
 
 export default function(state = initialState, action) {
@@ -57,6 +60,12 @@ export default function(state = initialState, action) {
       };
     case UPDATETAGS_SUCCESS:
     case UPDATETAGS_FAIL:
+    case EXPLORE_SUCCESS:
+      return {
+        ...state,
+        pmatches: action.payload
+      };
+    case EXPLORE_FAIL:
     default:
       return state;
     case UPDATEUSER_SUCCESS:

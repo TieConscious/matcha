@@ -161,9 +161,9 @@ router.post('/settings', (req, res) => {
 });
 
 router.route('/explore/').post(function(req, res) {
-  if (req.body.sexualPreference == "undefined") {
+  if (req.body.sexualPreference == "everyone") {
     //add location 
-    User.find({$or:[{sexualPreference: req.body.gender}, {sexualPreference: 'undefined'}], location: req.body.location}, function(err, pmatches) {
+    User.find({$or:[{sexualPreference: req.body.gender}, {sexualPreference: 'everyone'}], location: req.body.location}, function(err, pmatches) {
       if (err)
         res.send(err);
       else
