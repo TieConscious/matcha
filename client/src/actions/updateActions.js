@@ -6,7 +6,7 @@ import {
 } from "./types";
 
 // Update user settings
-export const updateSettings = ( firstname, lastname, bio, age, gender, sexualPreference, userId) => dispatch => {
+export const updateSettings = ({ firstname, lastname, bio, age, gender, sexualPreference, id }) => dispatch => {
   // Headers
   const config = {
     headers: {
@@ -14,12 +14,10 @@ export const updateSettings = ( firstname, lastname, bio, age, gender, sexualPre
     }
   };
   // Request body
-  const body = JSON.stringify({ firstname, lastname, bio, age, gender, sexualPreference, userId });
-  console.log(body);
+  const body = JSON.stringify({ firstname, lastname, bio, age, gender, sexualPreference, id });
   axios
     .post("api/users/settings", body, config)
     .then(res => {
-        console.log(res)
         dispatch({
           type: UPDATEUSER_SUCCESS,
           payload: res.data

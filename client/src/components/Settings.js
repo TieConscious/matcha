@@ -14,6 +14,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
+import { geolocated } from "react-geolocated";
 
 const styles = {
   paper: {
@@ -78,10 +79,16 @@ class Settings extends Component {
   onSubmit = e => {
     //Grabs all info from settings with default values already set
     e.preventDefault();
-    console.log(this.state);
+
+    const id = this.props.user._id;
     const { firstname, lastname, bio, age, gender, sexualPreference } = this.state;
 
-    this.props.updateSettings(firstname, lastname, bio, age, gender, sexualPreference, this.props.user._id);
+    const user = {
+      firstname, lastname, bio, age, gender, sexualPreference, id
+    };
+    //On successful submission redirect
+    this.props.updateSettings(user);
+    this.props.history.push("/dashboard");
   };
 
   render() {
@@ -183,9 +190,12 @@ class Settings extends Component {
                 upload image
               </Button>
             </label> */}
+            {/* <Button type="submit" variant="contained" className={classes.button}>
+              Submit
+            </Button> */}
             <br />
             <Button type="submit" variant="contained" className={classes.button}>
-              Submit
+              SUBMIT
             </Button>
           </form>
         </Paper>

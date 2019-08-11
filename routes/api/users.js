@@ -132,15 +132,14 @@ router.route('/select/done/').post(function(req, res) {
 });
 
 router.post('/settings', (req, res) => {
-  const { firstname, lastname, bio, age, gender, sexualPreference, userId } = req.body;
+  const { firstname, lastname, bio, age, gender, sexualPreference, id } = req.body;
 
   //Simple validation
   if (!firstname || !lastname || !bio || !age || !gender || !sexualPreference) {
     return res.status(400).send("update not possible due to " + err);
   }
-  console.log(userId);
-  User.findById(userId, function (err, user) {
-    console.log(user);
+  console.log(id);
+  User.findById(id, function (err, user) {
     if(!user)
       res.status(404).send('not found: ' + user);
     else {
@@ -151,7 +150,8 @@ router.post('/settings', (req, res) => {
       user.gender = gender;
       user.sexualPreference = sexualPreference;
       user.save().then(user => {
-          res.status(200).send("worked");
+          //
+          res.json({user});
       })
       .catch(err => {
           res.status(400).send("update not possible due to " + err);
@@ -162,7 +162,7 @@ router.post('/settings', (req, res) => {
 
 router.route('/explore/').post(function(req, res) {
   if (req.body.sexualPreference == "everyone") {
-    //add location 
+    //add location
     User.find({$or:[{sexualPreference: req.body.gender}, {sexualPreference: 'everyone'}], location: req.body.location}, function(err, pmatches) {
       if (err)
         res.send(err);
@@ -178,7 +178,7 @@ router.route('/explore/').post(function(req, res) {
         res.json(pmatches);
     });
   }
-  
+
 });
 
 module.exports = router;

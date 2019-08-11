@@ -39,6 +39,7 @@ export default function(state = initialState, action) {
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
+      console.log(action.payload)
       localStorage.setItem("token", action.payload.token);
       return {
         ...state,
@@ -66,10 +67,14 @@ export default function(state = initialState, action) {
         pmatches: action.payload
       };
     case EXPLORE_FAIL:
-    default:
       return state;
     case UPDATEUSER_SUCCESS:
     case UPDATEUSER_FAIL:
+      return {
+        ...state,
+        ...action.payload
+      };
+    default:
       return state;
   }
 }

@@ -17,6 +17,7 @@ import LandingPage from "./components/LandingPage";
 import Settings from "./components/Settings";
 import SelectingPage from "./components/SelectingPage";
 import Explore from "./components/Explore";
+import Geo from "./components/geo";
 // import AppDescription from "./components/AppDescription";
 
 class App extends Component {
@@ -37,6 +38,7 @@ class App extends Component {
                 <Route exact path="/settings" component={Settings} />
                 <Route exact path="/select" component={SelectingPage} />
                 <Route exact path="/explore" component={Explore} />
+                <Route exact path="/geo" component={Geo} />
               </div>
             </Router>
           </div>

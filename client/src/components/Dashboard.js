@@ -2,12 +2,13 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+import { loadUser } from "../actions/authActions";
+
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Avatar from "@material-ui/core/Avatar";
 import profile from '../img/me.jpg';
 
 const styles = {
@@ -33,11 +34,16 @@ const styles = {
 };
 
 class Dashboard extends Component {
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+  };
+
   componentDidMount() {
     // If not logged in and user navigates to Dashboard page, should redirect them to landing page
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
+    this.props.loadUser();
   }
 
   componentDidUpdate() {
@@ -45,15 +51,13 @@ class Dashboard extends Component {
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
-  }
 
-  static propTypes = {
-    auth: PropTypes.object.isRequired
-  };
+  }
 
   render() {
     const { classes } = this.props;
     const { user } = this.props.auth;
+
 
     const dashboardDisplay = (
       <Fragment>
@@ -87,10 +91,10 @@ class Dashboard extends Component {
               {bioDisplay}
             </Grid>
             <Grid item xs={8}>
-              <Paper>asdf</Paper>
+              <Paper>{user ? `${user.baldTags}` : ""}</Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper>asdf</Paper>
+              <Paper>{user ? `${user.location}` : ""}</Paper>
             </Grid>
             <Grid item xs={8}>
               <Paper>asdf</Paper>
@@ -107,10 +111,10 @@ const mapStateToProps = state => ({
   auth: state.auth,
   isAuthenticated: state.auth.isAuthenticated,
   error: state.error,
-  user: state.auth.user
+  user: state.auth.user,
 });
 
 export default connect(
   mapStateToProps,
-  null
+  { loadUser }
 )(withStyles(styles)(Dashboard));
