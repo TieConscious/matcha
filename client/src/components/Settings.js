@@ -14,7 +14,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import { geolocated } from "react-geolocated";
 
 const styles = {
   paper: {
@@ -142,7 +141,7 @@ class Settings extends Component {
               variant="outlined"
             />
             <br />
-            <FormControl className={classes.formControl}>
+            <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel htmlFor="gender">gender</InputLabel>
               <Select
                 value={this.state.gender}
@@ -158,7 +157,7 @@ class Settings extends Component {
               </Select>
             </FormControl>
             <br />
-            {/* <FormControl className={classes.formControl}>
+            <FormControl variant="outlined" className={classes.formControl}>
               <InputLabel htmlFor="sexualPreference">sexualPreference</InputLabel>
               <Select
                 value={this.state.sexualPreference}
@@ -172,7 +171,7 @@ class Settings extends Component {
                 <MenuItem value={"female"}>female</MenuItem>
                 <MenuItem value={"other"}>everyone</MenuItem>
               </Select>
-            </FormControl> */}
+            </FormControl>
             <br />
             {/* <input
               accept="image/*"
@@ -190,8 +189,8 @@ class Settings extends Component {
                 upload image
               </Button>
             </label> */}
-            {/* <Button type="submit" variant="contained" className={classes.button}>
-              Submit
+            {/* <Button type="button" variant="outlined" className={classes.button}>
+              enable location
             </Button> */}
             <br />
             <Button type="submit" variant="contained" className={classes.button}>

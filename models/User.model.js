@@ -34,6 +34,10 @@ const UserSchema = new Schema({
         match:
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     },
+    enableLocations: {
+        type: Boolean,
+        default: false
+    },
     location: {
         type: String
     },
@@ -53,13 +57,13 @@ const UserSchema = new Schema({
     },
     gender: {
         type: String,
-        enum: ["male", "female", "undefined"],
-        default: "undefined"
+        enum: ["male", "female", "other"],
+        default: "other"
     },
     sexualPreference: {
         type: String,
-        enum: ["male", "female", "undefined"],
-        default: "undefined"
+        enum: ["male", "female", "other"],
+        default: "other"
     },
     bio: {
         type: String,
