@@ -28,7 +28,40 @@ export const updateSettings = ({ firstname, lastname, bio, age, gender, sexualPr
       dispatch({
         type: UPDATEUSER_FAIL
       });
-      console.log("ERROR: " + err)
+      console.log("ERROR: " + err);
+      console.log("body: " + body + " config: " + config);
+    });
+};
+
+export const updateLike = ( otherId, likeOrUnlike, id ) => dispatch => {
+  console.log("otherId: " + otherId);
+  console.log("like?: " + likeOrUnlike);
+  console.log("id: " + id);
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  };
+  // Request body
+  const body = JSON.stringify({ otherId, likeOrUnlike, id });
+  console.log(body);
+  axios
+    .post("api/users/like", body, config)
+    .then(res => {
+        dispatch({
+          type: UPDATEUSER_SUCCESS,
+          payload: res.data
+        })
+        console.log(res);
+      }
+    )
+    .catch(err => {
+      dispatch({
+        type: UPDATEUSER_FAIL
+      });
+      console.log("ERROR: " + err);
+      console.log("body: " + body + " config: " + config);
     });
 };
 
