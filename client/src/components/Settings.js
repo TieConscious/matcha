@@ -69,32 +69,34 @@ class Settings extends Component {
     }
   }
 
-  displayLocationInfo(position) {
+  displayLocationInfo = (position) => {
     const lng = position.coords.longitude;
     const lat = position.coords.latitude;
-    var address = "";
 
     console.log(`longitude: ${ lng } | latitude: ${ lat }`);
-    Geocode.fromLatLng(lat, lng).then(
+    var res = "";
+    var here = this;
+    Geocode.fromLatLng(lat, lng)
+    .then(
       response => {
-        address = response.results[0].address_components[2].long_name + ", " + response.results[0].address_components[4].short_name + ", " + response.results[0].address_components[5].short_name;
-        // console.log(address);
+        var address = response.results[0].address_components[2].long_name + ", " + response.results[0].address_components[4].short_name + ", " + response.results[0].address_components[5].short_name;
+        console.log(address);
+        res = address;
+        console.log(res);
+        this.setState({location: res}, function() {
+          console.log(this.state);
+        });
       },
       error => {
-        // console.error(error);
-        return "error";
+        console.error(error);
       }
     );
-    // console.log(address);
-    return address;
+
   }
 
   geoLocator = e => {
     if (navigator.geolocation) {
-      const address = navigator.geolocation.getCurrentPosition(this.displayLocationInfo);
-      // console.log(navigator.geolocation.getCurrentPosition(this.displayLocationInfo));
-      console.log(address);
-      this.setState({ [e.target.id]: address });
+      navigator.geolocation.getCurrentPosition(this.displayLocationInfo);
     }
   };
 
