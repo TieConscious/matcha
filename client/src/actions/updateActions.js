@@ -6,7 +6,7 @@ import {
 } from "./types";
 
 // Update user settings
-export const updateSettings = ({ firstname, lastname, bio, age, gender, sexualPreference, id }) => dispatch => {
+export const updateSettings = ({ firstname, lastname, bio, age, gender, sexualPreference, location, id }) => dispatch => {
   // Headers
   const config = {
     headers: {
@@ -14,7 +14,7 @@ export const updateSettings = ({ firstname, lastname, bio, age, gender, sexualPr
     }
   };
   // Request body
-  const body = JSON.stringify({ firstname, lastname, bio, age, gender, sexualPreference, id });
+  const body = JSON.stringify({ firstname, lastname, bio, age, gender, sexualPreference, location, id });
   axios
     .post("api/users/settings", body, config)
     .then(res => {

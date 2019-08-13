@@ -9,6 +9,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 
+import Geocode from "react-geocode";
+
 import AppNavbar from "./components/AppNavbar";
 import AppFooter from "./components/AppFooter";
 
@@ -22,6 +24,7 @@ import Geo from "./components/geo";
 
 class App extends Component {
   componentDidMount() {
+    Geocode.setApiKey("AIzaSyBpJPJx266vjfLOVxTROT8Un22SK04nIYQ");
     store.dispatch(loadUser());
   }
 
