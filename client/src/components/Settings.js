@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Geocode from "react-geocode";
 
 import { updateSettings } from "../actions/updateActions";
 
@@ -50,7 +51,8 @@ class Settings extends Component {
     bio: this.props.user.bio,
     age: this.props.user.age,
     gender: this.props.user.gender,
-    sexualPreference: this.props.user.sexualPreference
+    sexualPreference: this.props.user.sexualPreference,
+    location: this.props.user.location
   };
 
   componentDidMount() {
@@ -67,6 +69,35 @@ class Settings extends Component {
     }
   }
 
+  displayLocationInfo(position) {
+    const lng = position.coords.longitude;
+    const lat = position.coords.latitude;
+    var address = "";
+
+    console.log(`longitude: ${ lng } | latitude: ${ lat }`);
+    Geocode.fromLatLng(lat, lng).then(
+      response => {
+        address = response.results[0].address_components[2].long_name + ", " + response.results[0].address_components[4].short_name + ", " + response.results[0].address_components[5].short_name;
+        // console.log(address);
+      },
+      error => {
+        // console.error(error);
+        return "error";
+      }
+    );
+    // console.log(address);
+    return address;
+  }
+
+  geoLocator = e => {
+    if (navigator.geolocation) {
+      const address = navigator.geolocation.getCurrentPosition(this.displayLocationInfo);
+      // console.log(navigator.geolocation.getCurrentPosition(this.displayLocationInfo));
+      console.log(address);
+      this.setState({ [e.target.id]: address });
+    }
+  };
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
@@ -80,11 +111,12 @@ class Settings extends Component {
     e.preventDefault();
 
     const id = this.props.user._id;
-    const { firstname, lastname, bio, age, gender, sexualPreference } = this.state;
+    const { firstname, lastname, bio, age, gender, sexualPreference, location } = this.state;
 
     const user = {
-      firstname, lastname, bio, age, gender, sexualPreference, id
+      firstname, lastname, bio, age, gender, sexualPreference, location, id
     };
+    console.log(location);
     //On successful submission redirect
     this.props.updateSettings(user);
     this.props.history.push("/dashboard");
@@ -189,9 +221,9 @@ class Settings extends Component {
                 upload image
               </Button>
             </label> */}
-            {/* <Button type="button" variant="outlined" className={classes.button}>
+            <Button type="button" id="location" variant="outlined" onClick={this.geoLocator} className={classes.button}>
               enable location
-            </Button> */}
+            </Button>
             <br />
             <Button type="submit" variant="contained" className={classes.button}>
               SUBMIT

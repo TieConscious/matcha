@@ -5,9 +5,8 @@ import Geocode from "react-geocode";
 
 import { loadUser } from "../actions/authActions";
 
-import { geolocated } from "react-geolocated";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import Button from "@material-ui/core/Button";
 
 class Geo extends Component {
   static propTypes = {
@@ -39,7 +38,7 @@ class Geo extends Component {
     console.log(`longitude: ${ lng } | latitude: ${ lat }`);
     Geocode.fromLatLng(lat, lng).then(
       response => {
-        const address = response.results[0].formatted_address;
+        const address = response.results[0].address_components[2].long_name + ", " + response.results[0].address_components[4].short_name + ", " + response.results[0].address_components[5].short_name;
         console.log(address);
       },
       error => {
@@ -48,7 +47,7 @@ class Geo extends Component {
     );
   }
 
-  onChange = e => {
+  geoLocator = e => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.displayLocationInfo);
     }
@@ -64,12 +63,15 @@ class Geo extends Component {
       // !this.props.isGeolocationAvailable ? (
       //   <div>Geolocation not supported</div>
       // ) : (
-      <Checkbox
-        checked={user.enableLocation}
-        onChange={this.onChange}
-        color="primary"
-        value="checked"
-      />
+        <Button type="button" variant="outlined" onClick={this.onChange}>
+              enable location
+            </Button>
+      // <Checkbox
+      //   checked={user.enableLocation}
+      //   onChange={this.onChange}
+      //   color="primary"
+      //   value="checked"
+      // />
     );
     // !this.props.isGeolocationEnabled ? (
     //   <div>Geolocation is not enabled</div>
