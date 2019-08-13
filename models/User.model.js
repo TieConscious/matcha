@@ -46,7 +46,7 @@ const UserSchema = new Schema({
         required: true,
         match: /^(?=.*\d).{4,8}/
     },
-    images: [{type: Schema.ObjectId, ref: 'Post', default: '[]'}],
+    media: [{type: String, default: '[]'}],
     isValidated: {
         type: Boolean,
         default: false
@@ -55,6 +55,8 @@ const UserSchema = new Schema({
         type: Boolean,
         default: true
     },
+    likes: [{type: Schema.Types.ObjectId, ref: 'User', default: '[]'}],
+    dislikes: [{type: Schema.Types.ObjectId, ref: 'User', default: '[]'}],
     gender: {
         type: String,
         enum: ["male", "female", "other"],

@@ -66,8 +66,7 @@ class Explore extends Component {
     };
 
     render() {
-        console.log("matches in global state: " + this.props.pmatches);
-        console.log("USER: " + this.props.user);
+        console.log(this.props.user);
         // if (this.props.user != null) {
         //     this.updateMatches();
         // };
@@ -77,12 +76,16 @@ class Explore extends Component {
                 <div className="explore">
                     {   this.props.pmatches ? 
                         this.props.pmatches.map(pmatch => {
+                          let liked = this.props.user.likes.includes(pmatch._id);
+                          let disliked = this.props.user.dislikes.includes(pmatch._id);
+                          let same;
+                          if (this.props.user._id == pmatch._id)
+                            same = true;
+                          console.log("liked: " + liked + " disliked: " + disliked);
+                          if (!liked && !disliked && !same)
                             return <CardExplore info={pmatch} />
                         })
-                        :
-                        this.state.pmatches.map(pmatch => {
-                            return <CardExplore info={pmatch} />
-                        })
+                        : <h1> There's no one here for you </h1>
                     }
                 </div>
             </div>

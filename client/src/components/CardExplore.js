@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
+import { updateLike } from "../actions/updateActions";
 
 const styles = {
   card: {
@@ -19,16 +20,33 @@ const styles = {
 };
 
 class CardExplore extends React.Component {
+
+  componentDidMount() {
+    console.log(this.props.info);
+    
+  }
+    handleClickLike = () => {
+       console.log("user " + this.props.user._id + " likes user " + this.props.info._id);
+       this.props.updateLike(this.props.info._id, "like", this.props.user._id);
+    }
+
+    handleClickDislike = () => {
+      console.log("DISlike");
+      this.props.updateLike(this.props.info._id, "dislike", this.props.user._id);
+  }
+
     render() {
         // console.log("INFOOOOOO: " + this.props.info.images);
         const { classes } = this.props;
+        console.log(this.props.user);
+        console.log(this.props.info);
         return (
             <Card className={classes.card}>
               <CardActionArea>
               <img className="cardImage" src={this.props.info.media[0]} onClick={this.handleClick}></img>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    {this.props.info.name}
+                    {this.props.info.firstname}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
                     {this.props.info.bio}
@@ -36,11 +54,11 @@ class CardExplore extends React.Component {
                 </CardContent>
               </CardActionArea>
               <CardActions className="cardButtons">
-                <Button size="small" color="primary">
+                <Button size="small" onClick={this.handleClickLike} color="primary">
                   LIKE
                 </Button>
-                <Button size="small" color="primary">
-                  REPORT
+                <Button size="small" onClick={this.handleClickDislike}color="primary">
+                  DISLIKE
                 </Button>
               </CardActions>
             </Card>
@@ -57,5 +75,5 @@ const mapStateToProps = state => ({
   
   export default connect(
     mapStateToProps,
-    null
+    { updateLike }
   )(withStyles(styles)(CardExplore));

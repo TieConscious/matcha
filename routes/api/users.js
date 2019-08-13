@@ -161,9 +161,9 @@ router.post('/settings', (req, res) => {
 });
 
 router.route('/explore/').post(function(req, res) {
-  if (req.body.sexualPreference == "everyone") {
+  if (req.body.sexualPreference == "other") {
     //add location
-    User.find({$or:[{sexualPreference: req.body.gender}, {sexualPreference: 'everyone'}], location: req.body.location}, function(err, pmatches) {
+    User.find({$or:[{sexualPreference: req.body.gender}, {sexualPreference: 'other'}], location: req.body.location}, function(err, pmatches) {
       if (err)
         res.send(err);
       else
@@ -179,6 +179,44 @@ router.route('/explore/').post(function(req, res) {
     });
   }
 
+});
+
+router.post('/like', (req, res) => {
+  const { otherId, likeOrUnlike, id } = req.body;
+
+  
+  console.log(id);
+  console.log(otherId);
+  User.findById(id, function (err, user) {
+    if(!user)
+      res.status(404).send('not found: ' + user);
+    else {
+      if (likeOrUnlike == "like") {
+        const arrayLikes = user.likes;
+        arrayLikes.push(...[otherId]);
+        user.likes = arrayLikes;
+        user.save().then(user => {
+          //
+          res.json({user});
+        })
+        .catch(err => {
+            res.status(400).send("update not possible due to " + err);
+        });
+      }
+      else {
+        const arrayDisLikes = user.dislikes;
+        arrayDisLikes.push(...[otherId]);
+        user.dislikes = arrayDisLikes;
+        user.save().then(user => {
+            //
+            res.json({user});
+        })
+        .catch(err => {
+            res.status(400).send("update not possible due to " + err);
+        });
+      };
+    };
+  });
 });
 
 module.exports = router;
