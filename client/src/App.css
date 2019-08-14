@@ -6,6 +6,13 @@
   color: red
 }
 
+.filterbuttons {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+  grid-template-areas:
+    "left right"; 
+}
 .wrapper {
   text-align: center;
 }
@@ -13,7 +20,9 @@
 .explore {
   display: inline-block;
 }
-
+.otherwrapper {
+  display: inline-block;
+}
 .select {
   margin: auto;
   margin-top: 40px;

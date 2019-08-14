@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import CardExplore from './CardExplore';
 import { getMatches } from "../actions/authActions";
 import Matches from './Matches';
+import FilterSort from './FilterSort';
 
 // THE ISSUE IS TWO FOLD, EITHER I DONT HAVE THE INFO BC THE REDUCERS TAKES TIME TO GET IT
 // OR IF I PUT IT IN COMPONENT DID UPDATE THEN IT TIMES OUT
@@ -116,14 +117,17 @@ class Explore extends Component {
         // };
         const { classes } = this.props;
         return (
-            <div className="wrapper">
-                <div className="explore">
-                    {   this.props.pmatches ? 
-                        <Matches pfmatches={this.filterMatches()} />
-                        : <h1> There's no one here for you </h1>
-                    }
-                </div>
-            </div>
+          <>
+            
+              <div className="wrapper">
+                  <div className="explore">
+                      {   this.props.pmatches ? 
+                          <Matches pfmatches={this.filterMatches()} />
+                          : <h1> There's no one here for you </h1>
+                      }
+                  </div>
+              </div>
+            </>
         );
     }
 }

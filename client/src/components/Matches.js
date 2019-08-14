@@ -2,16 +2,24 @@ import React from 'react';
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import CardExplore from './CardExplore';
+import FilterSort from './FilterSort';
+import ButtonFilter from './ButtonFilter';
 
 
 
 class Matches extends React.Component {
-
+    
     render() {
         return (
-            this.props.pfmatches.map(pfmatch => {
+            <>
+            <div className="filterbuttons">
+                <FilterSort />
+                <ButtonFilter />
+            </div>
+            {this.props.pfmatches.map(pfmatch => {
                 return <CardExplore info={pfmatch} />
-            })
+            })}
+            </>
         ); 
     }
 }
