@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Geocode from "react-geocode";
 
 import { updateSettings } from "../actions/updateActions";
+import { getIP } from "../actions/updateActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -97,6 +98,23 @@ class Settings extends Component {
   geoLocator = e => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.displayLocationInfo);
+    }
+    else {
+      fetch('http://ip-api.com/json')
+      .then(res => res.text(),
+        error => {
+          console.error(error);
+        }
+      )
+      .then(data => {
+        console.log(data);
+        var userData = JSON.parse(data);
+        var address = userData.city + ", " + userData.region + ", " + userData.countryCode;
+        console.log(address);
+        this.setState({location: address}, function() {
+          console.log(this.state)
+        });
+      });
     }
   };
 
