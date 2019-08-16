@@ -48,7 +48,7 @@ class AppNavbar extends Component {
         <Link to="/settings">Settings</Link>
         <Link to="/select">Select</Link>
         <Link to="/explore">Explore</Link>
-        <Link to="/geo">Geo</Link>
+        <Link to="/messenger">Messenger</Link>
         <NavItem>
           <AppLogout />
         </NavItem>

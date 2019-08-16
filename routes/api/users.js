@@ -132,13 +132,12 @@ router.route('/select/done/').post(function(req, res) {
 });
 
 router.post('/settings', (req, res) => {
-  const { firstname, lastname, bio, age, gender, sexualPreference, id } = req.body;
+  const { firstname, lastname, bio, age, gender, sexualPreference, location, id } = req.body;
 
   //Simple validation
-  if (!firstname || !lastname || !bio || !age || !gender || !sexualPreference) {
+  if (!firstname || !lastname || !bio || !age || !gender || !sexualPreference || !location) {
     return res.status(400).send("update not possible due to " + err);
   }
-  console.log(id);
   User.findById(id, function (err, user) {
     if(!user)
       res.status(404).send('not found: ' + user);
@@ -149,6 +148,7 @@ router.post('/settings', (req, res) => {
       user.age = age;
       user.gender = gender;
       user.sexualPreference = sexualPreference;
+      user.location = location;
       user.save().then(user => {
           //
           res.json({user});
@@ -184,7 +184,7 @@ router.route('/explore/').post(function(req, res) {
 router.post('/like', (req, res) => {
   const { otherId, likeOrUnlike, id } = req.body;
 
-  
+
   console.log(id);
   console.log(otherId);
   User.findById(id, function (err, user) {

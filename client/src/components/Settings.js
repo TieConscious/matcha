@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Geocode from "react-geocode";
 
 import { updateSettings } from "../actions/updateActions";
+import { loadUser } from "../actions/authActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
@@ -60,6 +61,7 @@ class Settings extends Component {
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
+    this.props.loadUser();
   }
 
   componentDidUpdate() {
@@ -73,16 +75,13 @@ class Settings extends Component {
     const lng = position.coords.longitude;
     const lat = position.coords.latitude;
 
-    console.log(`longitude: ${ lng } | latitude: ${ lat }`);
     var res = "";
     var here = this;
     Geocode.fromLatLng(lat, lng)
     .then(
       response => {
         var address = response.results[0].address_components[2].long_name + ", " + response.results[0].address_components[4].short_name + ", " + response.results[0].address_components[5].short_name;
-        console.log(address);
         res = address;
-        console.log(res);
         this.setState({location: res}, function() {
           console.log(this.state);
         });
@@ -101,10 +100,8 @@ class Settings extends Component {
         }
       )
       .then(data => {
-        console.log(data);
         var userData = JSON.parse(data);
         var address = userData.city + ", " + userData.region + ", " + userData.countryCode;
-        console.log(address);
         this.setState({location: address}, function() {
           console.log(this.state)
         });
@@ -138,7 +135,6 @@ class Settings extends Component {
     const user = {
       firstname, lastname, bio, age, gender, sexualPreference, location, id
     };
-    console.log(location);
     //On successful submission redirect
     this.props.updateSettings(user);
     this.props.history.push("/dashboard");
@@ -266,5 +262,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateSettings }
+  { updateSettings, loadUser }
 )(withStyles(styles)(Settings));

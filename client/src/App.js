@@ -19,8 +19,10 @@ import LandingPage from "./components/LandingPage";
 import Settings from "./components/Settings";
 import SelectingPage from "./components/SelectingPage";
 import Explore from "./components/Explore";
-import Geo from "./components/geo";
-// import AppDescription from "./components/AppDescription";
+import Messenger from "./components/Messenger";
+
+// const config = require('../../config');
+// const geo = config.get('GeocodeApiKey');
 
 class App extends Component {
   componentDidMount() {
@@ -41,7 +43,7 @@ class App extends Component {
                 <Route exact path="/settings" component={Settings} />
                 <Route exact path="/select" component={SelectingPage} />
                 <Route exact path="/explore" component={Explore} />
-                <Route exact path="/geo" component={Geo} />
+                <Route exact path="/messenger" component={Messenger} />
               </div>
             </Router>
           </div>
