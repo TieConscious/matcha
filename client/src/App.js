@@ -26,7 +26,7 @@ import Messenger from "./components/Messenger";
 
 class App extends Component {
   componentDidMount() {
-    Geocode.setApiKey("AIzaSyBpJPJx266vjfLOVxTROT8Un22SK04nIYQ");
+    Geocode.setApiKey("");
     store.dispatch(loadUser());
   }
 
