@@ -17,6 +17,9 @@
   text-align: center;
 }
 
+.filter-button {
+  margin-top: 20%;
+}
 .explore {
   display: inline-block;
 }
