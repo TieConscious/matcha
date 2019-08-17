@@ -7,6 +7,39 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = {
+  messenger: {
+    display: "grid",
+    width: "100%",
+    height: "100vh",
+    background: "#eeeef1",
+
+    gridTemplateColumns: `25vw auto`,
+    gridTemplateRows: `60px' 'auto' '60px`,
+    gridColumnGap: "1px",
+    gridRowGap: "1px",
+  },
+  sidebar: {
+    background: "white",
+    gridRowStart: "1",
+    gridRowEnd: "span 3",
+
+    position: "relative",
+    overflowY: "scroll",
+    // -webkit-overflow-scrolling: "touch",
+  },
+  content: {
+    background: "white",
+    gridRowStart: "1",
+    gridRowEnd: "span 3",
+
+    position: "relative",
+    overflowY: "scroll",
+    // -webkit-overflow-scrolling: "touch",
+  }
+};
 
 export class Messenger extends Component {
   static propTypes = {
@@ -28,16 +61,17 @@ export class Messenger extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <Box>
-        hello
-        <Grid item xs={4}>
+      <div className={classes.messenger}>
+        <div className={classes.sidebar}>
           <MessengerSidebar />
-        </Grid>
-        <Grid item xs={8}>
+        </div>
+        <div className={classes.content}>
           <MessengerChat />
-        </Grid>
-      </Box>
+        </div>
+      </div>
     );
   }
 }
@@ -50,4 +84,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   null
-)(Messenger);
+)(withStyles(styles)(Messenger));

@@ -43,7 +43,7 @@ const styles = {
 class Settings extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+    user: PropTypes.object
   };
 
   state = {
