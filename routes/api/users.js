@@ -122,7 +122,7 @@ router.route('/select/done/').post(function(req, res) {
     else {
       user.baldTags = req.body.tags;
       user.save().then(user => {
-          res.status(200).send("worked");
+          res.status(200).send(user);
       })
       .catch(err => {
           res.status(400).send("update not possible due to " + err);

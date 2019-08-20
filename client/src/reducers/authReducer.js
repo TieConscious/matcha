@@ -59,13 +59,17 @@ export default function(state = initialState, action) {
         isAuthenticated: false,
         isLoading: false
       };
-    case UPDATETAGS_SUCCESS:
-    case UPDATETAGS_FAIL:
     case EXPLORE_SUCCESS:
       return {
         ...state,
         pmatches: action.payload
       };
+    case UPDATETAGS_SUCCESS:
+      return {
+        ...state,
+        user: action.payload
+      }
+    case UPDATETAGS_FAIL:
     case EXPLORE_FAIL:
       return state;
     case UPDATEUSER_SUCCESS:

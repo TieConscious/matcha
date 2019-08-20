@@ -67,7 +67,8 @@ class SelectingPage extends Component {
       console.log("DONE: " + arrayToPush);
     }
     console.log(this.props.user._id);
-    this.props.updateBaldTags(arrayToPush, this.props.user._id)
+    this.props.updateBaldTags(arrayToPush, this.props.user._id);
+    this.props.history.push("/dashboard");
   }
 
   fillUp = () => {

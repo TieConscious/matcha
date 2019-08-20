@@ -6,6 +6,7 @@ import CardExplore from './CardExplore';
 import { getMatches } from "../actions/authActions";
 import Matches from './Matches';
 import FilterSort from './FilterSort';
+import { timingSafeEqual } from "crypto";
 
 // THE ISSUE IS TWO FOLD, EITHER I DONT HAVE THE INFO BC THE REDUCERS TAKES TIME TO GET IT
 // OR IF I PUT IT IN COMPONENT DID UPDATE THEN IT TIMES OUT
@@ -56,21 +57,30 @@ class Explore extends Component {
             ]
         }
     }
+    componentDidUpdate() {
+      // If not logged in and user navigates to Dashboard page, should redirect them to landing page
+      if (!this.props.isAuthenticated) {
+        this.props.history.push("/");
+      }
+    }
+
     componentDidMount() {
-        console.log(this.props.user);
-        if (this.props.user != null) {
-            this.props.getMatches(this.props.user.sexualPreference, this.props.user.gender, this.props.user.location);
+        if (!this.props.isAuthenticated) {
+          this.props.history.push("/");
+        }
+        else {
+          console.log(this.props.user);
+          if (this.props.user != null) {
+              this.props.getMatches(this.props.user.sexualPreference, this.props.user.gender, this.props.user.location);
+          }
         }
     }
 
     compare = (a,b) => {
-      console.log("a: " + a);
-      console.log("b: " + b);
       let i = 0;
       let j = 0;
       let res = 0;
       while (i < a.length) {
-        console.log(a[i]);
         j = 0;
         while (j < b.length) {
           let inc = a[i].includes(b[j]);
@@ -88,22 +98,31 @@ class Explore extends Component {
     }
 
     filterMatches = () => {
-      var filteredMatches = [];
-      this.props.pmatches.map(pmatch => {
-        let res = this.compare(this.props.user.baldTags, pmatch.baldTags);
-        console.log(pmatch.firstname);
-        console.log(res);
-        let liked = this.props.user.likes.includes(pmatch._id);
-        let disliked = this.props.user.dislikes.includes(pmatch._id);
-        let same;
-        if (this.props.user._id == pmatch._id)
-          same = true;
-        console.log("liked: " + liked + " disliked: " + disliked);
-        if (!liked && !disliked && !same && res)
-          filteredMatches.push(pmatch);
-      });
-      console.log(filteredMatches);
-      return (filteredMatches);
+      console.log(this.props.user);
+      console.log(this.props.isAuthenticated);
+      if (this.props.isAuthenticated == false) {
+        this.props.history.push("/");
+      }
+      else {
+        var filteredMatches = [];
+        console.log(this.props.pmatches);
+        this.props.pmatches.map(pmatch => {
+          let res = this.compare(this.props.user.baldTags, pmatch.baldTags);
+          console.log(pmatch.firstname);
+          console.log("at least 2 tags:" + res);
+          let liked = this.props.user.likes.includes(pmatch._id);
+          let disliked = this.props.user.dislikes.includes(pmatch._id);
+          let same;
+          if (this.props.user._id == pmatch._id)
+            same = true;
+          console.log("liked: " + liked + " disliked: " + disliked);
+          if (!liked && !disliked && !same && res)
+            filteredMatches.push(pmatch);
+        });
+        console.log(filteredMatches);
+        return (filteredMatches);
+      }
+      
     }
     
     static propTypes = {
@@ -112,23 +131,24 @@ class Explore extends Component {
 
     render() {
         console.log(this.props.user);
-        // if (this.props.user != null) {
-        //     this.updateMatches();
-        // };
         const { classes } = this.props;
+        if (this.props.isAuthenticated == false) {
+          this.props.history.push("/");
+        }
         return (
           <>
-            
-              <div className="wrapper">
-                  <div className="explore">
-                      {   this.props.pmatches ? 
-                          <Matches pfmatches={this.filterMatches()} />
-                          : <h1> There's no one here for you </h1>
-                      }
-                  </div>
-              </div>
-            </>
-        );
+            <div className="wrapper">
+                <div className="explore">
+                    {this.props.isAuthenticated ? 
+                        this.props.pmatches ? 
+                        <Matches pfmatches={this.filterMatches()} />
+                        : <h1> There's no one here for you </h1>
+                        : <h1> There's no one here for you </h1>
+                    }
+                </div>
+            </div>
+          </>
+        );   
     }
 }
 

@@ -17,6 +17,13 @@
   text-align: center;
 }
 
+.drawerInner {
+  width: 50vw;
+  padding-top: 15px;
+  padding-left: 5px;
+  padding-right: 15px;
+}
+
 .filter-button {
   margin-top: 20%;
 }

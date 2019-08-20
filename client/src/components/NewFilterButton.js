@@ -1,16 +1,21 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
-import CardExplore from './CardExplore';
-import FilterSort from './FilterSort';
-import ButtonFilter from './ButtonFilter';
-import FilterButton from './FilterButton';
-import SimpleSlider from './SimpleSlider';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
+const styles = {
+    list: {
+        width: 360,
+        paddingLeft: 10,
+        paddingRight: 10,
+      },
+      fullList: {
+        width: 'auto',
+      },
+}
 
 class NewFilterButton extends React.Component {
     constructor(props) {
@@ -18,7 +23,7 @@ class NewFilterButton extends React.Component {
         this.state = {
             filter: false,
             drawerIsOpen: false,
-            age: 18,
+            age: [18, 47],
             location: 10,
             fameRate: 5,
             baldTags: 2,
@@ -38,48 +43,75 @@ class NewFilterButton extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        this.setState({drawerIsOpen: false});
         console.log(e.target);
-        console.log(e.target.fame.value);
+        console.log(this.state);
+        const filters = {
+            age: this.state.age,
+            location: this.state.location,
+            fameRate: this.state.fameRate,
+            baldTags: this.state.baldTags
+
+        }
+        this.props.handleFilters(filters);
         //get it from state worst case scenario
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <>
             <button className="filter-button" onClick={this.handleDrawer}>Filter</button>
-            <Drawer variant="temporary" open={this.state.drawerIsOpen}>
-                <form onSubmit={this.handleSubmit} noValidate autoComplete="off">
-                    <Typography id="label">Popularity</Typography>
-                    <Slider
-                        id="fame"
-                        label="fame"
-                        value={this.state.fameRate}
-                        aria-labelledby="fameRate"
-                        onChange={this.handleChange("fameRate")}
-                        min={0}
-                        max={42}
-                        step={1}
-                    />
-                    <Typography id="label">Bald Tags</Typography>
-                    <Slider
-                        value={this.state.baldTags}
-                        aria-labelledby="baldTags"
-                        onChange={this.handleChange("baldTags")}
-                        min="0"
-                        max="4"
-                        step="1"
-                    />
-                    <Typography id="label">Location (miles)</Typography>
-                    <Slider
-                        value={this.state.location}
-                        aria-labelledby="location"
-                        onChange={this.handleChange("location")}
-                        min={0}
-                        max={50}
-                        step={2}
-                    />
-                    <button type="submit">Done</button>
-                </form>
+            <Drawer  variant="temporary" open={this.state.drawerIsOpen}>
+                <div className="drawerInner">
+                    <form onSubmit={this.handleSubmit} noValidate autoComplete="off">
+                        <Typography id="label">Age range</Typography>
+                        <Slider
+                            id="age"
+                            label="age"
+                            value={this.state.age}
+                            onChange={this.handleChange("age")}
+                            valueLabelDisplay="auto"
+                            aria-labelledby="range-slider"
+                            min={18}
+                            max={50}
+                            step={1}
+                        />
+                        <Typography id="label">Popularity</Typography>
+                        <Slider
+                            id="fame"
+                            label="fame"
+                            value={this.state.fameRate}
+                            aria-labelledby="fameRate"
+                            onChange={this.handleChange("fameRate")}
+                            min={0}
+                            max={42}
+                            step={1}
+                            valueLabelDisplay="auto"
+                        />
+                        <Typography id="label">Bald Tags</Typography>
+                        <Slider
+                            value={this.state.baldTags}
+                            aria-labelledby="baldTags"
+                            onChange={this.handleChange("baldTags")}
+                            min="0"
+                            max="4"
+                            step="1"
+                            valueLabelDisplay="auto"
+                        />
+                        <Typography id="label">Location (miles)</Typography>
+                        <Slider
+                            value={this.state.location}
+                            aria-labelledby="location"
+                            onChange={this.handleChange("location")}
+                            min={0}
+                            max={50}
+                            step={2}
+                            valueLabelDisplay="auto"
+                        />
+                        <Button color="secondary" type="submit">Done</Button>
+                    </form>
+                </div>
             </Drawer>
             </>
         ); 
@@ -96,4 +128,4 @@ const mapStateToProps = state => ({
   export default connect(
     mapStateToProps,
     null
-  )(NewFilterButton);
+  )(withStyles(styles)(NewFilterButton));
