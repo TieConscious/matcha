@@ -12,51 +12,31 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const marks = [
-  {
-    value: 0,
-    label: '0°C',
-  },
-  {
-    value: 20,
-    label: '20°C',
-  },
-  {
-    value: 37,
-    label: '37°C',
-  },
-  {
-    value: 100,
-    label: '100°C',
-  },
-];
-
 function valuetext(value) {
     console.log(value);
-    return `${value}°C`;
+    return value;
 }
 
-function valueLabelFormat(value) {
-  return marks.findIndex(mark => mark.value === value) + 1;
-}
-
-export default function DiscreteSlider() {
+export default function DiscreteSlider(props) {
   const classes = useStyles();
+  const handleChange = (event, newValue) => {
+    console.log(newValue);
+  }
 
   return (
     <div className={classes.root}>
-      <Typography id="discrete-slider" gutterBottom>
-        Age
+      <Typography id="discrete-slider-small-steps" gutterBottom>
+        {props.name}
       </Typography>
       <Slider
-        defaultValue={30}
+        defaultValue={props.value}
+        onChange={props.handleChangeParent}
         getAriaValueText={valuetext}
-        aria-labelledby="discrete-slider"
+        aria-labelledby="discrete-slider-small-steps"
         valueLabelDisplay="auto"
-        step={2}
-        marks
-        min={18}
-        max={60}
+        step={props.step}
+        min={props.min}
+        max={props.max}
       />
     </div>
   );

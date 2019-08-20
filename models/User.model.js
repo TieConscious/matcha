@@ -26,6 +26,7 @@ const UserSchema = new Schema({
     },
     age: {
         type: Number,
+        default: 18,
         //required: true
     },
     email: {
@@ -39,7 +40,8 @@ const UserSchema = new Schema({
         default: false
     },
     location: {
-        type: String
+        type: String,
+        default: ""
     },
     password: {
         type: String,

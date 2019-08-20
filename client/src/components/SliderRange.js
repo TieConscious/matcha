@@ -10,10 +10,10 @@ const useStyles = makeStyles({
 });
 
 function valuetext(value) {
-  return `${value}°C`;
+  return value;
 }
 
-export default function RangeSlider() {
+export default function RangeSlider(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState([20, 37]);
 
@@ -24,7 +24,7 @@ export default function RangeSlider() {
   return (
     <div className={classes.root}>
       <Typography id="range-slider" gutterBottom>
-        Temperature range
+        {props.name}
       </Typography>
       <Slider
         value={value}
