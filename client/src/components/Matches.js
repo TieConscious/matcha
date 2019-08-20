@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import CardExplore from './CardExplore';
 import FilterSort from './FilterSort';
 import ButtonFilter from './ButtonFilter';
-import FilterButton from './FilterButton';
+import NewFilterButton from './NewFilterButton';
 
 
 
@@ -15,7 +15,7 @@ class Matches extends React.Component {
             <>
             <div className="filterbuttons">
                 <FilterSort />
-                <FilterButton />
+                <NewFilterButton />
             </div>
             {this.props.pfmatches.map(pfmatch => {
                 return <CardExplore info={pfmatch} />
