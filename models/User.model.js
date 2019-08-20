@@ -75,7 +75,8 @@ const UserSchema = new Schema({
         maxlength: 420,
         default: "Im lonely"
     },
-    baldTags: [{ type: String, default: '[]'}]
+    baldTags: [{ type: String, default: '[]'}],
+    conversations: [{type: Schema.Types.ObjectId, ref: 'Conversation', default: '[]'}]
 });
 
 module.exports = mongoose.model('User', UserSchema)

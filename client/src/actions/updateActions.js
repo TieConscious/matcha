@@ -2,7 +2,9 @@ import axios from "axios";
 
 import {
   UPDATEUSER_SUCCESS,
-  UPDATEUSER_FAIL
+  UPDATEUSER_FAIL,
+  MESSAGESEND_SUCCESS,
+  MESSAGESEND_FAIL
 } from "./types";
 
 // Update user settings
@@ -65,4 +67,60 @@ export const updateLike = ( otherId, likeOrUnlike, id ) => dispatch => {
     });
 };
 
+export const updateMessages = (conversationID) => dispatch => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  // Request body
+  const body = JSON.stringify({conversationID});
+  console.log(body);
+  axios
+    .post("api/users/messages/update", body, config)
+    .then(res => {
+        console.log(res.data)
+        dispatch({
+          type: MESSAGESEND_SUCCESS,
+          payload: res.data
+        })
+      }
+    )
+    .catch(err => {
+      dispatch({
+        type: MESSAGESEND_FAIL
+      });
+      console.log(err)
+    });
 
+}
+
+export const sendMessage = ({conversationID, userID, message}) => dispatch => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  };
+  // Request body
+  const body = JSON.stringify({conversationID, userID, message});
+  console.log(body);
+  axios
+    .post("api/users/messages/send", body, config)
+    .then(res => {
+        dispatch({
+          type: MESSAGESEND_SUCCESS,
+          payload: res.data
+        })
+        console.log(res);
+      }
+    )
+    .catch(err => {
+      dispatch({
+        type: MESSAGESEND_FAIL
+      });
+      console.log("ERROR: " + err);
+      console.log("body: " + body + " config: " + config);
+    });
+}

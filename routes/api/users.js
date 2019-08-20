@@ -7,6 +7,9 @@ const jwt = require("jsonwebtoken");
 //User Model
 const User = require("../../models/User.model");
 
+//Message Model
+const Conversation = require("../../models/Conversation.model");
+
 //@route	POST api/users
 //@desc		Create a user
 //@access	Public
@@ -64,61 +67,55 @@ router.get("/", (req, res) => {
   User.find(function(err, users) {
     if (err) {
       console.log(err);
-    }
-    else {
+    } else {
       res.json(users);
     }
   });
 });
 
-router.route('/:id').get(function(req, res) {
+router.route("/:id").get(function(req, res) {
   let id = req.params.id;
   User.findById(id, function(err, user) {
-      if(err)
-          res.send(err)
-      else
-          res.json(user);
+    if (err) res.send(err);
+    else res.json(user);
   });
 });
 
-router.route('/delete/:id').delete(function(req, res) {
+router.route("/delete/:id").delete(function(req, res) {
   User.findById(req.params.id).remove(function(err, user) {
-      if (err)
-          res.send(err);
-      else
-          res.send("successfully deleted");
+    if (err) res.send(err);
+    else res.send("successfully deleted");
   });
 });
 
-router.route('/update/:id').post(function(req, res) {
-  User.findById(req.params.id, function (err, user) {
-      if(!user)
-          res.status(404).send('User not found!!!!');
-      else {
-          let psswd = bcrypt.hashSync(req.body.password, 10, function(err, hash) {
-              if (err)
-                  "false"
-          });
-          console.log(psswd);
-          user.username = req.body.username;
-          user.password = psswd;
-          user.email = req.body.email;
-          user.receiveEmails = req.body.receiveEmails;
+router.route("/update/:id").post(function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    if (!user) res.status(404).send("User not found!!!!");
+    else {
+      let psswd = bcrypt.hashSync(req.body.password, 10, function(err, hash) {
+        if (err) "false";
+      });
+      console.log(psswd);
+      user.username = req.body.username;
+      user.password = psswd;
+      user.email = req.body.email;
+      user.receiveEmails = req.body.receiveEmails;
 
-          user.save().then(user => {
-              res.status(200).send("worked");
-          })
-          .catch(err => {
-              res.status(400).send("update not possible due to " + err);
-          });
-      }
+      user
+        .save()
+        .then(user => {
+          res.status(200).send("worked");
+        })
+        .catch(err => {
+          res.status(400).send("update not possible due to " + err);
+        });
+    }
   });
 });
 
-router.route('/select/done/').post(function(req, res) {
-  User.findById(req.body.userId, function (err, user) {
-    if(!user)
-      res.status(404).send('User not found');
+router.route("/select/done/").post(function(req, res) {
+  User.findById(req.body.userId, function(err, user) {
+    if (!user) res.status(404).send("User not found");
     else {
       user.baldTags = req.body.tags;
       user.save().then(user => {
@@ -126,21 +123,37 @@ router.route('/select/done/').post(function(req, res) {
       })
       .catch(err => {
           res.status(400).send("update not possible due to " + err);
-      });
-    };
+        });
+    }
   });
 });
 
-router.post('/settings', (req, res) => {
-  const { firstname, lastname, bio, age, gender, sexualPreference, location, id } = req.body;
+router.post("/settings", (req, res) => {
+  const {
+    firstname,
+    lastname,
+    bio,
+    age,
+    gender,
+    sexualPreference,
+    location,
+    id
+  } = req.body;
 
   //Simple validation
-  if (!firstname || !lastname || !bio || !age || !gender || !sexualPreference || !location) {
+  if (
+    !firstname ||
+    !lastname ||
+    !bio ||
+    !age ||
+    !gender ||
+    !sexualPreference ||
+    !location
+  ) {
     return res.status(400).send("update not possible due to " + err);
   }
-  User.findById(id, function (err, user) {
-    if(!user)
-      res.status(404).send('not found: ' + user);
+  User.findById(id, function(err, user) {
+    if (!user) res.status(404).send("not found: " + user);
     else {
       user.firstname = firstname;
       user.lastname = lastname;
@@ -149,73 +162,151 @@ router.post('/settings', (req, res) => {
       user.gender = gender;
       user.sexualPreference = sexualPreference;
       user.location = location;
-      user.save().then(user => {
+      user
+        .save()
+        .then(user => {
           //
-          res.json({user});
-      })
-      .catch(err => {
+          res.json({ user });
+        })
+        .catch(err => {
           res.status(400).send("update not possible due to " + err);
-      });
-    };
+        });
+    }
   });
 });
 
-router.route('/explore/').post(function(req, res) {
+router.route("/explore/").post(function(req, res) {
   if (req.body.sexualPreference == "other") {
     //add location
-    User.find({$or:[{sexualPreference: req.body.gender}, {sexualPreference: 'other'}], location: req.body.location}, function(err, pmatches) {
-      if (err)
-        res.send(err);
-      else
-        res.json(pmatches);
-    });
+    User.find(
+      {
+        $or: [
+          { sexualPreference: req.body.gender },
+          { sexualPreference: "other" }
+        ],
+        location: req.body.location
+      },
+      function(err, pmatches) {
+        if (err) res.send(err);
+        else res.json(pmatches);
+      }
+    );
+  } else {
+    User.find(
+      {
+        location: req.body.location,
+        sexualPreference: req.body.gender,
+        gender: req.body.sexualPreference
+      },
+      function(err, pmatches) {
+        if (err) res.send(err);
+        else res.json(pmatches);
+      }
+    );
   }
-  else {
-    User.find({location: req.body.location, sexualPreference: req.body.gender, gender: req.body.sexualPreference}, function(err, pmatches) {
-      if (err)
-        res.send(err);
-      else
-        res.json(pmatches);
-    });
-  }
-
 });
 
-router.post('/like', (req, res) => {
+router.post("/like", (req, res) => {
   const { otherId, likeOrUnlike, id } = req.body;
-
 
   console.log(id);
   console.log(otherId);
-  User.findById(id, function (err, user) {
-    if(!user)
-      res.status(404).send('not found: ' + user);
+  User.findById(id, function(err, user) {
+    if (!user) res.status(404).send("not found: " + user);
     else {
       if (likeOrUnlike == "like") {
         const arrayLikes = user.likes;
         arrayLikes.push(...[otherId]);
         user.likes = arrayLikes;
-        user.save().then(user => {
-          //
-          res.json({user});
-        })
-        .catch(err => {
+        user
+          .save()
+          .then(user => {
+            //
+            res.json({ user });
+          })
+          .catch(err => {
             res.status(400).send("update not possible due to " + err);
-        });
-      }
-      else {
+          });
+      } else {
         const arrayDisLikes = user.dislikes;
         arrayDisLikes.push(...[otherId]);
         user.dislikes = arrayDisLikes;
-        user.save().then(user => {
+        user
+          .save()
+          .then(user => {
             //
-            res.json({user});
+            res.json({ user });
+          })
+          .catch(err => {
+            res.status(400).send("update not possible due to " + err);
+          });
+      }
+    }
+  });
+});
+
+
+// Messaging Routes
+
+router.get("/messages/all", (req, res) => {
+  // displays all messages
+  Conversation.find(function(err, conversation) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(conversation);
+    }
+  });
+});
+
+router.post("/messages/new", (req, res) => {
+  // creates a new conversation
+  let convo = new Conversation(req.body);
+  convo
+    .save()
+    .then(user => {
+      res.status(200).json({ post: "post added succesfully with poop" });
+    })
+    .catch(err => {
+      res.status(400).send("adding new post failed: " + err);
+    });
+});
+
+router.post("/messages/update", (req, res) => {
+  // updates conversation
+  const { conversationID } = req.body;
+  Conversation.findById(conversationID, function(err, conversation) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(conversation);
+    }
+  });
+});
+
+
+
+router.post("/messages/send", (req, res) => {
+  // sends a new message and appends to a conversation
+  const { conversationID, userID, message } = req.body;
+
+  Conversation.findById(conversationID, function(err, conversation) {
+    if (err) {
+      res.status(500).send("message could not send due to " + err);
+    } else {
+      const arrayMessages = conversation.messages;
+      const newMessage = { userID, message };
+      arrayMessages.push(newMessage);
+      conversation.messages = arrayMessages;
+      conversation
+        .save()
+        .then(conversation => {
+          res.json({ conversation });
         })
         .catch(err => {
-            res.status(400).send("update not possible due to " + err);
+          res.status(400).send("update not possible due to " + err);
         });
-      };
-    };
+    }
   });
 });
 
