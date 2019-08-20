@@ -12,7 +12,9 @@ import {
   UPDATEUSER_SUCCESS,
   UPDATEUSER_FAIL,
   EXPLORE_SUCCESS,
-  EXPLORE_FAIL
+  EXPLORE_FAIL,
+  MESSAGESEND_SUCCESS,
+  MESSAGESEND_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -74,6 +76,12 @@ export default function(state = initialState, action) {
         ...state,
         ...action.payload
       };
+    case MESSAGESEND_SUCCESS:
+    case MESSAGESEND_FAIL:
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }

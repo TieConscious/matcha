@@ -184,3 +184,4 @@ export const getMatches = ( sexualPreference, gender, location ) => dispatch => 
       console.log(err)
     });
 };
+
