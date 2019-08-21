@@ -18,13 +18,15 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function FilterSort() {
+export default function FilterSort(props) {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
+  const [value, setSortValue] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
   function handleChange(event) {
-    setAge(event.target.value);
+    setSortValue(event.target.value);
+    console.log(event.target.value);
+    props.handleSort(event.target.value);
   }
 
   function handleClose() {
@@ -45,19 +47,20 @@ export default function FilterSort() {
                 open={open}
                 onClose={handleClose}
                 onOpen={handleOpen}
-                value={age}
+                value={value}
                 onChange={handleChange}
                 inputProps={{
-                    name: 'age',
+                    name: 'sort',
                     id: 'demo-controlled-open-select',
                 }}
                 >
                 <MenuItem value="">
                     <em>None</em>
                 </MenuItem>
-                <MenuItem value={10}>Age</MenuItem>
-                <MenuItem value={20}>Location</MenuItem>
-                <MenuItem value={30}>Bald people</MenuItem>
+                <MenuItem value={"age"}>Age</MenuItem>
+                <MenuItem value={"location"}>Location</MenuItem>
+                <MenuItem value={"baldTags"}>Bald people</MenuItem>
+                <MenuItem value={"fameRate"}>Popularity</MenuItem>
                 </Select>
             </FormControl>
             </form>

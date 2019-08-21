@@ -76,7 +76,7 @@ class Explore extends Component {
         }
     }
 
-    compare = (a,b) => {
+    compare = (a,b,min=2) => {
       let i = 0;
       let j = 0;
       let res = 0;
@@ -91,7 +91,7 @@ class Explore extends Component {
         }
         i++;
       }
-      if (res >= 2)
+      if (res >= min)
         return true;
       else 
         return false;
@@ -141,7 +141,7 @@ class Explore extends Component {
                 <div className="explore">
                     {this.props.isAuthenticated ? 
                         this.props.pmatches ? 
-                        <Matches pfmatches={this.filterMatches()} />
+                        <Matches compare={this.compare} pfmatches={this.filterMatches()} />
                         : <h1> There's no one here for you </h1>
                         : <h1> There's no one here for you </h1>
                     }
