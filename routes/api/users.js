@@ -212,22 +212,24 @@ router.post("/like", (req, res) => {
   console.log(id);
   console.log(otherId);
   User.findById(id, function(err, user) {
-    if (!user) res.status(404).send("not found: " + user);
+    if (!user) 
+      res.status(404).send("not found: " + err);
     else {
       if (likeOrUnlike == "like") {
         const arrayLikes = user.likes;
         arrayLikes.push(...[otherId]);
         user.likes = arrayLikes;
         user
-          .save()
-          .then(user => {
-            //
-            res.json({ user });
-          })
-          .catch(err => {
-            res.status(400).send("update not possible due to " + err);
-          });
-      } else {
+        .save()
+        .then(user => {
+          //
+          res.json({ user });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      } 
+      else {
         const arrayDisLikes = user.dislikes;
         arrayDisLikes.push(...[otherId]);
         user.dislikes = arrayDisLikes;
@@ -240,6 +242,38 @@ router.post("/like", (req, res) => {
           .catch(err => {
             res.status(400).send("update not possible due to " + err);
           });
+        }
+      }
+    });
+});
+
+router.post('/famerate', (req, res) => {
+  const { otherId, likeOrUnlike} = req.body;
+  User.findById(otherId, function(err, user) {
+    if(!user)
+      res.status(404).send("not found other user" + err);
+    else {
+      if (likeOrUnlike == "like") {
+        user.fameRate += 1;
+        user
+        .save()
+        .then(user => {
+          res.json("populatity increased");
+        })
+        .catch(err => {
+          res.status(400).send("update not possible due to " + err);
+        });
+      }
+      else {
+        user.fameRate -= 1;
+        user
+        .save()
+        .then(user => {
+          res.json("populatity decreased");
+        })
+        .catch(err => {
+          res.status(400).send("update not possible due to " + err);
+        });
       }
     }
   });

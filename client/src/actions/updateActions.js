@@ -3,6 +3,8 @@ import axios from "axios";
 import {
   UPDATEUSER_SUCCESS,
   UPDATEUSER_FAIL,
+  UPDATEFAMERATE_SUCCESS,
+  UPDATEFAMERATE_FAIL,
   MESSAGESEND_SUCCESS,
   MESSAGESEND_FAIL
 } from "./types";
@@ -124,3 +126,32 @@ export const sendMessage = ({conversationID, userID, message}) => dispatch => {
       console.log("body: " + body + " config: " + config);
     });
 }
+
+export const updateFameRate = ( otherId, likeOrUnlike) => dispatch => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  };
+  // Request body
+  const body = JSON.stringify({ otherId, likeOrUnlike});
+  console.log(body);
+  axios
+    .post("api/users/famerate", body, config)
+    .then(res => {
+        dispatch({
+          type: UPDATEFAMERATE_SUCCESS,
+          payload: res.data
+        })
+        console.log(res);
+      }
+    )
+    .catch(err => {
+      dispatch({
+        type: UPDATEFAMERATE_FAIL
+      });
+      console.log("ERROR: " + err);
+      console.log("body: " + body + " config: " + config);
+    });
+};

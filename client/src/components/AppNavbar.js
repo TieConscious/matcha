@@ -42,16 +42,27 @@ class AppNavbar extends Component {
             <strong>{user ? `Welcome ${user.firstname}` : ""}</strong>
           </span>
         </NavItem>
-        <NavItem>
-          <Link to="/dashboard">Dashboard</Link>
-        </NavItem>
-        <Link to="/settings">Settings</Link>
-        <Link to="/select">Select</Link>
-        <Link to="/explore">Explore</Link>
-        <Link to="/messenger">Messenger</Link>
-        <NavItem>
-          <AppLogout />
-        </NavItem>
+        <span className="navbar-text mr-3">
+          <NavItem>
+            <Link to="/dashboard">Dashboard</Link>
+          </NavItem>
+          <NavItem>
+          <Link to="/settings">Settings</Link>
+          </NavItem>
+          <NavItem>
+          <Link to="/select">Select</Link>
+          </NavItem>
+          <NavItem>
+          <Link to="/explore">Explore</Link>
+          </NavItem>
+          <NavItem>
+          <Link to="/messenger">Messenger</Link>
+          </NavItem>
+        </span>
+          <NavItem>
+            <AppLogout />
+          </NavItem>
+        
       </Fragment>
     );
 

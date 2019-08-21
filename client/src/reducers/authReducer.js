@@ -14,7 +14,9 @@ import {
   EXPLORE_SUCCESS,
   EXPLORE_FAIL,
   MESSAGESEND_SUCCESS,
-  MESSAGESEND_FAIL
+  MESSAGESEND_FAIL,
+  UPDATEFAMERATE_SUCCESS,
+  UPDATEFAMERATE_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -73,6 +75,8 @@ export default function(state = initialState, action) {
       }
     case UPDATETAGS_FAIL:
     case EXPLORE_FAIL:
+    case UPDATEFAMERATE_SUCCESS:
+    case UPDATEFAMERATE_FAIL:
       return state;
     case UPDATEUSER_SUCCESS:
     case UPDATEUSER_FAIL:
