@@ -24,7 +24,7 @@ class AppNavbar extends Component {
   };
 
   static propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
   };
 
   toggle = () => {
@@ -32,6 +32,8 @@ class AppNavbar extends Component {
       isOpen: !this.state.isOpen
     });
   };
+
+
 
   render() {
     const { isAuthenticated, user } = this.props.auth;
@@ -42,16 +44,18 @@ class AppNavbar extends Component {
             <strong>{user ? `Welcome ${user.firstname}` : ""}</strong>
           </span>
         </NavItem>
-        <NavItem>
+        <span className="navbar-text mr-3">
+
           <Link to="/dashboard">Dashboard</Link>
-        </NavItem>
+
         <Link to="/settings">Settings</Link>
         <Link to="/select">Select</Link>
         <Link to="/explore">Explore</Link>
         <Link to="/messenger">Messenger</Link>
-        <NavItem>
+
           <AppLogout />
-        </NavItem>
+
+        </span>
       </Fragment>
     );
 

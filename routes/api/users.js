@@ -256,7 +256,7 @@ router.get("/messages/all", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.json(conversation);
+      res.json({conversation});
     }
   });
 });
@@ -281,7 +281,9 @@ router.post("/messages/update", (req, res) => {
     if (err) {
       console.log(err);
     } else {
+      console.log({conversation});
       res.json(conversation);
+      console.log(conversation);
     }
   });
 });

@@ -14,7 +14,9 @@ import {
   EXPLORE_SUCCESS,
   EXPLORE_FAIL,
   MESSAGESEND_SUCCESS,
-  MESSAGESEND_FAIL
+  MESSAGESEND_FAIL,
+  MESSAGEUPDATE_SUCCESS,
+  MESSAGEUPDATE_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -22,7 +24,8 @@ const initialState = {
   isAuthenticated: null,
   isLoading: false,
   user: null,
-  pmatches: null
+  pmatches: null,
+  conversations: null
 };
 
 export default function(state = initialState, action) {
@@ -41,7 +44,7 @@ export default function(state = initialState, action) {
       };
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
-      console.log(action.payload)
+      console.log(action.payload);
       localStorage.setItem("token", action.payload.token);
       return {
         ...state,
@@ -81,7 +84,17 @@ export default function(state = initialState, action) {
       return {
         ...state,
         ...action.payload
-      }
+      };
+    case MESSAGEUPDATE_SUCCESS:
+      return {
+        ...state,
+        conversations: action.payload
+      };
+    case MESSAGEUPDATE_FAIL:
+      return {
+        ...state,
+        conversations: null
+      };
     default:
       return state;
   }

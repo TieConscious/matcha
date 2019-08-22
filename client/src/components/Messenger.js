@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import MessengerSidebar from "./MessengerSidebar";
 import MessengerChat from "./MessengerChat";
+import { updateMessages } from "../actions/updateActions";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -19,7 +20,7 @@ const styles = {
     gridTemplateColumns: `25vw auto`,
     gridTemplateRows: `60px' 'auto' '60px`,
     gridColumnGap: "1px",
-    gridRowGap: "1px",
+    gridRowGap: "1px"
   },
   sidebar: {
     background: "white",
@@ -27,7 +28,7 @@ const styles = {
     gridRowEnd: "span 3",
 
     position: "relative",
-    overflowY: "scroll",
+    overflowY: "scroll"
     // -webkit-overflow-scrolling: "touch",
   },
   content: {
@@ -36,15 +37,22 @@ const styles = {
     gridRowEnd: "span 3",
 
     position: "relative",
-    overflowY: "scroll",
+    overflowY: "scroll"
     // -webkit-overflow-scrolling: "touch",
   }
 };
 
 export class Messenger extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    conversations: PropTypes.object
   };
+
+  constructor(props) {
+    super(props);
+    this.props.updateMessages(this.props.auth.user.conversations);
+    console.log(this.props.conversations);
+  }
 
   componentDidMount() {
     // If not logged in and user navigates to Dashboard page, should redirect them to landing page
@@ -53,11 +61,13 @@ export class Messenger extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(nextProps) {
     // If not logged in and user navigates to Dashboard page, should redirect them to landing page
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
+    if (this.props.conversations !== nextProps.conversations)
+      this.setState({ conversations: nextProps.conversations });
   }
 
   render() {
@@ -66,10 +76,10 @@ export class Messenger extends Component {
     return (
       <div className={classes.messenger}>
         <div className={classes.sidebar}>
-          <MessengerSidebar />
+          {this.props.conversations ? <MessengerSidebar /> : ""}
         </div>
         <div className={classes.content}>
-          <MessengerChat />
+          {this.props.conversations ? <MessengerChat /> : ""}
         </div>
       </div>
     );
@@ -78,10 +88,11 @@ export class Messenger extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  conversations: state.auth.conversations
 });
 
 export default connect(
   mapStateToProps,
-  null
+  { updateMessages }
 )(withStyles(styles)(Messenger));

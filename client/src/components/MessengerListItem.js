@@ -22,30 +22,26 @@ export class MessengerListItem extends Component {
     const conversationID = this.props.data;
     console.log(conversationID);
 
-	this.props.updateMessages(conversationID);
-
-	// .then(
-	// 	response => {
-	// 		this.setState({conversation: response}, function() {
-	// 			console.log(this.state);
-	// 		  });
-	// 	},
-	// 	error => {
-	// 		console.error(error);
-	// 	}
-	// );
+    // this.props.updateMessages(conversationID);
   }
 
+
   render() {
-
-
-    return <div />;
+    console.log(this.props.conversations);
+    return (
+      <div>
+        {
+          this.props.conversations ? <h1>buttholes</h1> : ""
+        }
+        </div>
+    );
   }
 }
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  conversations: state.conversations
 });
 
 export default connect(
