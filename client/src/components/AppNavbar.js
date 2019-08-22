@@ -45,7 +45,6 @@ class AppNavbar extends Component {
           </span>
         </NavItem>
         <span className="navbar-text mr-3">
-<<<<<<< HEAD
 
           <Link to="/dashboard">Dashboard</Link>
 
@@ -57,28 +56,6 @@ class AppNavbar extends Component {
           <AppLogout />
 
         </span>
-=======
-          <NavItem>
-            <Link to="/dashboard">Dashboard</Link>
-          </NavItem>
-          <NavItem>
-          <Link to="/settings">Settings</Link>
-          </NavItem>
-          <NavItem>
-          <Link to="/select">Select</Link>
-          </NavItem>
-          <NavItem>
-          <Link to="/explore">Explore</Link>
-          </NavItem>
-          <NavItem>
-          <Link to="/messenger">Messenger</Link>
-          </NavItem>
-        </span>
-          <NavItem>
-            <AppLogout />
-          </NavItem>
-        
->>>>>>> e805d15b7d43d476a0ae3a80a98f201710616051
       </Fragment>
     );
 

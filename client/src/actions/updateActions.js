@@ -147,9 +147,6 @@ export const sendMessage = ({
       console.log("ERROR: " + err);
       console.log("body: " + body + " config: " + config);
     });
-<<<<<<< HEAD
-};
-=======
 }
 
 export const updateFameRate = ( otherId, likeOrUnlike) => dispatch => {
@@ -180,4 +177,3 @@ export const updateFameRate = ( otherId, likeOrUnlike) => dispatch => {
       console.log("body: " + body + " config: " + config);
     });
 };
->>>>>>> e805d15b7d43d476a0ae3a80a98f201710616051
