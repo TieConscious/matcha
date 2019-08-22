@@ -20,19 +20,16 @@ class Matches extends React.Component {
           }
     }
     componentDidUpdate() {
-        console.log("component updated");
         if (!this.props.isAuthenticated) {
             this.props.history.push("/");
           }
     }
     handleFilters = (filters) => {
-        console.log(filters);
         this.setState({filters: filters, sort: null}, function() {
             console.log(this.state.filters);
         });
     }
     handleSort = (value) => {
-        console.log(value);
         this.setState({sort: value, filters: null}, function() {
             console.log(this.state.sort);
         });
@@ -40,12 +37,20 @@ class Matches extends React.Component {
             this.props.pfmatches.sort(((a, b) => (a.age > b.age) ? 1 : -1));
         else if (value == "baldTags") {
              this.props.pfmatches.map(item => {
-                 console.log(this.props.user);
                 this.compare(this.props.user.baldTags, item.baldTags, item);
               });
             this.props.pfmatches.sort(((a, b) => (a.noBald > b.noBald) ? -1 : 1));
-            console.log("sorted?????: " + this.props.pfmatches);
         }
+        else if (value == "fameRate") {
+            this.props.pfmatches.sort(((a, b) => (a.fameRate > b.fameRate) ? -1 : 1));
+        }
+    }
+
+    filterBaldTags = () => {
+        this.props.pfmatches.map(item => {
+           this.compare(this.props.user.baldTags, item.baldTags, item);
+         });
+       this.props.pfmatches.sort(((a, b) => (a.noBald > b.noBald) ? -1 : 1));
     }
     compare = (a,b,item) => {
         let i = 0;
@@ -78,9 +83,10 @@ class Matches extends React.Component {
             this.props.pfmatches.map(pfmatch => {
                 console.log(pfmatch);
                 if (this.state.filters != null) {
-                    //add baldTags, location, popularity, 
-                    if (pfmatch.age >= this.state.filters.age[0] && pfmatch.age <= this.state.filters.age[1]) {
-                        console.log("match filtered");
+                    //add baldTags, location, popularity,
+                    this.filterBaldTags();
+                    console.log("baldTagsFilter: " +this.state.filters.baldTags+" pmatch.noBaldTags: "+pfmatch.noBaldTags);
+                    if ((pfmatch.age >= this.state.filters.age[0] && pfmatch.age <= this.state.filters.age[1]) && (pfmatch.noBald >= this.state.filters.baldTags) && (pfmatch.fameRate >= this.state.filters.fameRate)) {
                         return <CardExplore info={pfmatch} />
                     }     
                 }
