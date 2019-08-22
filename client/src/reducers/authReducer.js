@@ -16,7 +16,9 @@ import {
   MESSAGESEND_SUCCESS,
   MESSAGESEND_FAIL,
   MESSAGEUPDATE_SUCCESS,
-  MESSAGEUPDATE_FAIL
+  MESSAGEUPDATE_FAIL,
+  UPDATEFAMERATE_SUCCESS,
+  UPDATEFAMERATE_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -64,14 +66,20 @@ export default function(state = initialState, action) {
         isAuthenticated: false,
         isLoading: false
       };
-    case UPDATETAGS_SUCCESS:
-    case UPDATETAGS_FAIL:
     case EXPLORE_SUCCESS:
       return {
         ...state,
         pmatches: action.payload
       };
+    case UPDATETAGS_SUCCESS:
+      return {
+        ...state,
+        user: action.payload
+      }
+    case UPDATETAGS_FAIL:
     case EXPLORE_FAIL:
+    case UPDATEFAMERATE_SUCCESS:
+    case UPDATEFAMERATE_FAIL:
       return state;
     case UPDATEUSER_SUCCESS:
     case UPDATEUSER_FAIL:

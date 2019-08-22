@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
 import { updateLike } from "../actions/updateActions";
+import { updateFameRate } from "../actions/updateActions";
 
 const styles = {
   card: {
@@ -28,11 +29,13 @@ class CardExplore extends React.Component {
     handleClickLike = () => {
        console.log("user " + this.props.user._id + " likes user " + this.props.info._id);
        this.props.updateLike(this.props.info._id, "like", this.props.user._id);
+       this.props.updateFameRate(this.props.info._id, "like");
     }
 
     handleClickDislike = () => {
       console.log("DISlike");
       this.props.updateLike(this.props.info._id, "dislike", this.props.user._id);
+      this.props.updateFameRate(this.props.info._id, "dislike");
   }
 
     render() {
@@ -75,5 +78,5 @@ const mapStateToProps = state => ({
   
   export default connect(
     mapStateToProps,
-    { updateLike }
+    { updateLike, updateFameRate }
   )(withStyles(styles)(CardExplore));

@@ -64,6 +64,10 @@ const UserSchema = new Schema({
         enum: ["male", "female", "other"],
         default: "other"
     },
+    fameRate: {
+        type: Number,
+        default: 0
+    },
     sexualPreference: {
         type: String,
         enum: ["male", "female", "other"],

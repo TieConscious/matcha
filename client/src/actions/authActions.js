@@ -87,9 +87,6 @@ export const updateBaldTags = ( tags, userId ) => dispatch => {
       }
     )
     .catch(err => {
-      // dispatch(
-      //   returnErrors(err.response.data, err.response.status, "REGISTER_FAIL")
-      // );
       dispatch({
         type: UPDATETAGS_FAIL
       });
