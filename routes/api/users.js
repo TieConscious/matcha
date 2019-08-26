@@ -118,10 +118,12 @@ router.route("/select/done/").post(function(req, res) {
     if (!user) res.status(404).send("User not found");
     else {
       user.baldTags = req.body.tags;
-      user.save().then(user => {
+      user
+        .save()
+        .then(user => {
           res.status(200).send(user);
-      })
-      .catch(err => {
+        })
+        .catch(err => {
           res.status(400).send("update not possible due to " + err);
         });
     }
@@ -212,24 +214,22 @@ router.post("/like", (req, res) => {
   console.log(id);
   console.log(otherId);
   User.findById(id, function(err, user) {
-    if (!user) 
-      res.status(404).send("not found: " + err);
+    if (!user) res.status(404).send("not found: " + err);
     else {
       if (likeOrUnlike == "like") {
         const arrayLikes = user.likes;
         arrayLikes.push(...[otherId]);
         user.likes = arrayLikes;
         user
-        .save()
-        .then(user => {
-          //
-          res.json({ user });
-        })
-        .catch(err => {
-          console.log(err);
-        });
-      } 
-      else {
+          .save()
+          .then(user => {
+            //
+            res.json({ user });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
         const arrayDisLikes = user.dislikes;
         arrayDisLikes.push(...[otherId]);
         user.dislikes = arrayDisLikes;
@@ -242,43 +242,40 @@ router.post("/like", (req, res) => {
           .catch(err => {
             res.status(400).send("update not possible due to " + err);
           });
-        }
-      }
-    });
-});
-
-router.post('/famerate', (req, res) => {
-  const { otherId, likeOrUnlike} = req.body;
-  User.findById(otherId, function(err, user) {
-    if(!user)
-      res.status(404).send("not found other user" + err);
-    else {
-      if (likeOrUnlike == "like") {
-        user.fameRate += 1;
-        user
-        .save()
-        .then(user => {
-          res.json("populatity increased");
-        })
-        .catch(err => {
-          res.status(400).send("update not possible due to " + err);
-        });
-      }
-      else {
-        user.fameRate -= 1;
-        user
-        .save()
-        .then(user => {
-          res.json("populatity decreased");
-        })
-        .catch(err => {
-          res.status(400).send("update not possible due to " + err);
-        });
       }
     }
   });
 });
 
+router.post("/famerate", (req, res) => {
+  const { otherId, likeOrUnlike } = req.body;
+  User.findById(otherId, function(err, user) {
+    if (!user) res.status(404).send("not found other user" + err);
+    else {
+      if (likeOrUnlike == "like") {
+        user.fameRate += 1;
+        user
+          .save()
+          .then(user => {
+            res.json("populatity increased");
+          })
+          .catch(err => {
+            res.status(400).send("update not possible due to " + err);
+          });
+      } else {
+        user.fameRate -= 1;
+        user
+          .save()
+          .then(user => {
+            res.json("populatity decreased");
+          })
+          .catch(err => {
+            res.status(400).send("update not possible due to " + err);
+          });
+      }
+    }
+  });
+});
 
 // Messaging Routes
 
@@ -288,7 +285,7 @@ router.get("/messages/all", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      res.json({conversation});
+      res.json({ conversation });
     }
   });
 });
@@ -313,25 +310,39 @@ router.post("/messages/update", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log({conversation});
+      console.log({ conversation });
       res.json(conversation);
       console.log(conversation);
     }
   });
 });
 
+router.post("/messages/retrieve", (req, res) => {
+  // gets all conversations from user
+  const { conversations } = req.body;
 
+  Conversation.find({ _id: { $in: conversations } }, function(
+    err,
+    conversation
+  ) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(conversation);
+    }
+  });
+});
 
 router.post("/messages/send", (req, res) => {
   // sends a new message and appends to a conversation
-  const { conversationID, userID, message } = req.body;
+  const { conversationID, sender, message } = req.body;
 
   Conversation.findById(conversationID, function(err, conversation) {
     if (err) {
       res.status(500).send("message could not send due to " + err);
     } else {
       const arrayMessages = conversation.messages;
-      const newMessage = { userID, message };
+      const newMessage = { sender, message };
       arrayMessages.push(newMessage);
       conversation.messages = arrayMessages;
       conversation

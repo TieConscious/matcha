@@ -8,7 +8,10 @@ import {
   MESSAGESEND_SUCCESS,
   MESSAGESEND_FAIL,
   MESSAGEUPDATE_SUCCESS,
-  MESSAGEUPDATE_FAIL
+  MESSAGEUPDATE_FAIL,
+  MESSAGERETRIEVE_SUCCESS,
+  MESSAGERETRIEVE_FAIL,
+  CURRENTCONVERSATION
 } from "./types";
 
 // Update user settings
@@ -87,6 +90,8 @@ export const updateLike = (otherId, likeOrUnlike, id) => dispatch => {
     });
 };
 
+
+// Messaging Matches
 export const updateMessages = conversationID => dispatch => {
   // Headers
   const config = {
@@ -101,12 +106,11 @@ export const updateMessages = conversationID => dispatch => {
     axios
       .post("api/users/messages/update", body, config)
       .then(res => {
-        console.log(res.data);
         dispatch({
           type: MESSAGEUPDATE_SUCCESS,
           payload: res.data
         });
-        console.log(res);
+        console.log(res.data);
       })
       .catch(err => {
         dispatch({
@@ -116,6 +120,40 @@ export const updateMessages = conversationID => dispatch => {
       });
   // };
 };
+
+export const retrieveMessages = (conversations) => dispatch => {
+   // Headers
+   const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  // Request body
+  const body = JSON.stringify({ conversations });
+  axios
+    .post("api/users/messages/retrieve", body, config)
+    .then(res => {
+      dispatch({
+        type: MESSAGERETRIEVE_SUCCESS,
+        payload: res.data
+      });
+      console.log(res);
+    })
+    .catch(err => {
+      dispatch({
+        type: MESSAGERETRIEVE_FAIL
+      });
+      console.log("ERROR: " + err);
+      console.log("body: " + body + " config: " + config);
+    });
+}
+
+export const setConversation = (currentConversation) => {
+  return {
+    type: CURRENTCONVERSATION,
+    payload: currentConversation
+  }
+}
 
 export const sendMessage = ({
   conversationID,

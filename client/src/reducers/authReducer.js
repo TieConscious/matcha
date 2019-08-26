@@ -17,6 +17,9 @@ import {
   MESSAGESEND_FAIL,
   MESSAGEUPDATE_SUCCESS,
   MESSAGEUPDATE_FAIL,
+  MESSAGERETRIEVE_SUCCESS,
+  MESSAGERETRIEVE_FAIL,
+  CURRENTCONVERSATION,
   UPDATEFAMERATE_SUCCESS,
   UPDATEFAMERATE_FAIL
 } from "../actions/types";
@@ -27,7 +30,8 @@ const initialState = {
   isLoading: false,
   user: null,
   pmatches: null,
-  conversations: null
+  conversations: null,
+  currentConversation: null
 };
 
 export default function(state = initialState, action) {
@@ -100,9 +104,19 @@ export default function(state = initialState, action) {
       };
     case MESSAGEUPDATE_FAIL:
       return {
-        ...state,
-        conversations: null
+        ...state
       };
+    case MESSAGERETRIEVE_SUCCESS:
+    case MESSAGERETRIEVE_FAIL:
+      return {
+        ...state,
+        conversations: action.payload
+      }
+    case CURRENTCONVERSATION:
+      return {
+        ...state,
+        currentConversation: action.payload
+      }
     default:
       return state;
   }

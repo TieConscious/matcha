@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import MessengerSidebar from "./MessengerSidebar";
 import MessengerChat from "./MessengerChat";
-import { updateMessages } from "../actions/updateActions";
+import { retrieveMessages } from "../actions/updateActions";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -45,13 +45,14 @@ const styles = {
 export class Messenger extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
-    conversations: PropTypes.object
+    conversations: PropTypes.array
   };
 
   constructor(props) {
     super(props);
-    this.props.updateMessages(this.props.auth.user.conversations);
-    console.log(this.props.conversations);
+    this.state = {
+      conversations: []
+    };
   }
 
   componentDidMount() {
@@ -59,27 +60,31 @@ export class Messenger extends Component {
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
+    this.props.retrieveMessages(this.props.auth.user.conversations);
+    // this.setState({ conversations: conversationsToState }, function() {
+    //   console.log(this.state.conversations);
+    // });
   }
 
-  componentDidUpdate(nextProps) {
+  componentDidUpdate() {
     // If not logged in and user navigates to Dashboard page, should redirect them to landing page
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
-    if (this.props.conversations !== nextProps.conversations)
-      this.setState({ conversations: nextProps.conversations });
   }
 
   render() {
     const { classes } = this.props;
+    console.log(this.props.conversations);
+    console.log(this.props.auth);
 
     return (
       <div className={classes.messenger}>
         <div className={classes.sidebar}>
-          {this.props.conversations ? <MessengerSidebar /> : ""}
+          <MessengerSidebar />
         </div>
         <div className={classes.content}>
-          {this.props.conversations ? <MessengerChat /> : ""}
+          <MessengerChat />
         </div>
       </div>
     );
@@ -94,5 +99,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateMessages }
+  { retrieveMessages }
 )(withStyles(styles)(Messenger));

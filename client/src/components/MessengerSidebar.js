@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
 import MessengerListItem from "./MessengerListItem";
-import { updateMessages } from "../actions/updateActions";
+import { setConversation } from "../actions/updateActions";
 
 import PropTypes from "prop-types";
 
@@ -16,16 +16,17 @@ const styles = {
 export class MessengerSidebar extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
-    conversations: PropTypes.object
+    conversations: PropTypes.array
   };
 
   render() {
     return (
       <div>
-        {this.props.auth.user.conversations.map(conversation => (
-          // <Button onClick={this.geoLocator} className={classes.button}>Click Me</Button>
-          <MessengerListItem key={conversation} data={conversation} />
-        ))}
+        {this.props.conversations
+          ? this.props.conversations.map((convo, index) => (
+              <MessengerListItem key={index} data={convo} />
+            ))
+          : ""}
       </div>
     );
   }
@@ -39,5 +40,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { updateMessages }
+  { setConversation }
 )(withStyles(styles)(MessengerSidebar));
