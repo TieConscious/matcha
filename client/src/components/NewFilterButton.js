@@ -5,6 +5,8 @@ import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import Checkbox from '@material-ui/core/Checkbox';
+import { FormControlLabel } from '@material-ui/core';
 
 const styles = {
     list: {
@@ -24,8 +26,8 @@ class NewFilterButton extends React.Component {
             filter: false,
             drawerIsOpen: false,
             age: [18, 47],
-            location: 10,
-            fameRate: 5,
+            location: false,
+            fameRate: [0,5],
             baldTags: 2,
         };
     }
@@ -84,8 +86,9 @@ class NewFilterButton extends React.Component {
                             value={this.state.fameRate}
                             aria-labelledby="fameRate"
                             onChange={this.handleChange("fameRate")}
+                            aria-labelledby="range-slider"
                             min={0}
-                            max={42}
+                            max={10}
                             step={1}
                             valueLabelDisplay="auto"
                         />
@@ -99,15 +102,16 @@ class NewFilterButton extends React.Component {
                             step="1"
                             valueLabelDisplay="auto"
                         />
-                        <Typography id="label">Location (miles)</Typography>
-                        <Slider
-                            value={this.state.location}
-                            aria-labelledby="location"
-                            onChange={this.handleChange("location")}
-                            min={0}
-                            max={50}
-                            step={2}
-                            valueLabelDisplay="auto"
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                checked={this.state.location}
+                                onChange={this.handleChange("location")}
+                                value={this.state.location}
+                                indeterminate
+                                />
+                            }
+                            label="Location"
                         />
                         <Button color="secondary" type="submit">Done</Button>
                     </form>

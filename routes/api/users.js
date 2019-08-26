@@ -149,8 +149,7 @@ router.post("/settings", (req, res) => {
     !bio ||
     !age ||
     !gender ||
-    !sexualPreference ||
-    !location
+    !sexualPreference
   ) {
     return res.status(400).send("update not possible due to " + err);
   }
@@ -185,8 +184,7 @@ router.route("/explore/").post(function(req, res) {
         $or: [
           { sexualPreference: req.body.gender },
           { sexualPreference: "other" }
-        ],
-        location: req.body.location
+        ]
       },
       function(err, pmatches) {
         if (err) res.send(err);
@@ -196,7 +194,6 @@ router.route("/explore/").post(function(req, res) {
   } else {
     User.find(
       {
-        location: req.body.location,
         sexualPreference: req.body.gender,
         gender: req.body.sexualPreference
       },

@@ -44,13 +44,16 @@ class Matches extends React.Component {
         else if (value == "fameRate") {
             this.props.pfmatches.sort(((a, b) => (a.fameRate > b.fameRate) ? -1 : 1));
         }
+        else if (value == "location") {
+            this.props.pfmatches.sort(((a) => (a.location == this.props.user.location) ? -1 : 1));
+        }
     }
 
     filterBaldTags = () => {
+        console.log(this.props.pfmatches);
         this.props.pfmatches.map(item => {
            this.compare(this.props.user.baldTags, item.baldTags, item);
          });
-       this.props.pfmatches.sort(((a, b) => (a.noBald > b.noBald) ? -1 : 1));
     }
     compare = (a,b,item) => {
         let i = 0;
@@ -68,6 +71,7 @@ class Matches extends React.Component {
           i++;
         }
         item.noBald = res;
+        console.log(item);
      }
     render() {
         return (
@@ -83,10 +87,17 @@ class Matches extends React.Component {
             this.props.pfmatches.map(pfmatch => {
                 console.log(pfmatch);
                 if (this.state.filters != null) {
+                    let loc = "";
                     //add baldTags, location, popularity,
                     this.filterBaldTags();
                     console.log("baldTagsFilter: " +this.state.filters.baldTags+" pmatch.noBaldTags: "+pfmatch.noBaldTags);
-                    if ((pfmatch.age >= this.state.filters.age[0] && pfmatch.age <= this.state.filters.age[1]) && (pfmatch.noBald >= this.state.filters.baldTags) && (pfmatch.fameRate >= this.state.filters.fameRate)) {
+                    if (this.state.filters.location === true)
+                        loc = this.props.user.location
+                    console.log(loc);
+                    console.log(pfmatch.location);
+                    console.log("--------")
+                    console.log(pfmatch.location.includes(loc))
+                    if ((pfmatch.age >= this.state.filters.age[0] && pfmatch.age <= this.state.filters.age[1]) && (pfmatch.noBald >= this.state.filters.baldTags) && (pfmatch.fameRate >= this.state.filters.fameRate[0] && pfmatch.fameRate <= this.state.filters.fameRate[1]) && (pfmatch.location.includes(loc))) {
                         return <CardExplore info={pfmatch} />
                     }     
                 }
