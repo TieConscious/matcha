@@ -27,17 +27,23 @@ class GridImages extends React.Component {
     }
     render() {
         const { classes } = this.props;
+        const images = (
+            <Grid container spacing={24}>
+                { this.props.user ?
+                    this.props.user.media.map(item => {
+                        return  <Grid item xs={12} sm={6}> <img className="img-grid" src={item}></img></Grid>
+                    })
+                    :
+                    this.state.imgSrc.map(item => {
+                        return  <Grid item xs={12} sm={6}> <img className="img-grid" src={item}></img></Grid>
+                    })
+                }
+            </Grid>
+        )
         return(
             <div className="Gallery">
                 <div className={classes.root}>
-                    <Grid container spacing={24}>
-                    {
-                        this.state.imgSrc.map(item => {
-                            return  <Grid item xs={12} sm={6}> <img className="img-grid" src={item}></img></Grid>
-                        })
-                        
-                    }
-                    </Grid>
+                    {images}
                 </div>
             </div>
         );

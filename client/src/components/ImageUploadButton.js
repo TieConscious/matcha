@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
-import { loadUser } from "../actions/authActions";
+import { updateImages } from "../actions/updateActions";
 
 
 class ImageUploadButton extends React.Component {
@@ -10,17 +10,25 @@ class ImageUploadButton extends React.Component {
     handleClick = (e) => {
         console.log(e.target.files);
         let reader = new FileReader();
+        var dataURI;
+        let callback = this.callbackForImage;
         reader.onload = function(e) {
-            var dataURI = e.target.result;
+            dataURI = e.target.result;
             console.log(dataURI);
+            callback(dataURI);
         };
         reader.onerror = function(e) {
             console.log("ERROR: " + e.target.error.code)
         };
 
         reader.readAsDataURL(e.target.files[0]);
+        
+
     }
     
+    callbackForImage = (dataURI) => {
+        this.props.updateImages(this.props.user._id, dataURI);
+    }
     render() {
         const { classes } = this.props;
         return (
@@ -56,5 +64,5 @@ const mapStateToProps = state => ({
   
   export default connect(
     mapStateToProps,
-    { loadUser }
+    { updateImages }
   )((ImageUploadButton));

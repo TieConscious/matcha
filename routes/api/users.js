@@ -354,4 +354,27 @@ router.post("/messages/send", (req, res) => {
   });
 });
 
+router.post("/pictureadd", (req, res) => {
+  // sends a new message and appends to a conversation
+  const { id, data } = req.body;
+  User.findById(id, function(err, user) {
+    if (err) {
+      res.status(500).send("img not updated:" + err);
+    } 
+    else {
+      let media = user.media;
+      media.push(data);
+      user.media = media;
+      user
+        .save()
+        .then(user => {
+          res.json(user);
+        })
+        .catch(err => {
+          res.status(400).send("update not possible due to " + err);
+        });
+    }
+  });
+});
+
 module.exports = router;

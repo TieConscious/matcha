@@ -79,16 +79,20 @@ class Dashboard extends Component {
       </Fragment>
     );
 
+    const profileDisplay = (
+      <img
+        className={classes.profile}
+        src={user ? this.props.user.media[0] : profile}
+        alt={"profile pic"}
+      />
+    )
+
     return (
       <Box className={classes.paper}>
         <Paper style={{ backgroundColor: "#FBFBFB" }}>
           <Grid container className={classes.root}>
             <Grid item xs={4}>
-              <img
-                className={classes.profile}
-                src={profile}
-                alt={"profile pic"}
-              />
+              {profileDisplay}
             </Grid>
             <Grid item xs={8}>
               {dashboardDisplay}
