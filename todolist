@@ -16,3 +16,7 @@ OMNIAUTH
 BONUS
 MAP?  
 STYLE
+
+//KEV (IMAGES)
+make reducer, api call, action to send info to DB
+make reducer, api call, action to send info and read from DB

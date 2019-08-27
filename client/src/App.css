@@ -17,6 +17,14 @@
   text-align: center;
 }
 
+
+.img-grid {
+  width: auto;
+  max-width: 230px;
+  height: auto;
+  margin: 5px;
+}
+
 .drawerInner {
   width: 50vw;
   padding-top: 15px;
