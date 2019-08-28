@@ -9,6 +9,9 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import profile from "../img/me.jpg";
+import Button from "@material-ui/core/Button";
+import ImageUploadButton from "./ImageUploadButton";
+import GridImages from './GridImages';
 
 const styles = {
   paper: {
@@ -76,16 +79,20 @@ class Dashboard extends Component {
       </Fragment>
     );
 
+    const profileDisplay = (
+      <img
+        className={classes.profile}
+        src={user ? this.props.user.media[0] : profile}
+        alt={"profile pic"}
+      />
+    )
+
     return (
       <Box className={classes.paper}>
         <Paper style={{ backgroundColor: "#FBFBFB" }}>
           <Grid container className={classes.root}>
             <Grid item xs={4}>
-              <img
-                className={classes.profile}
-                src={profile}
-                alt={"profile pic"}
-              />
+              {profileDisplay}
             </Grid>
             <Grid item xs={8}>
               {dashboardDisplay}
@@ -105,7 +112,11 @@ class Dashboard extends Component {
           </Grid>
           <form noValidate autoComplete="off" />
         </Paper>
+        <br />
+        <ImageUploadButton />
+        <GridImages />
       </Box>
+      
     );
   }
 }

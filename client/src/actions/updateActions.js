@@ -11,7 +11,9 @@ import {
   MESSAGEUPDATE_FAIL,
   MESSAGERETRIEVE_SUCCESS,
   MESSAGERETRIEVE_FAIL,
-  CURRENTCONVERSATION
+  CURRENTCONVERSATION,
+  UPDATEIMG_SUCCESS,
+  UPDATEIMG_FAIL
 } from "./types";
 
 // Update user settings
@@ -210,6 +212,35 @@ export const updateFameRate = ( otherId, likeOrUnlike) => dispatch => {
     .catch(err => {
       dispatch({
         type: UPDATEFAMERATE_FAIL
+      });
+      console.log("ERROR: " + err);
+      console.log("body: " + body + " config: " + config);
+    });
+};
+
+export const updateImages = ( id, data) => dispatch => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  };
+  // Request body
+  const body = JSON.stringify({ id, data});
+  console.log(body);
+  axios
+    .post("api/users/pictureadd", body, config)
+    .then(res => {
+        dispatch({
+          type: UPDATEIMG_SUCCESS,
+          payload: res.data
+        })
+        console.log(res);
+      }
+    )
+    .catch(err => {
+      dispatch({
+        type: UPDATEIMG_FAIL
       });
       console.log("ERROR: " + err);
       console.log("body: " + body + " config: " + config);

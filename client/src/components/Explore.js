@@ -119,6 +119,8 @@ class Explore extends Component {
           if (!liked && !disliked && !same && res)
             filteredMatches.push(pmatch);
         });
+        if (this.props.user.location)
+          filteredMatches.sort(((a) => (a.location == this.props.user.location) ? -1 : 1));
         console.log(filteredMatches);
         return (filteredMatches);
       }

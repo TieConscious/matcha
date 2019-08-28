@@ -54,9 +54,6 @@ export default function FilterSort(props) {
                     id: 'demo-controlled-open-select',
                 }}
                 >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
                 <MenuItem value={"age"}>Age</MenuItem>
                 <MenuItem value={"location"}>Location</MenuItem>
                 <MenuItem value={"baldTags"}>Bald people</MenuItem>

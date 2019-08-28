@@ -21,7 +21,9 @@ import {
   MESSAGERETRIEVE_FAIL,
   CURRENTCONVERSATION,
   UPDATEFAMERATE_SUCCESS,
-  UPDATEFAMERATE_FAIL
+  UPDATEFAMERATE_FAIL,
+  UPDATEIMG_SUCCESS,
+  UPDATEIMG_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -78,11 +80,13 @@ export default function(state = initialState, action) {
         ...state,
         pmatches: action.payload
       };
+    case UPDATEIMG_SUCCESS:
     case UPDATETAGS_SUCCESS:
       return {
         ...state,
         user: action.payload
-      };
+      }
+    case UPDATEIMG_FAIL:
     case UPDATETAGS_FAIL:
     case EXPLORE_FAIL:
     case UPDATEFAMERATE_SUCCESS:
