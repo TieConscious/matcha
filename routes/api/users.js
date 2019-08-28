@@ -207,7 +207,7 @@ router.route("/explore/").post(function(req, res) {
 
 router.post("/like", (req, res) => {
   const { otherId, likeOrUnlike, id } = req.body;
-
+  console.log(req.body);
   console.log(id);
   console.log(otherId);
   User.findById(id, function(err, user) {

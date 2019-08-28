@@ -87,6 +87,14 @@ class Dashboard extends Component {
       />
     )
 
+    const onlineDisplay = (
+        <Paper style={{color: "#32CD32"	}}>online</Paper>
+    )
+
+    const offlineDisplay = (
+        <Paper style={{color: "#A9A9A9	"	}}>offline</Paper>
+    )
+
     return (
       <Box className={classes.paper}>
         <Paper style={{ backgroundColor: "#FBFBFB" }}>
@@ -104,7 +112,7 @@ class Dashboard extends Component {
               <Paper>{user ? `Baldies: ${user.baldTags}` : ""}</Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper>asdf</Paper>
+              {user ? user.isOnline ? onlineDisplay : offlineDisplay : "offline"}
             </Grid>
             <Grid item xs={12}>
               <Paper>{user ? `${user.images}` : ""}</Paper>

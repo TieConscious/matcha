@@ -124,35 +124,12 @@ export const login = ({ email, password }) => dispatch => {
     });
 };
 
-// Logout User
-export const logout = () => {
-  return {
-    type: LOGOUT_SUCCESS
-  };
-};
-
-// export const logout = (id) => {
-//   // Headers
-//   const config = {
-//     headers: {
-//       "Content-Type": "application/json"
-//     }
-//   };
-
-//   // Request body
-//   const body = JSON.stringify(id);
-//   axios
-//   .post("api/auth/logout", body, config)
-//   .then(res => {
-//     console.log(res);
-//     }
-//   )
-//   .catch(err => {
-//     console.log(err);
-//   });
+// // Logout User
+// export const logout = () => {
 //   return {
 //     type: LOGOUT_SUCCESS
-//   }
+//   };
+// };
 
 // Setup config/headers and token
 export const tokenConfig = getState => {
@@ -205,3 +182,27 @@ export const getMatches = ( sexualPreference, gender, location ) => dispatch => 
     });
 };
 
+export const logout = (id) => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  console.log(id)
+  // Request body
+  const body = JSON.stringify({id});
+  console.log(body);
+  axios
+  .post("api/auth/logout", body, config)
+  .then(res => {
+    console.log(res);
+    }
+  )
+  .catch(err => {
+    console.log(err);
+  });
+  return {
+    type: LOGOUT_SUCCESS
+  }
+}

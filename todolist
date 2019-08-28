@@ -5,7 +5,6 @@ KEV
     -CHANGING LOCATION
     -FORGOT PASSWORD
     -VALIDATE
-    -See if the user is online, and if not see the date and time of the last connection. (BOOLEAN IN DB) (ASK MOO ABOUT LOGOUT)
     -Block the user.
     -UNLIKE
     wednesday/thursday

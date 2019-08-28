@@ -7,9 +7,8 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import profile from "../img/me.jpg";
-import ImageUploadButton from "./ImageUploadButton";
 import GridImages from './GridImages';
-import axios from 'axios';
+import OtherDashboardButtons from "./OtherDashboardButtons";
 
 const styles = {
   paper: {
@@ -94,6 +93,13 @@ class Dashboard extends Component {
       />
     )
 
+    const onlineDisplay = (
+      <Paper style={{color: "#32CD32"	}}>online</Paper>
+    )
+
+    const offlineDisplay = (
+        <Paper style={{color: "#A9A9A9	"	}}>offline</Paper>
+    )
     return (
       <Box className={classes.paper}>
         <Paper style={{ backgroundColor: "#FBFBFB" }}>
@@ -111,7 +117,7 @@ class Dashboard extends Component {
               <Paper>{user ? `Baldies: ${user.baldTags}` : ""}</Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper>asdf</Paper>
+              {user ? user.isOnline ? onlineDisplay : offlineDisplay : "offline"}
             </Grid>
             <Grid item xs={12}>
               <Paper>{user ? `${user.images}` : ""}</Paper>
@@ -120,6 +126,7 @@ class Dashboard extends Component {
           <form noValidate autoComplete="off" />
         </Paper>
         <br />
+        <OtherDashboardButtons info={user} />
         {user ? user.media ? <GridImages user={user}/> : "" : ""}
       </Box>
       

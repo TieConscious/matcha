@@ -9,10 +9,14 @@ export class Logout extends Component {
     logout: PropTypes.func.isRequired
   };
 
+  handleClick = () => {
+    this.props.logout(this.props.user._id);
+    console.log(this.props.user._id);
+  }
   render() {
     return (
       <Fragment>
-        <NavLink onClick={this.props.logout} href='#'>
+        <NavLink onClick={this.handleClick} href='#'>
           Logout
         </NavLink>
       </Fragment>
@@ -20,7 +24,14 @@ export class Logout extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  auth: state.auth,
+  isAuthenticated: state.auth.isAuthenticated,
+  error: state.error,
+  user: state.auth.user
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { logout }
 )(Logout);

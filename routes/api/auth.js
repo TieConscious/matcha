@@ -11,6 +11,27 @@ const User = require("../../models/User.model");
 //@route	POST api/auth
 //@desc		Authenticate user
 //@access	Public
+
+router.route("/logout").post(function(req, res) {
+  console.log(req.body);
+  const { id } = req.body;
+  User.findById(id, function(err, user) {
+    if (!user) res.status(404).send("User not found");
+    else {
+      user.isOnline = false;
+      user.lastLogin = new Date();
+      user
+        .save()
+        .then(user => {
+          res.status(200).send(user);
+        })
+        .catch(err => {
+          res.status(400).send("update not possible due to " + err);
+        });
+    }
+  });
+});
+
 router.post("/", (req, res) => {
   const { email, password } = req.body;
 
