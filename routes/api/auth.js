@@ -28,6 +28,7 @@ router.post("/", (req, res) => {
       if (!isMatch) return res.status(400).json({ msg: "Invalid password" });
       else {
         user.lastLogin = new Date();
+        user.isOnline = true;
         user
         .save()
         .then(user => {

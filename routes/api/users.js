@@ -363,16 +363,20 @@ router.post("/pictureadd", (req, res) => {
     } 
     else {
       let media = user.media;
-      media.push(data);
-      user.media = media;
-      user
-        .save()
-        .then(user => {
-          res.json(user);
-        })
-        .catch(err => {
-          res.status(400).send("update not possible due to " + err);
-        });
+      if (media.length < 5) {
+        media.push(data);
+        user.media = media;
+        user
+          .save()
+          .then(user => {
+            res.json(user);
+          })
+          .catch(err => {
+            res.status(400).send("update not possible due to " + err);
+          });
+      }
+      else
+        res.status(400).send("update not possible: MAX 5");
     }
   });
 });

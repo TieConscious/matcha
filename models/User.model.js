@@ -83,6 +83,10 @@ const UserSchema = new Schema({
         maxlength: 420,
         default: "Im lonely"
     },
+    isOnline: {
+        type: Boolean,
+        default: false
+    },
     baldTags: [{ type: String, default: '[]'}],
     conversations: [{type: Schema.Types.ObjectId, ref: 'Conversation', default: '[]'}]
 });

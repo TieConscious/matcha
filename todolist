@@ -1,17 +1,17 @@
 
 AIzaSyBpJPJx266vjfLOVxTROT8Un22SK04nIYQ
 KEV
-    -CREATE OTHER USERS DASHBOARD / NOTIFY USER SOMEONE SAW THEM
+    -NOTIFY USER SOMEONE SAW THEM
     -CHANGING LOCATION
-    -image max 5
     -FORGOT PASSWORD
     -VALIDATE
-    -See if the user is online, and if not see the date and time of the last connection. (BOOLEAN IN DB)
+    -See if the user is online, and if not see the date and time of the last connection. (BOOLEAN IN DB) (ASK MOO ABOUT LOGOUT)
     -Block the user.
     -UNLIKE
     wednesday/thursday
     -IMAGE IMPORT
     -OMNIAUTH
+    -ADD STUFF TO DASHBOARD (ONLINE, BLOCK, REPORT, FAME RATE)
 
 MOO
     -CHATTING
@@ -29,7 +29,7 @@ STYLE
 
 wednesday
 --> OMNIAUTH
---> OTHERDASHBOARD
+--> OTHERDASHBOARD (DONE)
 --> HALFWAY THROUGH CHATTING
 
 thursday

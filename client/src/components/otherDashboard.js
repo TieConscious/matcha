@@ -89,7 +89,7 @@ class Dashboard extends Component {
     const profileDisplay = (
       <img
         className={classes.profile}
-        src={user ? user.media[0] ? this.props.user.media[0] : profile : profile}
+        src={user ? user.media[0] ? user.media[0] : profile : profile}
         alt={"profile pic"}
       />
     )
