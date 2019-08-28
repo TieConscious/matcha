@@ -20,6 +20,7 @@ import Settings from "./components/Settings";
 import SelectingPage from "./components/SelectingPage";
 import Explore from "./components/Explore";
 import Messenger from "./components/Messenger";
+import otherDashboard from "./components/otherDashboard";
 
 // const config = require('../../config');
 // const geo = config.get('GeocodeApiKey');
@@ -44,6 +45,7 @@ class App extends Component {
                 <Route exact path="/select" component={SelectingPage} />
                 <Route exact path="/explore" component={Explore} />
                 <Route exact path="/messenger" component={Messenger} />
+                <Route path="/user" component={otherDashboard} />
               </div>
             </Router>
           </div>

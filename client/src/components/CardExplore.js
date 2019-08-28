@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from "@material-ui/core/styles";
 import { updateLike } from "../actions/updateActions";
 import { updateFameRate } from "../actions/updateActions";
+import { Link } from "react-router-dom";
 
 const styles = {
   card: {
@@ -24,18 +25,23 @@ class CardExplore extends React.Component {
 
   componentDidMount() {
     console.log(this.props.info);
+  }
+
+  handleClick = () =>{
+    // console.log("click handled" + this.props.info._id)
     
   }
-    handleClickLike = () => {
-       console.log("user " + this.props.user._id + " likes user " + this.props.info._id);
-       this.props.updateLike(this.props.info._id, "like", this.props.user._id);
-       this.props.updateFameRate(this.props.info._id, "like");
-    }
 
-    handleClickDislike = () => {
-      console.log("DISlike");
-      this.props.updateLike(this.props.info._id, "dislike", this.props.user._id);
-      this.props.updateFameRate(this.props.info._id, "dislike");
+  handleClickLike = () => {
+      console.log("user " + this.props.user._id + " likes user " + this.props.info._id);
+      this.props.updateLike(this.props.info._id, "like", this.props.user._id);
+      this.props.updateFameRate(this.props.info._id, "like");
+  }
+
+  handleClickDislike = () => {
+    console.log("DISlike");
+    this.props.updateLike(this.props.info._id, "dislike", this.props.user._id);
+    this.props.updateFameRate(this.props.info._id, "dislike");
   }
 
     render() {
@@ -46,11 +52,18 @@ class CardExplore extends React.Component {
         return (
             <Card className={classes.card}>
               <CardActionArea>
-              <img className="cardImage" src={this.props.info.media[0]} onClick={this.handleClick}></img>
+              <img className="cardImage" src={this.props.info.media[0]} ></img>
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Link to={{
+                    pathname: "user/" + this.props.info._id,
+                    state: {
+                      user: this.props.info
+                    }                
+                  }}>
+                  <Typography gutterBottom variant="h5" component="h2" onClick={this.handleClick}>
                     {this.props.info.firstname}
                   </Typography>
+                  </Link>
                   <Typography variant="body2" color="textSecondary" component="p">
                     {this.props.info.bio}
                   </Typography>

@@ -1,22 +1,44 @@
 
 AIzaSyBpJPJx266vjfLOVxTROT8Un22SK04nIYQ
 KEV
-    -IMAGE UPLOAD
+    -CREATE OTHER USERS DASHBOARD / NOTIFY USER SOMEONE SAW THEM
+    -CHANGING LOCATION
+    -image max 5
+    -FORGOT PASSWORD
+    -VALIDATE
+    -See if the user is online, and if not see the date and time of the last connection. (BOOLEAN IN DB)
+    -Block the user.
+    -UNLIKE
+    wednesday/thursday
     -IMAGE IMPORT
-    -UPDATE DASHBOARD
-    -CREATE OTHER USERS DASHBOARD
-    -
+    -OMNIAUTH
+
 MOO
     -CHATTING
+    -DISPLAY FAME RATE
+    -If he has at least one picture “like” another user.
+    -Report the user as a “fake account”.
 
--CHANGING LOCATION
--Notifications
+-CHANGE LOCATION
+-Notifications / NOTIFY USER SOMEONE SAW THEM
 
 OMNIAUTH
 BONUS
 MAP?  
 STYLE
 
-//KEV (IMAGES)
-make reducer, api call, action to send info to DB
-make reducer, api call, action to send info and read from DB
+wednesday
+--> OMNIAUTH
+--> OTHERDASHBOARD
+--> HALFWAY THROUGH CHATTING
+
+thursday
+-->IMAGE IMPORT
+-->CHATTING
+
+friday
+-->NOTIFICATIONS
+
+SATURDAY
+-->CLEAN EVERYTHING
+-->BONUS

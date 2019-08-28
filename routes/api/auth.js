@@ -26,7 +26,17 @@ router.post("/", (req, res) => {
     // Validate password
     bcrypt.compare(password, user.password).then(isMatch => {
       if (!isMatch) return res.status(400).json({ msg: "Invalid password" });
-
+      else {
+        user.lastLogin = new Date();
+        user
+        .save()
+        .then(user => {
+          console.log("last login saved");
+        })
+        .catch(err => {
+          console.log("error saving date: " + err);
+        });
+      }
       jwt.sign(
         { id: user.id },
         config.get("jwtSecret"),

@@ -24,6 +24,10 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    lastLogin: {
+        type: String,
+        default: Date.now
+    },
     age: {
         type: Number,
         default: 18,

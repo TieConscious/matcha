@@ -1,17 +1,15 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-
 import { loadUser } from "../actions/authActions";
-
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import profile from "../img/me.jpg";
-import Button from "@material-ui/core/Button";
 import ImageUploadButton from "./ImageUploadButton";
 import GridImages from './GridImages';
+import axios from 'axios';
 
 const styles = {
   paper: {
@@ -39,13 +37,22 @@ class Dashboard extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired
   };
-
+  
+  constructor(props) {
+      super(props);
+      this.state = {
+          user: null
+      }
+  }
   componentDidMount() {
     // If not logged in and user navigates to Dashboard page, should redirect them to landing page
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
     this.props.loadUser();
+    console.log("-----")
+    console.log(this.props.location.state.user);
+    
   }
 
   componentDidUpdate() {
@@ -57,7 +64,7 @@ class Dashboard extends Component {
 
   render() {
     const { classes } = this.props;
-    const { user } = this.props.auth;
+    const user = this.props.location.state.user;
 
     const dashboardDisplay = (
       <Fragment>
@@ -113,8 +120,7 @@ class Dashboard extends Component {
           <form noValidate autoComplete="off" />
         </Paper>
         <br />
-        <ImageUploadButton />
-        {user ? user.media ? <GridImages user={this.props.user} /> : "" : ""}
+        {user ? user.media ? <GridImages user={user}/> : "" : ""}
       </Box>
       
     );
