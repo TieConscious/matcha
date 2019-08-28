@@ -68,7 +68,10 @@ export default function(state = initialState, action) {
         token: null,
         user: null,
         isAuthenticated: false,
-        isLoading: false
+        isLoading: false,
+        pmatches: null,
+        conversations: null,
+        currentConversation: null
       };
     case EXPLORE_SUCCESS:
       return {
@@ -79,7 +82,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         user: action.payload
-      }
+      };
     case UPDATETAGS_FAIL:
     case EXPLORE_FAIL:
     case UPDATEFAMERATE_SUCCESS:
@@ -92,10 +95,13 @@ export default function(state = initialState, action) {
         ...action.payload
       };
     case MESSAGESEND_SUCCESS:
-    case MESSAGESEND_FAIL:
       return {
         ...state,
         ...action.payload
+      };
+    case MESSAGESEND_FAIL:
+      return {
+        ...state
       };
     case MESSAGEUPDATE_SUCCESS:
       return {
@@ -111,12 +117,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         conversations: action.payload
-      }
+      };
     case CURRENTCONVERSATION:
       return {
         ...state,
         currentConversation: action.payload
-      }
+      };
     default:
       return state;
   }

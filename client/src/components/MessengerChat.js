@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
+import ComposeMessage from "./ComposeMessage";
 
 import PropTypes from "prop-types";
 
@@ -37,14 +38,17 @@ export class MessengerChat extends Component {
 
   render() {
     if (this.props.currentConversation)
-      console.log(this.props.currentConversation.messages)
+      console.log(this.props.currentConversation.messages);
     return (
       <div>
-        {this.props.currentConversation
-          ? this.props.currentConversation.messages.map((message) => (
-              `${message.message}`
-          ))
-          : ""}
+        <div>
+          {this.props.currentConversation
+            ? this.props.currentConversation.messages.map(
+                message => `${message.message}`
+              )
+            : ""}
+        </div>
+        <div>{this.props.currentConversation ? <ComposeMessage /> : ""}</div>
       </div>
     );
   }

@@ -71,6 +71,7 @@ export class Messenger extends Component {
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
+    this.props.retrieveMessages(this.props.auth.user.conversations);
   }
 
   render() {
