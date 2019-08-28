@@ -24,7 +24,7 @@ class OtherDashboardButtons extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          user: null
+          user: null,
       }
   }
   componentDidMount = () => {
@@ -44,17 +44,25 @@ class OtherDashboardButtons extends Component {
   }
 
   handleLike = () => {
-    console.log("id of this: " + this.props.info._id);
-    console.log("id of user: " + this.props.user._id);
     this.props.updateLike(this.props.info._id, "like", this.props.user._id);
     this.props.updateFameRate(this.props.info._id, "like");
   }
+
+  handleDislike = () => {
+    this.props.updateLike(this.props.info._id, "dislike", this.props.user._id);
+    this.props.updateFameRate(this.props.info._id, "dislike");
+  }
+
+  handleBlock = () => {
+    this.props.updateLike(this.props.info._id, "block", this.props.user._id);
+  }
+  handleReport = () => {
+    alert("User: " + this.props.info.firstname + "reported for being bad")
+  }
   render() {
     const { classes } = this.props;
-
-    return (
-      <Box className={classes.paper}>
-        <Button
+    const displayLike = (
+      <Button
             className={classes.button}
             onClick={this.handleLike}
             variant="contained"
@@ -63,19 +71,42 @@ class OtherDashboardButtons extends Component {
         >
             LIKE
         </Button>
-        <Button
+    );
+    const displayUnlike = (
+      <Button
             className={classes.button}
+            onClick={this.handleDislike}
             variant="contained"
             component="span"
-            color="secondary"
+            color="primary"
         >
-            BLOCK
+            UNLIKE
         </Button>
+    )
+
+    const displayBlock = (
+        <Button
+          className={classes.button}
+          variant="contained"
+          component="span"
+          color="secondary"
+          onClick={this.handleBlock}
+        >
+          BLOCK
+        </Button>
+    )
+    return (
+      <Box className={classes.paper}>
+        {this.props.user.blocked.includes(this.props.info._id) ? "" 
+        : 
+        this.props.user.likes.includes(this.props.info._id) ? displayUnlike : displayLike}
+        {this.props.user.blocked.includes(this.props.info._id) ? <h2>USER IS BLOCKED</h2> : displayBlock}
         <Button
             className={classes.button}
             variant="contained"
             component="span"
             color="contained"
+            onClick={this.handleReport}
         >
             REPORT
         </Button>

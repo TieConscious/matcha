@@ -33,6 +33,7 @@ const UserSchema = new Schema({
         default: 18,
         //required: true
     },
+    blocked: [{type: Schema.Types.ObjectId, ref: 'User', default: '[]'}],
     email: {
         type: String,
         required: true,

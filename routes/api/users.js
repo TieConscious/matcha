@@ -226,14 +226,33 @@ router.post("/like", (req, res) => {
           .catch(err => {
             console.log(err);
           });
-      } else {
+      } else if (likeOrUnlike == "dislike") {
         const arrayDisLikes = user.dislikes;
         arrayDisLikes.push(...[otherId]);
         user.dislikes = arrayDisLikes;
+        if (user.likes.includes(otherId)) {
+          let index = user.likes.indexOf(otherId);
+          user.likes.splice(index, 1);
+        }
         user
           .save()
           .then(user => {
             //
+            res.json({ user });
+          })
+          .catch(err => {
+            res.status(400).send("update not possible due to " + err);
+          });
+      }
+      else {
+        const arrayBlocked = user.blocked;
+        arrayBlocked.push(...[otherId]);
+        user.blocked = arrayBlocked;
+        user
+          .save()
+          .then(user => {
+            //
+            console.log(user.blocked)
             res.json({ user });
           })
           .catch(err => {

@@ -200,7 +200,7 @@ export const updateFameRate = ( otherId, likeOrUnlike) => dispatch => {
   const body = JSON.stringify({ otherId, likeOrUnlike});
   console.log(body);
   axios
-    .post("//api/users/famerate", body, config)
+    .post("http://localhost:3000/api/users/famerate", body, config)
     .then(res => {
         dispatch({
           type: UPDATEFAMERATE_SUCCESS,
