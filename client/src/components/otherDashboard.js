@@ -117,10 +117,10 @@ class Dashboard extends Component {
               <Paper>{user ? `Baldies: ${user.baldTags}` : ""}</Paper>
             </Grid>
             <Grid item xs={4}>
-              {user ? user.isOnline ? onlineDisplay : offlineDisplay : "offline"}
+              <Paper>{user ? `Popularity: ${user.fameRate}` : ""}</Paper>
             </Grid>
             <Grid item xs={12}>
-              <Paper>{user ? `${user.images}` : ""}</Paper>
+              {user ? user.isOnline ? onlineDisplay : offlineDisplay : "offline"}
             </Grid>
           </Grid>
           <form noValidate autoComplete="off" />

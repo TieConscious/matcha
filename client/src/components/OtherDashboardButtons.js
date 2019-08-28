@@ -57,7 +57,7 @@ class OtherDashboardButtons extends Component {
     this.props.updateLike(this.props.info._id, "block", this.props.user._id);
   }
   handleReport = () => {
-    alert("User: " + this.props.info.firstname + "reported for being bad")
+    alert("User: " + this.props.info.firstname + " reported for being bad")
   }
   render() {
     const { classes } = this.props;
