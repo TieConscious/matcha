@@ -98,7 +98,7 @@ class Dashboard extends Component {
     )
 
     const offlineDisplay = (
-        <Paper style={{color: "#A9A9A9	"	}}>offline</Paper>
+        <Paper style={{color: "#A9A9A9	"	}}>offline: last login on {this.props.user ? this.props.user.lastLogin.slice(0, 16) : ""} </Paper>
     )
     return (
       <Box className={classes.paper}>
@@ -114,20 +114,20 @@ class Dashboard extends Component {
               {bioDisplay}
             </Grid>
             <Grid item xs={8}>
-              <Paper>{user ? `Baldies: ${user.baldTags}` : ""}</Paper>
+              {user ? user.isOnline ? onlineDisplay : offlineDisplay : "offline"}
             </Grid>
             <Grid item xs={4}>
               <Paper>{user ? `Popularity: ${user.fameRate}` : ""}</Paper>
             </Grid>
             <Grid item xs={12}>
-              {user ? user.isOnline ? onlineDisplay : offlineDisplay : "offline"}
+              <Paper>{user ? `Baldies: ${user.baldTags[0]} | ${user.baldTags[1]} | ${user.baldTags[2]} | ${user.baldTags[3]}` : ""}</Paper>
             </Grid>
           </Grid>
           <form noValidate autoComplete="off" />
         </Paper>
         <br />
         <OtherDashboardButtons info={user} />
-        {user ? user.media ? <GridImages user={user}/> : "" : ""}
+        {user ? user.media ? <GridImages user={this.props.user} /> : "" : ""}
       </Box>
       
     );

@@ -7,6 +7,12 @@ import { validate } from "../actions/authActions";
 
 class ValidateButton extends React.Component {
     
+    componentDidMount() {
+        // If not logged in and user navigates to Dashboard page, should redirect them to landing page
+        if (!this.props.isAuthenticated) {
+          this.props.history.push("/");
+        }
+    }
     handleClick = (e) => {
         this.props.validate(this.props.user._id)
         console.log(this.props.user._id);
@@ -14,7 +20,7 @@ class ValidateButton extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <>
+            <div style={{marginLeft: "50vw", marginTop: "10vh"}}>
                 <Button
                     variant="contained"
                     component="span"
@@ -23,7 +29,7 @@ class ValidateButton extends React.Component {
                 >
                     VALIDATE
                 </Button>
-            </>
+            </div>
         );
     }
 }
