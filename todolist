@@ -2,32 +2,25 @@
 AIzaSyBpJPJx266vjfLOVxTROT8Un22SK04nIYQ
 KEV
    
--CHANGE LOCATION
--Notifications / NOTIFY USER SOMEONE SAW THEM
-    
-    wednesday/thursday
-    -IMAGE IMPORT
-    -OMNIAUTH
+    -CHANGE LOCATION
+    -Notifications / NOTIFY USER SOMEONE SAW THEM
+    -If he has at least one picture “like” another user.
 
 MOO
     -CHATTING
-    -DISPLAY FAME RATE
-    -If he has at least one picture “like” another user.
-    -Report the user as a “fake account”.
+    -start chat when match
+    -Notifications
 
+BONUS 
 
-OMNIAUTH
-BONUS
-MAP?  
-STYLE
+    OMNIAUTH
+    IMPORT IMAGES
+    MAP?  
+    STYLE
 
-wednesday
---> OMNIAUTH
---> OTHERDASHBOARD (DONE)
---> HALFWAY THROUGH CHATTING
 
 thursday
--->IMAGE IMPORT
+-->START BONUSES
 -->CHATTING
 
 friday
@@ -36,3 +29,7 @@ friday
 SATURDAY
 -->CLEAN EVERYTHING
 -->BONUS
+
+BONUS IDEAS
+-DASHBOARD FOR ADMIN (https://uber.github.io/react-vis/documentation/getting-started/creating-a-new-react-vis-project)
+-MAP (https://react-vector-maps.netlify.com/?path=/story/%F0%9F%93%96-documentation--readme) https://react-vector-maps.netlify.com/?path=/story/%F0%9F%91%A8%E2%80%8D%F0%9F%92%BB-examples--tooltips-for-layers
