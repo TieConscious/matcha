@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import { loadUser } from "../actions/authActions";
-
+import { sendEmail } from "../actions/authActions";
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
@@ -46,6 +46,14 @@ class Dashboard extends Component {
       this.props.history.push("/");
     }
     this.props.loadUser();
+    if (this.props.user) {
+      console.log("USER EXISTS")
+      if (!this.props.user.isValidated) {
+        console.log("USER NOT VALIDATED")
+        console.log(this.props.user.email)
+        this.props.sendEmail(this.props.user.email, "validate", "Please click the link to validate: ", this.props.user._id)
+      }
+    }
   }
 
   componentDidUpdate() {
@@ -138,5 +146,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadUser }
+  { loadUser, sendEmail }
 )(withStyles(styles)(Dashboard));
