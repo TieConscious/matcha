@@ -143,7 +143,22 @@ class Settings extends Component {
   render() {
     const { classes } = this.props;
     const { user } = this.props.auth;
-
+    const location = (
+      <Button type="button" id="location" variant="outlined" onClick={this.geoLocator} className={classes.button}>
+        enable location
+      </Button>
+    );
+    const locationChange = (
+      <TextField
+        id="location"
+        label="change location"
+        className={classes.textField}
+        defaultValue={user ? `${user.location}` : ""}
+        onChange={this.onChange}
+        margin="normal"
+        variant="outlined"
+      />
+    )
     return (
       <Box className={classes.paper}>
         <Paper style={{ backgroundColor: "#FBFBFB" }}>
@@ -223,25 +238,7 @@ class Settings extends Component {
               </Select>
             </FormControl>
             <br />
-            {/* <input
-              accept="image/*"
-              style={{ display: "none" }}
-              id="raised-button-file"
-              multiple
-              type="file"
-            />
-            <label htmlFor="raised-button-file">
-              <Button
-                variant="contained"
-                component="span"
-                className={classes.button}
-              >
-                upload image
-              </Button>
-            </label> */}
-            <Button type="button" id="location" variant="outlined" onClick={this.geoLocator} className={classes.button}>
-              enable location
-            </Button>
+              {this.props.user.location.length > 0 ? locationChange : location}
             <br />
             <Button type="submit" variant="contained" className={classes.button}>
               SUBMIT

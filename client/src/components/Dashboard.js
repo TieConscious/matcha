@@ -103,6 +103,10 @@ class Dashboard extends Component {
         <Paper style={{color: "#A9A9A9	"	}}>offline </Paper>
     )
 
+    const baldies = (
+        <Paper>{user ? user.baldTags ? `Baldies: ${user.baldTags[0]} | ${user.baldTags[1]} | ${user.baldTags[2]} | ${user.baldTags[3]}` : "" : ""}</Paper>
+  )
+
     return (
       <Box className={classes.paper}>
         <Paper style={{ backgroundColor: "#FBFBFB" }}>
@@ -123,7 +127,7 @@ class Dashboard extends Component {
               <Paper>{user ? `Popularity: ${user.fameRate}` : ""}</Paper>
             </Grid>
             <Grid item xs={12}>
-              <Paper>{user ? `Baldies: ${user.baldTags[0]} | ${user.baldTags[1]} | ${user.baldTags[2]} | ${user.baldTags[3]}` : ""}</Paper>
+              {baldies}
             </Grid>
           </Grid>
           <form noValidate autoComplete="off" />

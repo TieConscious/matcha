@@ -33,9 +33,14 @@ class CardExplore extends React.Component {
   }
 
   handleClickLike = () => {
-      console.log("user " + this.props.user._id + " likes user " + this.props.info._id);
-      this.props.updateLike(this.props.info._id, "like", this.props.user._id);
-      this.props.updateFameRate(this.props.info._id, "like");
+      if (this.props.user.media.length > 0) {
+        console.log("user " + this.props.user._id + " likes user " + this.props.info._id);
+        this.props.updateLike(this.props.info._id, "like", this.props.user._id);
+        this.props.updateFameRate(this.props.info._id, "like");
+      }
+      else
+        alert("You need to upload a picture to like someone else!")
+      
   }
 
   handleClickDislike = () => {
