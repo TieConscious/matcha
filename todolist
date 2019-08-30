@@ -1,22 +1,32 @@
 
 AIzaSyBpJPJx266vjfLOVxTROT8Un22SK04nIYQ
 KEV
-    -IMAGE UPLOAD
-    -IMAGE IMPORT
-    -UPDATE DASHBOARD
-    -CREATE OTHER USERS DASHBOARD
-    -
+    -Notifications / NOTIFY USER SOMEONE SAW THEM
+
 MOO
     -CHATTING
+    -start chat when match
+    -Notifications
 
--CHANGING LOCATION
--Notifications
+BONUS 
 
-OMNIAUTH
-BONUS
-MAP?  
-STYLE
+    OMNIAUTH
+    IMPORT IMAGES
+    MAP?  
+    STYLE
 
-//KEV (IMAGES)
-make reducer, api call, action to send info to DB
-make reducer, api call, action to send info and read from DB
+
+thursday
+-->START BONUSES
+-->CHATTING
+
+friday
+-->NOTIFICATIONS
+
+SATURDAY
+-->CLEAN EVERYTHING
+-->BONUS
+
+BONUS IDEAS
+-DASHBOARD FOR ADMIN (https://uber.github.io/react-vis/documentation/getting-started/creating-a-new-react-vis-project)
+-MAP (https://react-vector-maps.netlify.com/?path=/story/%F0%9F%93%96-documentation--readme) https://react-vector-maps.netlify.com/?path=/story/%F0%9F%91%A8%E2%80%8D%F0%9F%92%BB-examples--tooltips-for-layers

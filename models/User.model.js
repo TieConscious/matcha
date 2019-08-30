@@ -24,11 +24,16 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
+    lastLogin: {
+        type: String,
+        default: Date.now
+    },
     age: {
         type: Number,
         default: 18,
         //required: true
     },
+    blocked: [{type: Schema.Types.ObjectId, ref: 'User', default: '[]'}],
     email: {
         type: String,
         required: true,
@@ -78,6 +83,10 @@ const UserSchema = new Schema({
         //minlength: 10,
         maxlength: 420,
         default: "Im lonely"
+    },
+    isOnline: {
+        type: Boolean,
+        default: false
     },
     baldTags: [{ type: String, default: '[]'}],
     conversations: [{type: Schema.Types.ObjectId, ref: 'Conversation', default: '[]'}]

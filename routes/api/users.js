@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
 const config = require("config");
 const jwt = require("jsonwebtoken");
-
+const emailPass = require('../../config/keys').emailPass;
 //User Model
 const User = require("../../models/User.model");
 
@@ -207,7 +208,7 @@ router.route("/explore/").post(function(req, res) {
 
 router.post("/like", (req, res) => {
   const { otherId, likeOrUnlike, id } = req.body;
-
+  console.log(req.body);
   console.log(id);
   console.log(otherId);
   User.findById(id, function(err, user) {
@@ -226,14 +227,33 @@ router.post("/like", (req, res) => {
           .catch(err => {
             console.log(err);
           });
-      } else {
+      } else if (likeOrUnlike == "dislike") {
         const arrayDisLikes = user.dislikes;
         arrayDisLikes.push(...[otherId]);
         user.dislikes = arrayDisLikes;
+        if (user.likes.includes(otherId)) {
+          let index = user.likes.indexOf(otherId);
+          user.likes.splice(index, 1);
+        }
         user
           .save()
           .then(user => {
             //
+            res.json({ user });
+          })
+          .catch(err => {
+            res.status(400).send("update not possible due to " + err);
+          });
+      }
+      else {
+        const arrayBlocked = user.blocked;
+        arrayBlocked.push(...[otherId]);
+        user.blocked = arrayBlocked;
+        user
+          .save()
+          .then(user => {
+            //
+            console.log(user.blocked)
             res.json({ user });
           })
           .catch(err => {
@@ -363,8 +383,70 @@ router.post("/pictureadd", (req, res) => {
     }
     else {
       let media = user.media;
-      media.push(data);
-      user.media = media;
+      if (media.length < 5) {
+        media.push(data);
+        user.media = media;
+        user
+          .save()
+          .then(user => {
+            res.json(user);
+          })
+          .catch(err => {
+            res.status(400).send("update not possible due to " + err);
+          });
+      }
+      else
+        res.status(400).send("update not possible: MAX 5");
+    }
+  });
+});
+
+router.post('/email', (req, res) => {
+  let from = 'baldmatcha@gmail.com';
+  let to = req.body.to;
+  let subject = req.body.subject;
+  let text = req.body.text;
+  let id = req.body.id;
+  if (req.body.subject == "validate") {
+    text +=  "http://localhost:3000/api/users/validate/" + id + "5789";
+  }
+  console.log("inside api call")
+  console.log(req.body);
+  var transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+          user: from,
+          pass: emailPass
+      }
+  });
+
+  var mailoptions = {
+      from: from,
+      to: to,
+      subject: subject,
+      text: text
+  };
+  console.log(mailoptions);
+  transporter.sendMail(mailoptions, function(err, info) {
+      if (err)
+          console.log(err);
+      else
+          console.log('email sent: ' + info.response);
+  });
+  res.send("worked");
+});
+
+router.post("/validate/:id", (req, res) => {
+  // sends a new message and appends to a conversation
+  console.log("validating...")
+  let id = req.body.id;
+  User.findById(id, function(err, user) {
+    if (err) {
+      res.status(404).send("validation not updated:" + err);
+    } 
+    else {
+      user.isValidated = true;
+      console.log("doing it...")
       user
         .save()
         .then(user => {
@@ -373,7 +455,7 @@ router.post("/pictureadd", (req, res) => {
         .catch(err => {
           res.status(400).send("update not possible due to " + err);
         });
-    }
+      }
   });
 });
 

@@ -1,17 +1,14 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-
 import { loadUser } from "../actions/authActions";
-import { sendEmail } from "../actions/authActions";
 import { withStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import profile from "../img/me.jpg";
-import Button from "@material-ui/core/Button";
-import ImageUploadButton from "./ImageUploadButton";
 import GridImages from './GridImages';
+import OtherDashboardButtons from "./OtherDashboardButtons";
 
 const styles = {
   paper: {
@@ -39,21 +36,22 @@ class Dashboard extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired
   };
-
+  
+  constructor(props) {
+      super(props);
+      this.state = {
+          user: null
+      }
+  }
   componentDidMount() {
     // If not logged in and user navigates to Dashboard page, should redirect them to landing page
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
     this.props.loadUser();
-    if (this.props.user) {
-      console.log("USER EXISTS")
-      if (!this.props.user.isValidated) {
-        console.log("USER NOT VALIDATED")
-        console.log(this.props.user.email)
-        this.props.sendEmail(this.props.user.email, "validate", "Please click the link to validate: ", this.props.user._id)
-      }
-    }
+    console.log("-----")
+    console.log(this.props.location.state.user);
+    
   }
 
   componentDidUpdate() {
@@ -65,7 +63,7 @@ class Dashboard extends Component {
 
   render() {
     const { classes } = this.props;
-    const { user } = this.props.auth;
+    const user = this.props.location.state.user;
 
     const dashboardDisplay = (
       <Fragment>
@@ -90,23 +88,18 @@ class Dashboard extends Component {
     const profileDisplay = (
       <img
         className={classes.profile}
-        src={user ? user.media ? this.props.user.media[0] : profile : profile}
+        src={user ? user.media[0] ? user.media[0] : profile : profile}
         alt={"profile pic"}
       />
     )
 
     const onlineDisplay = (
-        <Paper style={{color: "#32CD32"	}}>online</Paper>
+      <Paper style={{color: "#32CD32"	}}>online</Paper>
     )
 
     const offlineDisplay = (
-        <Paper style={{color: "#A9A9A9	"	}}>offline </Paper>
+        <Paper style={{color: "#A9A9A9	"	}}>offline: last login on {this.props.user ? this.props.user.lastLogin.slice(0, 16) : ""} </Paper>
     )
-
-    const baldies = (
-        <Paper>{user ? user.baldTags ? `Baldies: ${user.baldTags[0]} | ${user.baldTags[1]} | ${user.baldTags[2]} | ${user.baldTags[3]}` : "" : ""}</Paper>
-  )
-
     return (
       <Box className={classes.paper}>
         <Paper style={{ backgroundColor: "#FBFBFB" }}>
@@ -127,13 +120,13 @@ class Dashboard extends Component {
               <Paper>{user ? `Popularity: ${user.fameRate}` : ""}</Paper>
             </Grid>
             <Grid item xs={12}>
-              {baldies}
+              <Paper>{user ? `Baldies: ${user.baldTags[0]} | ${user.baldTags[1]} | ${user.baldTags[2]} | ${user.baldTags[3]}` : ""}</Paper>
             </Grid>
           </Grid>
           <form noValidate autoComplete="off" />
         </Paper>
         <br />
-        <ImageUploadButton />
+        <OtherDashboardButtons info={user} />
         {user ? user.media ? <GridImages user={this.props.user} /> : "" : ""}
       </Box>
       
@@ -150,5 +143,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadUser, sendEmail }
+  { loadUser }
 )(withStyles(styles)(Dashboard));

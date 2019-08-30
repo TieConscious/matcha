@@ -13,7 +13,9 @@ import {
   UPDATETAGS_SUCCESS,
   UPDATETAGS_FAIL,
   EXPLORE_SUCCESS,
-  EXPLORE_FAIL
+  EXPLORE_FAIL,
+  EMAIL_SUCCESS,
+  EMAIL_FAIL
 } from "./types";
 
 // Check token & load user
@@ -124,12 +126,71 @@ export const login = ({ email, password }) => dispatch => {
     });
 };
 
-// Logout User
-export const logout = () => {
-  return {
-    type: LOGOUT_SUCCESS
+// Login User
+export const sendEmail = ( to, subject, text, id ) => dispatch => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
   };
+  console.log(to);
+  // Request body
+  const body = JSON.stringify({ to, subject, text, id });
+  console.log(body)
+  axios
+    .post("http://localhost:3000/api/users/email", body, config)
+    .then(res =>
+      dispatch({
+        type: EMAIL_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      console.log(err)
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "EMAIL_FAIL")
+      );
+      dispatch({
+        type: EMAIL_FAIL
+      });
+    });
 };
+
+export const validate = ( id ) => dispatch => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  // Request body
+  const body = JSON.stringify({ id });
+  console.log(body)
+  axios
+    .post("http://localhost:3000/api/users/validate/" + id, body, config)
+    .then(res =>
+      dispatch({
+        type: EMAIL_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err => {
+      console.log(err)
+      dispatch(
+        returnErrors(err.response.data, err.response.status, "EMAIL_FAIL")
+      );
+      dispatch({
+        type: EMAIL_FAIL
+      });
+    });
+};
+// // Logout User
+// export const logout = () => {
+//   return {
+//     type: LOGOUT_SUCCESS
+//   };
+// };
 
 // Setup config/headers and token
 export const tokenConfig = getState => {
@@ -182,3 +243,27 @@ export const getMatches = ( sexualPreference, gender, location ) => dispatch => 
     });
 };
 
+export const logout = (id) => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  console.log(id)
+  // Request body
+  const body = JSON.stringify({id});
+  console.log(body);
+  axios
+  .post("api/auth/logout", body, config)
+  .then(res => {
+    console.log(res);
+    }
+  )
+  .catch(err => {
+    console.log(err);
+  });
+  return {
+    type: LOGOUT_SUCCESS
+  }
+}

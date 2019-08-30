@@ -112,11 +112,12 @@ class Explore extends Component {
           console.log("at least 2 tags:" + res);
           let liked = this.props.user.likes.includes(pmatch._id);
           let disliked = this.props.user.dislikes.includes(pmatch._id);
+          let blocked = this.props.user.blocked.includes(pmatch._id)
           let same;
           if (this.props.user._id == pmatch._id)
             same = true;
           console.log("liked: " + liked + " disliked: " + disliked);
-          if (!liked && !disliked && !same && res)
+          if (!liked && !disliked && !same && !blocked && res)
             filteredMatches.push(pmatch);
         });
         if (this.props.user.location)

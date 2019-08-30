@@ -50,13 +50,11 @@ class GridImages extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    user: state.auth.user,
-    error: state.error
-  });
+// const mapStateToProps = state => ({
+//     isAuthenticated: state.auth.isAuthenticated,
+//     user: state.auth.user,
+//     error: state.error
+//   });
   
-  export default connect(
-    mapStateToProps,
-  )(withStyles(styles)(GridImages));
+  export default(withStyles(styles)(GridImages));
   
