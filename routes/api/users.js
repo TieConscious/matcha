@@ -307,9 +307,7 @@ router.post("/messages/update", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log({ conversation });
       res.json(conversation);
-      console.log(conversation);
     }
   });
 });
@@ -325,6 +323,8 @@ router.post("/messages/retrieve", (req, res) => {
     if (err) {
       console.log(err);
     } else {
+      console.log("-----------------------------------------------------")
+      console.log(conversation);
       res.json(conversation);
     }
   });
@@ -345,7 +345,7 @@ router.post("/messages/send", (req, res) => {
       conversation
         .save()
         .then(conversation => {
-          res.json({ conversation });
+          res.json(conversation);
         })
         .catch(err => {
           res.status(400).send("update not possible due to " + err);
@@ -360,7 +360,7 @@ router.post("/pictureadd", (req, res) => {
   User.findById(id, function(err, user) {
     if (err) {
       res.status(500).send("img not updated:" + err);
-    } 
+    }
     else {
       let media = user.media;
       media.push(data);

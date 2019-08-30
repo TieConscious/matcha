@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
 import ComposeMessage from "./ComposeMessage";
+import { updateMessages, retrieveMessages } from "../actions/updateActions";
 
 import PropTypes from "prop-types";
 
@@ -32,13 +33,40 @@ const styles = {
 export class MessengerChat extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
-    conversations: PropTypes.array,
     currentConversation: PropTypes.object
   };
 
+  state = {
+   currentConversation: this.props.currentConversation
+  };
+
+  componentDidMount() {
+    // If not logged in and user navigates to Dashboard page, should redirect them to landing page
+    if (!this.props.isAuthenticated) {
+      this.props.history.push("/");
+    }
+    console.log(this.props.currentConversation);
+    if (this.props.currentConversation) {
+      this.props.updateMessages(this.props.currentConversation._id);
+      this.setState({ currentConversation: this.props.currentConversation });
+    }
+  }
+
+  // componentDidUpdate() {
+  //   if (this.props.currentConversation) {
+  //     console.log(this.props.currentConversation);
+  //     this.props.updateMessages(this.props.currentConversation._id);
+  //   }
+  // }
+
+  // componentDidUpdate(prevProps) {
+
+  //     console.log("updated");
+  //     console.log(this.props.currentConversation)
+  // }
+
   render() {
-    if (this.props.currentConversation)
-      console.log(this.props.currentConversation.messages);
+    console.log(this.props.currentConversation);
     return (
       <div>
         <div>
@@ -57,11 +85,10 @@ export class MessengerChat extends Component {
 const mapStateToProps = state => ({
   auth: state.auth,
   isAuthenticated: state.auth.isAuthenticated,
-  conversations: state.auth.conversations,
   currentConversation: state.auth.currentConversation
 });
 
 export default connect(
   mapStateToProps,
-  null
+  { updateMessages, retrieveMessages }
 )(withStyles(styles)(MessengerChat));

@@ -48,36 +48,22 @@ export class Messenger extends Component {
     conversations: PropTypes.array
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      conversations: []
-    };
-  }
-
   componentDidMount() {
     // If not logged in and user navigates to Dashboard page, should redirect them to landing page
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
     this.props.retrieveMessages(this.props.auth.user.conversations);
-    // this.setState({ conversations: conversationsToState }, function() {
-    //   console.log(this.state.conversations);
-    // });
   }
 
   componentDidUpdate() {
-    // If not logged in and user navigates to Dashboard page, should redirect them to landing page
     if (!this.props.isAuthenticated) {
       this.props.history.push("/");
     }
-    this.props.retrieveMessages(this.props.auth.user.conversations);
   }
 
   render() {
     const { classes } = this.props;
-    console.log(this.props.conversations);
-    console.log(this.props.auth);
 
     return (
       <div className={classes.messenger}>

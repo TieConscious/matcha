@@ -3,6 +3,7 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import MessengerListItem from "./MessengerListItem";
 import { setConversation } from "../actions/updateActions";
+import { retrieveMessages } from "../actions/updateActions";
 
 import PropTypes from "prop-types";
 
@@ -18,6 +19,13 @@ export class MessengerSidebar extends Component {
     auth: PropTypes.object.isRequired,
     conversations: PropTypes.array
   };
+
+  componentDidMount() {
+    // If not logged in and user navigates to Dashboard page, should redirect them to landing page
+    if (!this.props.isAuthenticated) {
+      this.props.history.push("/");
+    }
+  }
 
   render() {
     return (
@@ -40,5 +48,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setConversation }
+  { setConversation, retrieveMessages }
 )(withStyles(styles)(MessengerSidebar));

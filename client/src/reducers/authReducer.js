@@ -85,7 +85,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         user: action.payload
-      }
+      };
     case UPDATEIMG_FAIL:
     case UPDATETAGS_FAIL:
     case EXPLORE_FAIL:
@@ -101,7 +101,7 @@ export default function(state = initialState, action) {
     case MESSAGESEND_SUCCESS:
       return {
         ...state,
-        ...action.payload
+        currentConversation: action.payload
       };
     case MESSAGESEND_FAIL:
       return {
@@ -110,17 +110,20 @@ export default function(state = initialState, action) {
     case MESSAGEUPDATE_SUCCESS:
       return {
         ...state,
-        conversations: action.payload
+        currentConversation: action.payload
       };
     case MESSAGEUPDATE_FAIL:
       return {
         ...state
       };
     case MESSAGERETRIEVE_SUCCESS:
-    case MESSAGERETRIEVE_FAIL:
       return {
         ...state,
         conversations: action.payload
+      };
+    case MESSAGERETRIEVE_FAIL:
+      return {
+        ...state
       };
     case CURRENTCONVERSATION:
       return {

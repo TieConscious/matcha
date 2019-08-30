@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 
 import { connect } from "react-redux";
-import { sendMessage } from "../actions/updateActions";
+import { sendMessage, updateMessages, retrieveMessages } from "../actions/updateActions";
 import io from "socket.io-client";
 
 import PropTypes from "prop-types";
@@ -59,6 +59,7 @@ export class ComposeMessage extends Component {
   onSubmit = e => {
     //Grabs all info from settings with default values already set
     e.preventDefault();
+    this.setState({ message: "" });
 
     const userID = this.props.auth.user._id;
     const conversationID = this.props.currentConversation._id;
@@ -72,6 +73,8 @@ export class ComposeMessage extends Component {
 
     console.log(messageObject);
     this.props.sendMessage(messageObject);
+    this.props.updateMessages(this.props.currentConversation._id);
+    this.props.retrieveMessages(this.props.auth.user.conversations);
   };
 
   render() {
@@ -82,8 +85,7 @@ export class ComposeMessage extends Component {
         <form onSubmit={this.onSubmit}>
           <TextField
             id="message"
-            default=""
-            // label="first name"
+            value={this.state.message}
             className={classes.textField}
             onChange={this.onChange}
             margin="normal"
@@ -107,5 +109,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { sendMessage }
+  { sendMessage, updateMessages, retrieveMessages }
 )(withStyles(styles)(ComposeMessage));
