@@ -18,16 +18,19 @@ const Conversation = require("../../models/Conversation.model");
 //register
 router.post("/register", (req, res) => {
   const { firstname, lastname, email, password } = req.body;
-
+  console.log(req.body)
   //Simple validation
   if (!firstname || !lastname || !email || !password) {
+    console.log("something is missing...");
     return res.status(400).json({ msg: "Please enter all fields" });
   }
 
   // Check for existing user
   User.findOne({ email }).then(user => {
-    if (user) return res.status(400).json({ msg: "Email already registered" });
-
+    if (user) {
+      console.log("email already exists");
+      return res.status(400).json({ msg: "Email already registered" });
+    }
     const newUser = new User({
       firstname,
       lastname,

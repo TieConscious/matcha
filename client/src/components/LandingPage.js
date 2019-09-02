@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import Typography from "@material-ui/core/Typography";
 import AppRegistration from "./AppRegistration";
+import FacebookLoginButton from './FacebookLoginButton';
 
 class LandingPage extends Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class LandingPage extends Component {
             </Col>
             <Col />
           </Row>
+          {/* <FacebookLoginButton /> */}
         </Container>
       </div>
     );

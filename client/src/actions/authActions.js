@@ -139,7 +139,7 @@ export const sendEmail = ( to, subject, text, id ) => dispatch => {
   const body = JSON.stringify({ to, subject, text, id });
   console.log(body)
   axios
-    .post("http://localhost:3000/api/users/email", body, config)
+    .post("/api/users/email", body, config)
     .then(res =>
       dispatch({
         type: EMAIL_SUCCESS,
@@ -168,7 +168,7 @@ export const validate = ( id ) => dispatch => {
   const body = JSON.stringify({ id });
   console.log(body)
   axios
-    .post("http://localhost:3000/api/users/validate/" + id, body, config)
+    .post("/api/users/validate/" + id, body, config)
     .then(res =>
       dispatch({
         type: EMAIL_SUCCESS,
