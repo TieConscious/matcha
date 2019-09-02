@@ -4,6 +4,8 @@ import { login } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
 import { register } from "../actions/authActions";
 import { connect } from "react-redux";
+import { updateImagesFB } from "../actions/updateActions";
+import axios from 'axios';
 
 class FacebookLoginButton extends Component {
     state = {
@@ -26,21 +28,37 @@ class FacebookLoginButton extends Component {
             email: response.email,
             password: response.userID
           };
-      
-        this.getItDone(newUser);
+        this.setState({
+            userID: response.userID,
+            email: response.email
+        })
+        this.getItDone(newUser, response.userID);
     }
-    async getItDone(newUser) {
+    async getItDone(newUser, fbID) {
         let result = await this.props.register(newUser);
         let loginUser = {
             email: newUser.email,
             password: newUser.password,
             fb: 1
         }
-        this.props.login(loginUser);
+        let result2 = await this.props.login(loginUser);
+    }
+
+    async call(email, fbID) {
+        console.log("calling...")
+        axios.get("https://graph.facebook.com/" + fbID + "/picture?type=large&width=720&height=720&redirect=0")
+        .then(response => {
+            console.log(response);
+            this.props.updateImagesFB(email, response.url)
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
     render() {
         let fbContent;
-
+        // if (this.props.user)
+        //     this.call(this.state.email, this.state.userID)
         if (this.state.isLoggedIn) {
             fbContent = null
         }
@@ -63,10 +81,11 @@ class FacebookLoginButton extends Component {
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
-    error: state.error
+    error: state.error,
+    user: state.auth.user
   });
   
   export default connect(
     mapStateToProps,
-    { register, clearErrors, login }
+    { register, clearErrors, login, updateImagesFB }
   )(FacebookLoginButton);

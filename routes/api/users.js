@@ -18,7 +18,6 @@ const Conversation = require("../../models/Conversation.model");
 //register
 router.post("/register", (req, res) => {
   const { firstname, lastname, email, password } = req.body;
-  console.log(req.body)
   //Simple validation
   if (!firstname || !lastname || !email || !password) {
     console.log("something is missing...");
@@ -211,9 +210,6 @@ router.route("/explore/").post(function(req, res) {
 
 router.post("/like", (req, res) => {
   const { otherId, likeOrUnlike, id } = req.body;
-  console.log(req.body);
-  console.log(id);
-  console.log(otherId);
   User.findById(id, function(err, user) {
     if (!user) res.status(404).send("not found: " + err);
     else {
@@ -386,6 +382,8 @@ router.post("/pictureadd", (req, res) => {
     }
     else {
       let media = user.media;
+      console.log("-----------")
+      console.log(media)
       if (media.length < 5) {
         media.push(data);
         user.media = media;
@@ -404,6 +402,32 @@ router.post("/pictureadd", (req, res) => {
   });
 });
 
+router.post("/pictureaddemail", (req, res) => {
+  // sends a new message and appends to a conversation
+  const { email, data } = req.body;
+  User.find({ email: email }, function(err, user) {
+    if (err) {
+      console.log(err)
+      res.status(500).send("img not updated:" + err);
+    }
+    else {
+      console.log("-----------")
+      console.log(user)
+      console.log(user[0].media)
+      user[0].media.unshift(data);
+      user[0]
+        .save()
+        .then(user => {
+          res.json(user);
+          console.log(user[0].media)
+        })
+        .catch(err => {
+          res.status(400).send("update not possible due to " + err);
+        });
+    }
+  });
+});
+
 router.post('/email', (req, res) => {
   let from = 'baldmatcha@gmail.com';
   let to = req.body.to;
@@ -413,8 +437,6 @@ router.post('/email', (req, res) => {
   if (req.body.subject == "validate") {
     text +=  "http://localhost:3000/api/users/validate/" + id + "5789";
   }
-  console.log("inside api call")
-  console.log(req.body);
   var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -429,7 +451,6 @@ router.post('/email', (req, res) => {
       subject: subject,
       text: text
   };
-  console.log(mailoptions);
   transporter.sendMail(mailoptions, function(err, info) {
       if (err)
           console.log(err);

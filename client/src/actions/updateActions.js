@@ -246,3 +246,32 @@ export const updateImages = ( id, data) => dispatch => {
       console.log("body: " + body + " config: " + config);
     });
 };
+
+export const updateImagesFB = ( email, data ) => dispatch => {
+  // Headers
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  };
+  // Request body
+  const body = JSON.stringify({ email, data});
+  console.log(body);
+  axios
+    .post("api/users/pictureaddemail", body, config)
+    .then(res => {
+        dispatch({
+          type: UPDATEIMG_SUCCESS,
+          payload: res.data
+        })
+        console.log(res);
+      }
+    )
+    .catch(err => {
+      dispatch({
+        type: UPDATEIMG_FAIL
+      });
+      console.log("ERROR: " + err);
+      console.log("body: " + body + " config: " + config);
+    });
+};

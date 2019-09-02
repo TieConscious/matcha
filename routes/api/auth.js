@@ -32,32 +32,109 @@ router.route("/logout").post(function(req, res) {
   });
 });
 
+// router.post("/", (req, res) => {
+//   const { email, password } = req.body;
+//   //Simple validation
+//   if (!email || !password) {
+//     return res.status(400).json({ msg: "Please enter all fields" });
+//   }
+
+//   //Check for existing user
+//   User.findOne({ email }).then(user => {
+//     if (!user) return res.status(400).json({ msg: "Email does not exist" });
+
+//     // Validate password
+//     bcrypt.compare(password, user.password).then(isMatch => {
+//       if (!isMatch) return res.status(400).json({ msg: "Invalid password" });
+//       else {
+//         user.lastLogin = new Date();
+//         user.isOnline = true;
+//         user
+//         .save()
+//         .then(user => {
+//           console.log("last login saved");
+//         })
+//         .catch(err => {
+//           console.log("error saving date: " + err);
+//         });
+//       }
+//       jwt.sign(
+//         { id: user.id },
+//         config.get("jwtSecret"),
+//         { expiresIn: 3600 },
+//         (err, token) => {
+//           if (err) throw err;
+//           res.json({
+//             token,
+//             user
+//           });
+//         }
+//       );
+//     });
+//   });
+// });
+
 router.post("/", (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, fb } = req.body;
+  console.log("------------")
+  console.log(req.body);
   //Simple validation
-  if (!email || !password) {
-    return res.status(400).json({ msg: "Please enter all fields" });
+  if (fb != 1) {
+    if (!email || !password) {
+      console.log("email or password")
+      return res.status(400).json({ msg: "Please enter all fields" });
+    }
+    //Check for existing user
+    User.findOne({ email }).then(user => {
+      if (!user) return res.status(400).json({ msg: "Email does not exist" });
+  
+      // Validate password
+      bcrypt.compare(password, user.password).then(isMatch => {
+        if (!isMatch) {
+          console.log("password PROBLEM")
+          return res.status(400).json({ msg: "Invalid password" });
+        }
+        else {
+          user.lastLogin = new Date();
+          user.isOnline = true;
+          user
+          .save()
+          .then(user => {
+            console.log("last login saved");
+          })
+          .catch(err => {
+            console.log("error saving date: " + err);
+          });
+        }
+        jwt.sign(
+          { id: user.id },
+          config.get("jwtSecret"),
+          { expiresIn: 3600 },
+          (err, token) => {
+            if (err) throw err;
+            res.json({
+              token,
+              user
+            });
+          }
+        );
+      });
+    });
   }
+  else {
+    User.findOne({ email }).then(user => {
+      if (!user) return res.status(400).json({ msg: "Email does not exist" });
+      user.lastLogin = new Date();
+      user.isOnline = true;
+      user
+      .save()
+      .then(user => {
+        console.log("last login saved");
+      })
+      .catch(err => {
+        console.log("error saving date: " + err);
+      });
 
-  //Check for existing user
-  User.findOne({ email }).then(user => {
-    if (!user) return res.status(400).json({ msg: "Email does not exist" });
-
-    // Validate password
-    bcrypt.compare(password, user.password).then(isMatch => {
-      if (!isMatch) return res.status(400).json({ msg: "Invalid password" });
-      else {
-        user.lastLogin = new Date();
-        user.isOnline = true;
-        user
-        .save()
-        .then(user => {
-          console.log("last login saved");
-        })
-        .catch(err => {
-          console.log("error saving date: " + err);
-        });
-      }
       jwt.sign(
         { id: user.id },
         config.get("jwtSecret"),
@@ -71,7 +148,7 @@ router.post("/", (req, res) => {
         }
       );
     });
-  });
+  }
 });
 
 // @route   GET api/auth/user

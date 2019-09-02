@@ -97,7 +97,7 @@ export const updateBaldTags = ( tags, userId ) => dispatch => {
 };
 
 // Login User
-export const login = ({ email, password }) => dispatch => {
+export const login = ({ email, password, fb }) => dispatch => {
   // Headers
   const config = {
     headers: {
@@ -106,7 +106,7 @@ export const login = ({ email, password }) => dispatch => {
   };
 
   // Request body
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify({ email, password, fb });
 
   axios
     .post("/api/auth", body, config)

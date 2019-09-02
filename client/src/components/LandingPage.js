@@ -37,7 +37,7 @@ class LandingPage extends Component {
             </Col>
             <Col />
           </Row>
-          {/* <FacebookLoginButton /> */}
+          <FacebookLoginButton />
         </Container>
       </div>
     );

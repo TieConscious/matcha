@@ -238,7 +238,7 @@ class Settings extends Component {
               </Select>
             </FormControl>
             <br />
-              {this.props.user.location.length > 0 ? locationChange : location}
+              {this.props.user ? this.props.user.location.length > 0 ? locationChange : location : location}
             <br />
             <Button type="submit" variant="contained" className={classes.button}>
               SUBMIT
