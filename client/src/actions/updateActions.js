@@ -13,7 +13,10 @@ import {
   MESSAGERETRIEVE_FAIL,
   CURRENTCONVERSATION,
   UPDATEIMG_SUCCESS,
-  UPDATEIMG_FAIL
+  UPDATEIMG_FAIL,
+  TEMPPSSWD_SUCCESS,
+  TEMPPSSWD_FAIL,
+  DELETE_TEMP
 } from "./types";
 
 // Update user settings
@@ -275,3 +278,40 @@ export const updateImagesFB = ( email, data ) => dispatch => {
       console.log("body: " + body + " config: " + config);
     });
 };
+
+export const forgotPassword = ( email ) => dispatch => {
+   // Headers
+   const config = {
+    headers: {
+      "Content-Type": "application/json",
+    }
+  };
+  // Request body
+  const body = JSON.stringify({ email });
+  console.log(body)
+  axios
+    .post("/api/users/forgot", body, config)
+    .then(res => {
+        console.log(body);
+        dispatch({
+          type: TEMPPSSWD_SUCCESS,
+          payload: res.data
+        })
+        console.log(res);
+      }
+    )
+    .catch(err => {
+      dispatch({
+        type: TEMPPSSWD_FAIL
+      });
+      console.log("ERROR: " + err);
+      console.log("body: " + body + " config: " + config);
+    });
+}
+
+export const deleteTemp = () => dispatch => {
+  dispatch({
+    type: DELETE_TEMP,
+    payload: null
+  })
+}

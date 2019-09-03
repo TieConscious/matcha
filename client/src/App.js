@@ -22,6 +22,7 @@ import Explore from "./components/Explore";
 import Messenger from "./components/Messenger";
 import otherDashboard from "./components/otherDashboard";
 import ValidateButton from "./components/ValidateButton";
+import ForgotPassword from "./components/ForgotPassword";
 
 // const config = require('../../config');
 // const geo = config.get('GeocodeApiKey');
@@ -48,6 +49,7 @@ class App extends Component {
                 <Route exact path="/messenger" component={Messenger} />
                 <Route path="/user" component={otherDashboard} />
                 <Route path="/api/users/validate" component={ValidateButton} />
+                <Route exact path="/forgot" component={ForgotPassword} />
               </div>
             </Router>
           </div>

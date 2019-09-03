@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import AppRegistration from "./AppRegistration";
 import FacebookLoginButton from './FacebookLoginButton';
+import ForgotPassword from "./ForgotPassword";
+import { Link } from "react-router-dom";
 
 class LandingPage extends Component {
   componentDidMount() {
@@ -38,6 +40,11 @@ class LandingPage extends Component {
             <Col />
           </Row>
           <FacebookLoginButton />
+          <Link to={{
+            pathname: "forgot/"          
+            }}>
+            Forgot Password?
+          </Link>
         </Container>
       </div>
     );

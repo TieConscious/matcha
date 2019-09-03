@@ -483,4 +483,28 @@ router.post("/validate/:id", (req, res) => {
   });
 });
 
+router.post('/forgot', function(req, res) {
+  let email = req.body.email;
+  console.log("EMAAAAIL: " + email);
+  User.findOne({'email' : new RegExp(email)}, function(err, user) {
+      if (err)
+          res.send("err: " + err);
+      else if (user != null) {
+          console.log(user);
+          let temp = "859746521temporary" + Math.floor((Math.random() * 10000) + 1);
+          let psswd = bcrypt.hashSync(temp, 10, function(err, hash) {
+              if (err)
+                  res.send("err hashing: " + err);
+          });
+          user.password = psswd;
+          user.save().then(user => {
+              res.send(temp);
+          })
+          .catch(err => {
+              res.status(400).send("update not possible due to " + err);
+          });
+      }
+  });
+});
+
 module.exports = router;

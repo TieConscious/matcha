@@ -23,7 +23,9 @@ import {
   UPDATEFAMERATE_SUCCESS,
   UPDATEFAMERATE_FAIL,
   UPDATEIMG_SUCCESS,
-  UPDATEIMG_FAIL
+  UPDATEIMG_FAIL,
+  TEMPPSSWD_SUCCESS,
+  DELETE_TEMP
 } from "../actions/types";
 
 const initialState = {
@@ -33,7 +35,8 @@ const initialState = {
   user: null,
   pmatches: null,
   conversations: null,
-  currentConversation: null
+  currentConversation: null,
+  temp: null
 };
 
 export default function(state = initialState, action) {
@@ -43,6 +46,11 @@ export default function(state = initialState, action) {
         ...state,
         isLoading: true
       };
+    case DELETE_TEMP:
+      return {
+        ...state,
+        temp: null
+      }
     case USER_LOADED:
       return {
         ...state,
@@ -79,6 +87,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         pmatches: action.payload
+      };
+    case TEMPPSSWD_SUCCESS:
+      return {
+        ...state,
+        temp: action.payload
       };
     case UPDATEIMG_SUCCESS:
     case UPDATETAGS_SUCCESS:
