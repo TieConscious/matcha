@@ -128,7 +128,7 @@ class Dashboard extends Component {
         </Paper>
         <br />
         <OtherDashboardButtons info={user} />
-        {user ? user.media ? <GridImages user={this.props.user} /> : "" : ""}
+        {user ? user.media ? <GridImages user={user} /> : "" : ""}
       </Box>
 
     );
