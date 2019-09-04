@@ -33,6 +33,10 @@ const UserSchema = new Schema({
     default: 18
     //required: true
   },
+  certifiedBaldie: {
+    type: Boolean,
+    default: false
+  },
   blocked: [{ type: Schema.Types.ObjectId, ref: "User", default: "[]" }],
   email: {
     type: String,
