@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Rock",
+        "url": "./resources/rock.jpg"
+    },
+    {
+        "name": "Moo",
+        "url": "./resources/moo.jpg"
+    },
+    {
+        "name": "Jason",
+        "url": "./resources/jason.jpg"
+    },
+    {
+        "name": "Britney",
+        "url": "./resources/britney.jpg"
+    },
+    {
+        "name": "SamuelL",
+        "url": "./resources/rock.jpg"
+    },
+    {
+        "name": "Danai",
+        "url": "./resources/danai.jpg"
+    },
+    {
+        "name": "Pitbull",
+        "url": "./resources/pitbull.jpg"
+    },
+    {
+        "name": "Mrclean",
+        "url": "./resources/mrclean.jpg"
+    },
+    {
+        "name": "Patrick",
+        "url": "./resources/patrick.jpg"
+    },
+    {
+        "name": "Bryan",
+        "url": "./resources/bryan.jpg"
+    },
+    {
+        "name": "Jordan",
+        "url": "./resources/jordan.jpg"
+    },
+    {
+        "name": "Guardiola",
+        "url": "./resources/guardiola.jpg"
+    }
+]
