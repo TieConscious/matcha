@@ -11,6 +11,8 @@ import Grid from "@material-ui/core/Grid";
 import profile from "../img/me.jpg";
 import ImageUploadButton from "./ImageUploadButton";
 import GridImages from './GridImages';
+import Badge from "@material-ui/core/Badge";
+import verified from "../img/verified.png";
 
 const styles = {
   paper: {
@@ -114,7 +116,12 @@ class Dashboard extends Component {
         <Paper style={{ backgroundColor: "#FBFBFB" }}>
           <Grid container className={classes.root}>
             <Grid item xs={4}>
-              {profileDisplay}
+            {profileDisplay}
+            {this.props.user ? this.props.user.certifiedBaldie ? <Badge
+              color="secondary"
+            >
+              <img src={verified} alt="mug" color="white" width="30" height="30" />
+            </Badge> : "" : ""}
             </Grid>
             <Grid item xs={8}>
               {dashboardDisplay}
@@ -135,7 +142,7 @@ class Dashboard extends Component {
           <form noValidate autoComplete="off" />
         </Paper>
         <br />
-        <ImageUploadButton />
+        <ImageUploadButton text="upload image"/> {this.props.user ? this.props.user.certifiedBaldie ? "" : <ImageUploadButton text="certify as baldie"/> : ""}
         {user ? user.media ? <GridImages user={this.props.user} /> : "" : ""}
       </Box>
       

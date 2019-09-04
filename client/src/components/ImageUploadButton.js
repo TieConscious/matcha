@@ -45,7 +45,7 @@ class ImageUploadButton extends React.Component {
                     component="span"
                     color="primary"
                 >
-                    upload image
+                    {this.props.text}
                 </Button>
                 </label> 
             </>
