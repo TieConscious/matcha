@@ -28,7 +28,6 @@
   * [Installation](#installation)
 * [Screenshots](#screenshots)
 * [Contact](#contact)
-* [Article](#articles)
 
 
 
@@ -53,6 +52,7 @@ Matcha is the first project of the web branch in 42 Silicon Valley. As such, the
 ### Built With
 
 * React
+* Redux
 * MongoDB
 * Node.js
 * Express.js
@@ -64,8 +64,10 @@ Matcha is the first project of the web branch in 42 Silicon Valley. As such, the
 ## Screenshots
 
 <p align="center">
-  <img src="./images/screenshot3.png" height=300px width=auto> |
-  <img src="./images/screenshot2.png" height=300px width=auto> |
+  <img src="./images/screenshot3.png" height=300px width=auto> 
+  <br />
+  <img src="./images/screenshot2.png" height=300px width=auto> 
+  <br />
   <img src="./images/screenshot4.png" height=300px width=auto>
 </p>
 
@@ -92,16 +94,9 @@ npm install
 ## Contact
 
 Kev Lozano - [@kevlozano](https://twitter.com/kevlozano)
+Musashi Schroeder [@mschroed098](https://twitter.com/mschroed098)
 
 Project Link: [https://github.com/CptBang/matcha](https://github.com/CptBang/matcha)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Articles
-
-* [Four tips for building your first Fullstack app](https://dev.to/kevlozano/four-tips-for-building-your-first-fullstack-app-from-a-beginner-s-perspective-53e7)
-
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
