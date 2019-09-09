@@ -34,7 +34,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 <p align="center">
-  <img src="./images/screenshot1.png" height=300px width=auto border-style=solid border-width=1px border-color=green>
+  <img src="./images/screenshot1.png" height=500px width=auto border-style=solid border-width=1px border-color=green>
 </p>
 Matcha is the first project of the web branch in 42 Silicon Valley. As such, the purpose of it is to develop and understand functionalities such as: 
 
@@ -64,11 +64,11 @@ Matcha is the first project of the web branch in 42 Silicon Valley. As such, the
 ## Screenshots
 
 <p align="center">
-  <img src="./images/screenshot3.png" height=300px width=auto> 
+  <img src="./images/screenshot3.png" height=500px width=auto> 
   <br />
-  <img src="./images/screenshot2.png" height=300px width=auto> 
+  <img src="./images/screenshot2.png" height=500px width=auto> 
   <br />
-  <img src="./images/screenshot4.png" height=300px width=auto>
+  <img src="./images/screenshot4.png" height=500px width=auto>
 </p>
 
 ### Prerequisites
