@@ -11,7 +11,7 @@
   <p align="center">
     A progressive web app designed to match people based on their favorite bald celebrities
     <br />
-    <a href="https://github.com/kevlozano/camagru-42"><strong>Explore the code</strong></a>
+    <a href="https://github.com/CptBang/matcha"><strong>Explore the code</strong></a>
     <br />
   </p>
 </p>
@@ -35,7 +35,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 <p align="center">
-  <img src="./images/screenshot.png" height=300px width=auto>
+  <img src="./images/screenshot1.png" height=300px width=auto>
 </p>
 Matcha is the first project of the web branch in 42 Silicon Valley. As such, the purpose of it is to develop and understand functionalities such as: 
 
@@ -81,7 +81,7 @@ npm install npm@latest -g
  
 1. Clone the repo
 ```sh
-git clone https://github.com/kevlozano/camagru-42
+git clone https://github.com/CptBang/matcha
 ```
 2. Install NPM packages
 ```sh
@@ -93,7 +93,7 @@ npm install
 
 Kev Lozano - [@kevlozano](https://twitter.com/kevlozano)
 
-Project Link: [https://github.com/kevlozano/camagru-42](https://github.com/kevlozano/camagru-42)
+Project Link: [https://github.com/CptBang/matcha](https://github.com/CptBang/matcha)
 
 
 
