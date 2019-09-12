@@ -20,7 +20,7 @@ import Settings from "./components/Settings";
 import SelectingPage from "./components/SelectingPage";
 import Explore from "./components/Explore";
 import Messenger from "./components/Messenger";
-import otherDashboard from "./components/otherDashboard";
+import OtherDashboard from "./components/OtherDashboard";
 import ValidateButton from "./components/ValidateButton";
 import ForgotPassword from "./components/ForgotPassword";
 
@@ -47,7 +47,7 @@ class App extends Component {
                 <Route exact path="/select" component={SelectingPage} />
                 <Route exact path="/explore" component={Explore} />
                 <Route exact path="/messenger" component={Messenger} />
-                <Route path="/user" component={otherDashboard} />
+                <Route path="/user" component={OtherDashboard} />
                 <Route path="/api/users/validate" component={ValidateButton} />
                 <Route exact path="/forgot" component={ForgotPassword} />
               </div>
