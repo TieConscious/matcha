@@ -25,7 +25,7 @@ app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/posts", require("./routes/api/posts"));
 
 //Deploying to Heroku
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
@@ -35,4 +35,4 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-server = app.listen(port, () => console.log(`Server started on port ${port}`));
+server = app.listen(process.env.PORT || port, () => console.log(`Server started on port ${port}`));
