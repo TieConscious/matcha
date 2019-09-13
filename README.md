@@ -11,7 +11,7 @@
   <p align="center">
     A progressive web app designed to match people based on their favorite bald celebrities
     <br />
-    <a href="https://github.com/CptBang/matcha"><strong>Explore the code</strong></a>
+    <a href="https://matcha-cptbang-klozano.herokuapp.com/"><strong>Explore the demo</strong></a>
     <br />
   </p>
 </p>
